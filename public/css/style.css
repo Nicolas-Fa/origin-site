@@ -1,0 +1,64 @@
+/* --------------------------------Police------------------------------------------------- */
+/* exo-2-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Exo 2';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../font/exo-2-v24-latin-regular.eot'); /* IE9 Compat Modes */
+    src: url('../font/exo-2-v24-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../font/exo-2-v24-latin-regular.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+         url('../font/exo-2-v24-latin-regular.woff') format('woff'), /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+, iOS 5+ */
+         url('../font/exo-2-v24-latin-regular.ttf') format('truetype'), /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
+         url('../font/exo-2-v24-latin-regular.svg#Exo2') format('svg'); /* Legacy iOS */
+  }
+
+/* --------------------------------Variables---------------------------------------------- */
+:root {
+    --fond : #222c35;
+    --text_color : #19d3e2;
+}
+
+
+/* ---------------------------------------Reset------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text_color);
+}
+
+ul {
+    list-style-type: none;
+}
+
+.container {
+    max-width: 80%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ---------------------------------------Page 404---------------------------------------- */
+
+body {
+    background-color: var(--fond);
+    background-image: url(../images/background_404.webp);
+    background-size: cover;
+    background-clip: content-box;
+    background-attachment: fixed;
+}
+
+#page_404 {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#page_404 h1{
+    margin: 3rem;
+    font-family: 'Exo 2';
+    text-align: center;
+    font-size: 120px;
+}
