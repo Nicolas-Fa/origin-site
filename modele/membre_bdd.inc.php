@@ -29,7 +29,7 @@ function sInscrire($pseudo, $email, $pwd)
 
         $resultat = $requete->execute();
     } catch (PDOException $erreur) {
-        die("Erreur: " . $erreur->getMessage());
+        throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
 }
@@ -58,7 +58,7 @@ function recupererMembres()
             $ligne = $requete->fetch(PDO::FETCH_ASSOC);
         }
     } catch (PDOException $erreur) {
-        die("Erreur: " . $erreur->getMessage());
+        throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
 }
@@ -79,13 +79,13 @@ function recupererMailMembre($email)
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("SELECT * FROM `membre` WHERE `email=:email`");
+        $requete = $connexion->prepare("SELECT * FROM `membre` WHERE email=':email'");
         $requete->bindValue(":email", $email, PDO::PARAM_STR);
         $requete->execute();
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
-        die("Erreur: " . $erreur->getMessage());
+        throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
 }
@@ -106,13 +106,13 @@ function recupererPseudoMembre($pseudo)
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("SELECT * FROM `membre` WHERE `pseudo=:pseudo`");
+        $requete = $connexion->prepare("SELECT `pseudo` FROM `membre` WHERE pseudo=':pseudo'");
         $requete->bindValue(":pseudo", $pseudo, PDO::PARAM_STR);
         $requete->execute();
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
-        die("Erreur: " . $erreur->getMessage());
+        throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
 }
@@ -139,7 +139,7 @@ function recupererRoleMembre($role)
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
-        die("Erreur: " . $erreur->getMessage());
+        throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
 }
@@ -149,7 +149,9 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     header('Content-Type:text/plain');
 
     echo "recupererMailMembre() : \n";
+    echo "<pre>";
     print_r(recupererMailMembre("origin@test.com"));
+    echo "</pre>";
 
     echo "recupererPseudoMembre() : \n";
     print_r(recupererPseudoMembre("test"));

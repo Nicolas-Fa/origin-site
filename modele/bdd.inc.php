@@ -16,7 +16,7 @@ function connexionBdd()
         $pdo = new PDO("mysql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_NAME'], $_ENV['DB_LOGIN'], $_ENV['DB_PWD']);
         return $pdo;
     } catch (PDOException $erreur) {
-        die("Erreur: " . $erreur->getMessage());
+        throw new Exception("Erreur: " . $erreur->getMessage());
     }
 }
 

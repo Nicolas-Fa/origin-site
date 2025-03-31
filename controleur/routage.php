@@ -14,14 +14,14 @@
 function navigation($action = "defaut")
 {
     $choixAction = array();
-    $choixAction["defaut"] = "accueil.php";
-    $choixAction["accueil"] = "accueil.php";
-    $choixAction["profil"] = "profil.php";
-    $choixAction["postuler"] = "postuler.php";
-    $choixAction["candidatures"] = "candidatures.php";
-    $choixAction["connexion"] = "connexion.php";
-    $choixAction["inscription"] = "inscription.php";
-    $choixAction["deconnexion"] = "deconnexion.php";
+    $choixAction["defaut"] = "accueil_ctr.php";
+    $choixAction["accueil"] = "accueil_ctr.php";
+    $choixAction["profil"] = "profil_ctr.php";
+    $choixAction["postuler"] = "postuler_ctr.php";
+    $choixAction["candidatures"] = "candidatures_ctr.php";
+    $choixAction["connexion"] = "connexion_ctr.php";
+    $choixAction["inscription"] = "inscription_ctr.php";
+    $choixAction["deconnexion"] = "deconnexion_ctr.php";
     $choixAction["page404"] = "404_ctr.php";
 
     $fichier_ctrl = $choixAction[$action];

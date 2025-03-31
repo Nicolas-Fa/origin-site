@@ -8,7 +8,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 
 require_once RACINE . "/modele/authentification.inc.php";
 
-deconnecter();
+seDeconnecter();
 
 
 $titre = "Origin - Se connecter";
