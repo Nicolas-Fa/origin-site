@@ -15,7 +15,7 @@ CREATE TABLE POSTULATION(
    id_postulation INT AUTO_INCREMENT,
    contenu VARCHAR(750)  NOT NULL,
    statut VARCHAR(50)  NOT NULL,
-   date_de_soumission DATE,
+   date_de_soumission TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
    id_membre INT NOT NULL,
    PRIMARY KEY(id_postulation),
    UNIQUE(id_membre),
@@ -26,7 +26,7 @@ CREATE TABLE POSTULATION(
 CREATE TABLE COMMENTAIRE(
    id_commentaire INT AUTO_INCREMENT,
    contenu VARCHAR(250)  NOT NULL,
-   date_commentaire DATETIME,
+   date_commentaire TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
    id_postulation INT NOT NULL,
    id_membre INT NOT NULL,
    PRIMARY KEY(id_commentaire),
@@ -38,7 +38,7 @@ CREATE TABLE COMMENTAIRE(
 CREATE TABLE VOTE(
    id_vote INT AUTO_INCREMENT,
    choix BOOLEAN,
-   date_de_vote DATE NOT NULL,
+   date_de_vote TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
    id_postulation INT NOT NULL,
    id_membre INT NOT NULL,
    PRIMARY KEY(id_vote),

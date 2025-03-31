@@ -1,6 +1,6 @@
 <?php 
 
-include_once( RACINE . "/modele/utilisateur_bdd.inc.php");
+include_once( RACINE . "/modele/membre_bdd.inc.php");
 
 
 /* Nom de la fonction : seConnecter

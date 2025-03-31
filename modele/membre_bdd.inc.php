@@ -3,38 +3,6 @@
 include_once(RACINE . "/modele/bdd.inc.php");
 
 
-/* Nom de la fonction : sInscrire
-*
-* A quoi sert cette fonction enregistre un nouvel utilisateur dans la Base de données
-*
-* Paramètres de la fonction ($pseudo, $email, $pwd)
-*	$pseudo : le pseudonyme de l'utilisateur
-*	$email : l'adresse mail de l'utilisateur
-*   $pwd : le mot de passe de l'utilisateur
-*
-* Retour : l'ajout de l'utilisateur associé à son mail
-*/
-function sInscrire($pseudo, $email, $pwd)
-{
-    try {
-        $connexion = connexionBdd();
-
-        $role = "Membre";
-        $pwdCrypte = password_hash($pwd, PASSWORD_DEFAULT);
-        $requete = $connexion->prepare("INSERT INTO `membre` (pseudo, email, mot_de_passe, role) VALUES (:pseudo, :email, :mot_de_passe, :role");
-        $requete->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
-        $requete->bindValue(':email', $email, PDO::PARAM_STR);
-        $requete->bindValue(':mot_de_passe', $pwdCrypte, PDO::PARAM_STR);
-        $requete->bindValue(':role', $role, PDO::PARAM_STR);
-
-        $resultat = $requete->execute();
-    } catch (PDOException $erreur) {
-        throw new Exception("Erreur: " . $erreur->getMessage());
-    }
-    return $resultat;
-}
-
-
 /* Nom de la fonction : recupererMembres
 *
 * A quoi sert cette fonction : récuperer tous les membres
