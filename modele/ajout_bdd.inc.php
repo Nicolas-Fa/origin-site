@@ -21,8 +21,8 @@ function ajouterCommentaires($contenu, $idmembre, $idpostulation)
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("INSERT INTO `commentaire`(contenu, id_membre, id_postulation) VALUES (':contenu', :id_membre, :id_postulation)");
-        $requete->bindValue(":contenu", $contenu, PDO::PARAM_STR);
+        $requete = $connexion->prepare("INSERT INTO `commentaire`(contenu, id_membre, id_postulation) VALUES (:contenu, :id_membre, :id_postulation)");
+        $requete->bindValue(":contenu", ucfirst($contenu), PDO::PARAM_STR);
         $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_INT);
         $requete->bindValue(":id_postulation", $idpostulation, PDO::PARAM_INT);
         
@@ -55,10 +55,10 @@ function sInscrire($pseudo, $email, $pwd)
         $role = "Membre";
         $pwdCrypte = password_hash($pwd, PASSWORD_DEFAULT);
         $requete = $connexion->prepare("INSERT INTO `membre` (pseudo, email, mot_de_passe, role) VALUES (:pseudo, :email, :mot_de_passe, :role");
-        $requete->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
+        $requete->bindValue(':pseudo', ucfirst($pseudo), PDO::PARAM_STR);
         $requete->bindValue(':email', $email, PDO::PARAM_STR);
         $requete->bindValue(':mot_de_passe', $pwdCrypte, PDO::PARAM_STR);
-        $requete->bindValue(':role', $role, PDO::PARAM_STR);
+        $requete->bindValue(':role', ucfirst($role), PDO::PARAM_STR);
 
         $resultat = $requete->execute();
     } catch (PDOException $erreur) {
@@ -87,8 +87,8 @@ function ajouterPersonnage($pseudoperso, $royaume, $idmembre)
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("INSERT INTO `personnage` (pseudo_personnage, royaume, id_membre) VALUES (:pseudo_personnage, :royaume, :id_membre");
-        $requete->bindValue(':pseudo_personnage', $pseudoperso, PDO::PARAM_STR);
-        $requete->bindValue(':royaume', $royaume, PDO::PARAM_STR);
+        $requete->bindValue(':pseudo_personnage', ucfirst($pseudoperso), PDO::PARAM_STR);
+        $requete->bindValue(':royaume', str_replace(" ", "-", $royaume), PDO::PARAM_STR);
         $requete->bindValue(':id_membre', $idmembre, PDO::PARAM_INT);
 
         $resultat = $requete->execute();
@@ -119,11 +119,11 @@ function ajouterPostulation($contenu, $idmembre, $idpostulation)
         $connexion = connexionBdd();
 
         $statut = "En cours";
-        $requete = $connexion->prepare("INSERT INTO `postulation`(contenu, id_membre, id_postulation, statut) VALUES (':contenu', :id_membre, :id_postulation, :statut)");
-        $requete->bindValue(":contenu", $contenu, PDO::PARAM_STR);
+        $requete = $connexion->prepare("INSERT INTO `postulation`(contenu, id_membre, id_postulation, statut) VALUES (:contenu, :id_membre, :id_postulation, :statut)");
+        $requete->bindValue(":contenu", ucfirst($contenu), PDO::PARAM_STR);
         $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_INT);
         $requete->bindValue(":id_postulation", $idpostulation, PDO::PARAM_INT);
-        $requete->bindValue(":statut", $statut, PDO::PARAM_STR);
+        $requete->bindValue(":statut", ucfirst($statut), PDO::PARAM_STR);
         
         $resultat = $requete->execute();
     } catch (PDOException $erreur) {
@@ -152,7 +152,7 @@ function ajouterVote($choix, $idmembre, $idpostulation)
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("INSERT INTO `vote`(choix, id_membre, id_postulation) VALUES (':choix', :id_membre, :id_postulation)");
+        $requete = $connexion->prepare("INSERT INTO `vote`(choix, id_membre, id_postulation) VALUES (:choix, :id_membre, :id_postulation)");
         $requete->bindValue(":choix", $choix, PDO::PARAM_BOOL);
         $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_INT);
         $requete->bindValue(":id_postulation", $idpostulation, PDO::PARAM_INT);

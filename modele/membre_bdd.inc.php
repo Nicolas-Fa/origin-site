@@ -47,7 +47,7 @@ function recupererMailMembre($email)
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("SELECT * FROM `membre` WHERE email=':email'");
+        $requete = $connexion->prepare("SELECT * FROM `membre` WHERE email=:email");
         $requete->bindValue(":email", $email, PDO::PARAM_STR);
         $requete->execute();
 
@@ -74,8 +74,8 @@ function recupererPseudoMembre($pseudo)
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("SELECT `pseudo` FROM `membre` WHERE pseudo=':pseudo'");
-        $requete->bindValue(":pseudo", $pseudo, PDO::PARAM_STR);
+        $requete = $connexion->prepare("SELECT `pseudo` FROM `membre` WHERE pseudo=:pseudo");
+        $requete->bindValue(":pseudo", ucfirst($pseudo), PDO::PARAM_STR);
         $requete->execute();
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
@@ -102,7 +102,7 @@ function recupererRoleMembre($role)
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("SELECT * FROM `membre` WHERE `role=:role`");
-        $requete->bindValue(":role", $role, PDO::PARAM_STR);
+        $requete->bindValue(":role", ucfirst($role), PDO::PARAM_STR);
         $requete->execute();
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);

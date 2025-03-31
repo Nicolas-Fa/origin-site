@@ -19,7 +19,7 @@ function recupererVote($choix, $idpostulation)
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("SELECT * FROM `vote` WHERE choix=:'choix' AND id_postulation=':id_postulation'");
+        $requete = $connexion->prepare("SELECT * FROM `vote` WHERE choix=:choix AND id_postulation=:id_postulation");
         $requete->bindValue(":choix", $choix, PDO::PARAM_BOOL);
         $requete->bindValue(":id_postulation", $idpostulation, PDO::PARAM_INT);
 

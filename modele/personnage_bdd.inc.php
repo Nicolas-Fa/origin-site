@@ -75,9 +75,9 @@ function recupererRoyaumeParIdMembre($idmembre, $pseudoperso)
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("SELECT `royaume` FROM `personnage` WHERE id_membre=:id_membre AND pseudo_personnage=':pseudo_personnage'");
+        $requete = $connexion->prepare("SELECT `royaume` FROM `personnage` WHERE id_membre=:id_membre AND pseudo_personnage=:pseudo_personnage");
         $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_INT);
-        $requete->bindValue(":pseudo_personnage", $pseudoperso, PDO::PARAM_STR);
+        $requete->bindValue(":pseudo_personnage", ucfirst($pseudoperso), PDO::PARAM_STR);
         $requete->execute();
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
