@@ -20,6 +20,11 @@ function seConnecter($email, $pwd)
         session_start();
     }
     $membre = recupererMailMembre($email);
+
+    if(!$membre){
+        return "Erreur: aucun utilisateur n'a été trouvé avec cet email.";
+    }
+    
     $pwd_bdd = $membre["mot_de_passe"];
 
     if (trim($pwd_bdd) == trim(password_hash($pwd, $pwd_bdd))) {

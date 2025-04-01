@@ -13,28 +13,28 @@
 
 function navigation($action = "defaut")
 {
-    $choixAction = array();
-    $choixAction["defaut"] = "accueil_ctr.php";
-    $choixAction["accueil"] = "accueil_ctr.php";
-    $choixAction["profil"] = "profil_ctr.php";
-    $choixAction["postuler"] = "postuler_ctr.php";
-    $choixAction["candidatures"] = "candidatures_ctr.php";
-    $choixAction["connexion"] = "connexion_ctr.php";
-    $choixAction["inscription"] = "inscription_ctr.php";
-    $choixAction["deconnexion"] = "deconnexion_ctr.php";
-    $choixAction["page404"] = "404_ctr.php";
+    $choix_action = array();
+    $choix_action["defaut"] = "accueil_ctr.php";
+    $choix_action["accueil"] = "accueil_ctr.php";
+    $choix_action["profil"] = "profil_ctr.php";
+    $choix_action["postuler"] = "postuler_ctr.php";
+    $choix_action["candidatures"] = "candidatures_ctr.php";
+    $choix_action["connexion"] = "connexion_ctr.php";
+    $choix_action["inscription"] = "inscription_ctr.php";
+    $choix_action["deconnexion"] = "deconnexion_ctr.php";
+    $choix_action["page404"] = "404_ctr.php";
 
-    $fichier_ctrl = $choixAction[$action];
+    $fichier_ctrl = $choix_action[$action];
 
     //si le fichier n'existe pas :
     if (! file_exists(__DIR__ . '/' . $fichier_ctrl)) die("Le fichier : " . $fichier_ctrl . " n'existe pas !");
 
-    //si la clé "action" existe dans notre tableau "choixAction" :
-    if (array_key_exists($action, $choixAction)) {
+    //si la clé "action" existe dans notre tableau "choix_action" :
+    if (array_key_exists($action, $choix_action)) {
         // le fichier à inclure sera retourné :
         return $fichier_ctrl;
     } else {
         // sinon, erreur 404
-        return $choixAction["page404"];
+        return $choix_action["page404"];
     }
 }

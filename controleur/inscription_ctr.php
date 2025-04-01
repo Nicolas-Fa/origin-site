@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // sécurité pour éviter l'accès aux fichiers contenant des fonctions & variables
 // verification que le script PHP est exécuté directement et pas depuis un autre fichier
 if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
@@ -41,12 +41,12 @@ if (isset($_POST["pseudo"]) && isset($_POST["email"]) && isset($_POST["mot_de_pa
 
 
 if ($est_inscrit) {
-    $titre = "Origin - Inscription confirmée";
+    $titre = "Origin - Inscription confirmée - Profil de $pseudo";
     include RACINE . "/vue/header.php";
     include RACINE . "/vue/profil.php";
     include RACINE . "/vue/footer.php";
 } else {
-    $titre = "Origin - Inscription";
+    $titre = "Origin - Inscription echouée";
     include RACINE . "/vue/header.php";
     include RACINE . "/vue/inscription.php";
     include RACINE . "/vue/footer.php";

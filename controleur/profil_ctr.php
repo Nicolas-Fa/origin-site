@@ -1,4 +1,5 @@
 <?php
+session_start();
 // sécurité pour éviter l'accès aux fichiers contenant des fonctions & variables
 // verification que le script PHP est exécuté directement et pas depuis un autre fichier
 if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
@@ -6,7 +7,6 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     die('Erreur : ' . basename(__FILE__));
 }
 
-session_start();
 
 require_once RACINE . "/modele/authentification.inc.php";
 require_once RACINE . "/modele/personnage_bdd.inc.php";

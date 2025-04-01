@@ -18,17 +18,18 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
             <ul class="nav_liste">
                 <!-- navigation visible par tout le monde -->
                 <li><a href="?action=accueil">Accueil</a></li>
-                <?php if(estConnecte()) ?>
-                <li><a href="?action=profil">Profil</a></li>
-                <!-- navigation visible par les membres du roster -->
-                <?php if (estConnecte() && ($role == "Titan")) { ?>
+                <?php if (isset($_SESSION["email"])) : ?>
+                    <li><a href="?action=profil">Profil</a></li>
+                    <!-- navigation visible par les membres du roster -->
+                <?php endif;
+                if (isset($_SESSION["email"]) && ($role == "Titan")) : ?>
                     <li class="nav_roster"><a href="?action=candidatures">Candidatures</a></li>
                     <!-- navigation visible par les visiteurs  -->
-                    <?php } else { ?>
+                <?php else : ?>
                     <li class="nav_visiteur"><a href="?action=postuler">Postuler</a></li>
                     <li class="nav_visiteur"><a href="?action=connexion">Se connecter</a></li>
                     <li class="nav_visiteur"><a href="?action=inscription">S'inscrire</a></li>
-                <?php } ?>
+                <?php endif; ?>
                 <!-- log out -->
                 <li class="nav_connecte"><button type="button">Se déconnecter</button></li>
 

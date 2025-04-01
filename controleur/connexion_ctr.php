@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // sécurité pour éviter l'accès aux fichiers contenant des fonctions & variables
 // verification que le script PHP est exécuté directement et pas depuis un autre fichier
 if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
@@ -7,30 +7,13 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     die('Erreur : ' . basename(__FILE__));
 }
 
-require_once RACINE . "/modele/authentification.inc.php";
-
-// On va récupérer les données POST et SESSION
-
-if (isset($_POST["email"]) && isset($_POST["mot_de_passe"])) {
-    $email = htmlspecialchars($_POST["email"]);
-    $pwd = $_POST["mot_de_passe"];
-    if ($email && password_verify($pwd, $pwd_bdd)) {
-        // Lorsque les infos sont correctes on se connecte
-        seConnecter($email, $pwd);
-        $messageCo = "Connexion réussie";
-    }else{
-        $messageErreurCo = "L'email ou le mot de passe sont inccorects";
-    }
-} else {
-    $email = null;
-    $pwd = null;
-}
-
-// Si on a réussi à se connecter :
+require_once RACINE . "/controleur/authentification_ctr.php";
 
 if(estConnecte()){
+    // Si on a réussi à se connecter :
     include RACINE . "/controleur/profil_ctr.php"; // on redirige l'utilisateur vers son profil
 }else{
+    // sinon, on redirige vers la page d'inscription
     $titre = "Origin - S'enregistrer";
     include RACINE . "/vue/header.php";
     include RACINE . "/vue/inscription.php";
