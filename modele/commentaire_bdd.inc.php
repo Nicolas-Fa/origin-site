@@ -36,19 +36,19 @@ function recupererCommentaires()
 *
 * A quoi sert cette fonction : récupère le contenu du commentaire en fonction de l'id de la postulation
 *
-* Paramètres de la fonction ($idPostulation)
-*	$idPostulation : l'id de la postulation
+* Paramètres de la fonction ($id_postulation)
+*	$id_postulation : l'id de la postulation
 *
 * Retour : le contenu du commentaire de la postulation
 */
 
-function recupererCommentaireParIdPostulation($idPostulation)
+function recupererCommentaireParIdPostulation($id_postulation)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("SELECT `contenu` FROM `commentaire` WHERE id_postulation=:id_postulation");
-        $requete->bindValue(":id_postulation", $idPostulation, PDO::PARAM_INT);
+        $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
         $requete->execute();
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
@@ -63,19 +63,19 @@ function recupererCommentaireParIdPostulation($idPostulation)
 *
 * A quoi sert cette fonction : récupère la date du commentaire en fonction de l'id de la postulation
 *
-* Paramètres de la fonction ($idPostulation)
-*	$idPostulation : l'id de la postulation
+* Paramètres de la fonction ($id_postulation)
+*	$id_postulation : l'id de la postulation
 *
 * Retour : la date du commentaire de la postulation
 */
 
-function recupererDateCommentaireParIdPostulation($idPostulation)
+function recupererDateCommentaireParIdPostulation($id_postulation)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("SELECT `date_commentaire` FROM `commentaire` WHERE id_postulation=:id_postulation");
-        $requete->bindValue(":id_postulation", $idPostulation, PDO::PARAM_INT);
+        $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
         $requete->execute();
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);

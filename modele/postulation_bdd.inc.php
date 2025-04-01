@@ -34,19 +34,19 @@ function recupererPostulation()
 *
 * A quoi sert cette fonction : récupère le contenu de la postulation en fonction de l'id du membre
 *
-* Paramètres de la fonction ($idMembre)
-*	$idMembre : l'id du membre
+* Paramètres de la fonction ($id_membre)
+*	$id_membre : l'id du membre
 *
 * Retour : le contenu de la postulation du membre
 */
 
-function recupererContenuParIdMembre($idMembre)
+function recupererContenuParIdMembre($id_membre)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("SELECT `contenu` FROM `postulation` WHERE id_membre=:id_membre");
-        $requete->bindValue(":id_membre", $idMembre, PDO::PARAM_INT);
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->execute();
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
@@ -61,19 +61,19 @@ function recupererContenuParIdMembre($idMembre)
 *
 * A quoi sert cette fonction : récupère le statut de la postulation en fonction de l'id de celle-ci
 *
-* Paramètres de la fonction ($idPostulation)
-*	$idMembre : l'id de la postulation
+* Paramètres de la fonction ($id_postulation)
+*	$id_postulation : l'id de la postulation
 *
 * Retour : le statut de la postulation
 */
 
-function recupererStatutPostuParIdPostu($idPostulation)
+function recupererStatutPostuParIdPostu($id_postulation)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("SELECT `statut` FROM `postulation` WHERE id_postulation=:id_postulation");
-        $requete->bindValue(":id_postulation", $idPostulation, PDO::PARAM_INT);
+        $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
         $requete->execute();
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);

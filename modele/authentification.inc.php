@@ -19,11 +19,11 @@ function seConnecter ($email, $pwd){
         session_start();
     }
     $membre = recupererMailMembre($email);
-    $pwdBdd = $membre["mot_de_passe"];
+    $pwd_bdd = $membre["mot_de_passe"];
 
-    if(trim($pwdBdd)== trim(crypt($pwd, $pwdBdd))){
+    if(trim($pwd_bdd)== trim(password_hash($pwd, $pwd_bdd))){
         $_SESSION["email"] = $email;
-        $_SESSION["mot_de_passe"] = $pwdBdd;
+        $_SESSION["mot_de_passe"] = $pwd_bdd;
     }
 }
 

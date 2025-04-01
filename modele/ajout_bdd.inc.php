@@ -8,23 +8,23 @@ include_once(RACINE . "/modele/bdd.inc.php");
 *
 * A quoi sert cette fonction : ajouter un commentaire
 *
-* Paramètres de la fonction ($contenu, $idmembre, $idpostulation)
+* Paramètres de la fonction ($contenu, $id_membre, $id_postulation)
 *   $contenu : le contenu du commentaire
-*   $idmembre : l'id du membre ayant écrit le commentaire
-*   $idpostulation : l'id de la postulation concernée par le commentaire
+*   $id_membre : l'id du membre ayant écrit le commentaire
+*   $id_postulation : l'id de la postulation concernée par le commentaire
 *
 * Retour : l'ajout du commentaire sur la postulation
 */
 
-function ajouterCommentaires($contenu, $idmembre, $idpostulation)
+function ajouterCommentaires($contenu, $id_membre, $id_postulation)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("INSERT INTO `commentaire`(contenu, id_membre, id_postulation) VALUES (:contenu, :id_membre, :id_postulation)");
         $requete->bindValue(":contenu", ucfirst($contenu), PDO::PARAM_STR);
-        $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_INT);
-        $requete->bindValue(":id_postulation", $idpostulation, PDO::PARAM_INT);
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
+        $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
         
         $resultat = $requete->execute();
     } catch (PDOException $erreur) {
@@ -53,11 +53,11 @@ function sInscrire($pseudo, $email, $pwd)
         $connexion = connexionBdd();
 
         $role = "Membre";
-        $pwdCrypte = password_hash($pwd, PASSWORD_DEFAULT);
+        $pwd_crypte = password_hash($pwd, PASSWORD_DEFAULT);
         $requete = $connexion->prepare("INSERT INTO `membre` (pseudo, email, mot_de_passe, role) VALUES (:pseudo, :email, :mot_de_passe, :role");
         $requete->bindValue(':pseudo', ucfirst($pseudo), PDO::PARAM_STR);
         $requete->bindValue(':email', $email, PDO::PARAM_STR);
-        $requete->bindValue(':mot_de_passe', $pwdCrypte, PDO::PARAM_STR);
+        $requete->bindValue(':mot_de_passe', $pwd_crypte, PDO::PARAM_STR);
         $requete->bindValue(':role', ucfirst($role), PDO::PARAM_STR);
 
         $resultat = $requete->execute();
@@ -75,21 +75,21 @@ function sInscrire($pseudo, $email, $pwd)
 * A quoi sert cette fonction : ajoute un personnage
 *
 * Paramètres de la fonction ($pseudoperso, $royaume, $idmembre)
-*	$pseudoperso : le pseudonyme du personnage
-*	$roayume : le royaume du personnage
-*   $idmembre : l'id du membre qui souhaite enregistrer le personnage
+*	$pseudo_perso : le pseudonyme du personnage
+*	$royaume : le royaume du personnage
+*   $id_membre : l'id du membre qui souhaite enregistrer le personnage
 *
 * Retour : l'ajout du personnage et du royaume 
 */
-function ajouterPersonnage($pseudoperso, $royaume, $idmembre)
+function ajouterPersonnage($pseudo_perso, $royaume, $id_membre)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("INSERT INTO `personnage` (pseudo_personnage, royaume, id_membre) VALUES (:pseudo_personnage, :royaume, :id_membre");
-        $requete->bindValue(':pseudo_personnage', ucfirst($pseudoperso), PDO::PARAM_STR);
-        $requete->bindValue(':royaume', str_replace(" ", "-", $royaume), PDO::PARAM_STR);
-        $requete->bindValue(':id_membre', $idmembre, PDO::PARAM_INT);
+        $requete->bindValue(':pseudo_personnage', strtolower($pseudo_perso), PDO::PARAM_STR);
+        $requete->bindValue(':royaume', trim(str_replace(" ", "-", strtolower($royaume))), PDO::PARAM_STR);
+        $requete->bindValue(':id_membre', $id_membre, PDO::PARAM_INT);
 
         $resultat = $requete->execute();
     } catch (PDOException $erreur) {
@@ -105,15 +105,15 @@ function ajouterPersonnage($pseudoperso, $royaume, $idmembre)
 *
 * A quoi sert cette fonction : ajouter une postulation
 *
-* Paramètres de la fonction ($contenu, $idmembre, $idpostulation)
+* Paramètres de la fonction ($contenu, $id_membre, $id_postulation)
 *   $contenu : le contenu du commentaire
-*   $idmembre : l'id du membre ayant écrit le commentaire
-*   $idpostulation : l'id de la postulation concernée par le commentaire
+*   $id_membre : l'id du membre ayant écrit le commentaire
+*   $id_postulation : l'id de la postulation concernée par le commentaire
 *
 * Retour : l'ajout du commentaire sur la postulation
 */
 
-function ajouterPostulation($contenu, $idmembre, $idpostulation)
+function ajouterPostulation($contenu, $id_membre, $id_postulation)
 {
     try {
         $connexion = connexionBdd();
@@ -121,8 +121,8 @@ function ajouterPostulation($contenu, $idmembre, $idpostulation)
         $statut = "En cours";
         $requete = $connexion->prepare("INSERT INTO `postulation`(contenu, id_membre, id_postulation, statut) VALUES (:contenu, :id_membre, :id_postulation, :statut)");
         $requete->bindValue(":contenu", ucfirst($contenu), PDO::PARAM_STR);
-        $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_INT);
-        $requete->bindValue(":id_postulation", $idpostulation, PDO::PARAM_INT);
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
+        $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
         $requete->bindValue(":statut", ucfirst($statut), PDO::PARAM_STR);
         
         $resultat = $requete->execute();
@@ -139,23 +139,23 @@ function ajouterPostulation($contenu, $idmembre, $idpostulation)
 *
 * A quoi sert cette fonction : ajouter un vote sur une postulation
 *
-* Paramètres de la fonction ($choix, $idmembre, $idpostulation)
+* Paramètres de la fonction ($choix, $id_membre, $id_postulation)
 *   $choix : le choix du vote
-*   $idmembre : l'id du membre ayant voté
-*   $idpostulation : l'id de la postulation concernée par le vote
+*   $id_membre : l'id du membre ayant voté
+*   $id_postulation : l'id de la postulation concernée par le vote
 *
 * Retour : l'ajout d'un vote sur la postulation
 */
 
-function ajouterVote($choix, $idmembre, $idpostulation)
+function ajouterVote($choix, $id_membre, $id_postulation)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("INSERT INTO `vote`(choix, id_membre, id_postulation) VALUES (:choix, :id_membre, :id_postulation)");
         $requete->bindValue(":choix", $choix, PDO::PARAM_BOOL);
-        $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_INT);
-        $requete->bindValue(":id_postulation", $idpostulation, PDO::PARAM_INT);
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
+        $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
         
         $resultat = $requete->execute();
     } catch (PDOException $erreur) {

@@ -8,20 +8,21 @@ include_once(RACINE . "/modele/bdd.inc.php");
 *
 * A quoi sert cette fonction : permet d'éditer un commentaire
 *
-* Paramètres de la fonction ($contenu)
+* Paramètres de la fonction ($contenu, $id_commentaire)
 *   $contenu : le contenu du commentaire
+*   $id_commentaire : l'id du commentaire
 *
 * Retour : la modification commentaire sur la postulation
 */
 
-function editerCommentaire($contenu, $idcommentaire)
+function editerCommentaire($contenu, $id_commentaire)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("UPDATE `commentaire` SET contenu=:contenu WHERE id_commentaire=:id_commentaire");
         $requete->bindValue(":contenu", ucfirst($contenu), PDO::PARAM_STR);
-        $requete->bindValue(":id_commentaire", $idcommentaire, PDO::PARAM_INT);
+        $requete->bindValue(":id_commentaire", $id_commentaire, PDO::PARAM_INT);
         
         if ($requete->execute()) {
             return "Commentaire modifié avec succès.";
@@ -42,21 +43,21 @@ function editerCommentaire($contenu, $idcommentaire)
 *
 * A quoi sert cette fonction : permet d'éditer le pseudo d'un membre
 *
-* Paramètres de la fonction ($pseudo, $idmembre)
+* Paramètres de la fonction ($pseudo, $id_membre)
 *   $pseudo : le pseudo du membre
-*   $idmembre : l'id du membre
+*   $id_membre : l'id du membre
 *
 * Retour : la modification de son pseudo
 */
 
-function editerPseudoMembre($pseudo, $idmembre)
+function editerPseudoMembre($pseudo, $id_membre)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("UPDATE `membre` SET pseudo=:pseudo WHERE id_membre=:id_membre");
         $requete->bindValue(":pseudo", ucfirst($pseudo), PDO::PARAM_STR);
-        $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_INT);
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         
         if ($requete->execute()) {
             return "Pseudo modifié avec succès.";
@@ -76,22 +77,22 @@ function editerPseudoMembre($pseudo, $idmembre)
 *
 * A quoi sert cette fonction : permet d'éditer le mot de passe d'un membre
 *
-* Paramètres de la fonction ($pwd, $idmembre)
+* Paramètres de la fonction ($pwd, $id_membre)
 *   $pseudo : le mot de passe du membre
-*   $idmembre : l'id du membre
+*   $id_membre : l'id du membre
 *
 * Retour : la modification du mot de passe du membre
 */
 
-function editerMdpMembre($pwd, $idmembre)
+function editerMdpMembre($pwd, $id_membre)
 {
     try {
         $connexion = connexionBdd();
 
-        $pwdCrypte = password_hash($pwd, PASSWORD_DEFAULT);
+        $pwd_crypte = password_hash($pwd, PASSWORD_DEFAULT);
         $requete = $connexion->prepare("UPDATE `membre` SET mot_de_passe=:mot_de_passe WHERE id_membre=:id_membre" );
-        $requete->bindValue(":mot_de_passe", $pwdCrypte, PDO::PARAM_STR);
-        $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_STR);
+        $requete->bindValue(":mot_de_passe", $pwd_crypte, PDO::PARAM_STR);
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_STR);
         
         if ($requete->execute()) {
             return "Mot de passe modifié avec succès.";
@@ -111,21 +112,21 @@ function editerMdpMembre($pwd, $idmembre)
 *
 * A quoi sert cette fonction : permet d'éditer le rôle d'un membre
 *
-* Paramètres de la fonction ($role, $idmembre)
+* Paramètres de la fonction ($role, $id_membre)
 *   $role : le role du membre
-*   $idmembre : l'id du membre
+*   $id_membre : l'id du membre
 *
 * Retour : la modification du rôle d'un membre
 */
 
-function editerRoleMembre($role, $idmembre)
+function editerRoleMembre($role, $id_membre)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("UPDATE `membre` SET role=:role WHERE id_membre=:id_membre");
         $requete->bindValue(":role", ucfirst($role), PDO::PARAM_STR);
-        $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_INT);
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         
         if ($requete->execute()) {
             return "Rôle du membre modifié avec succès.";
@@ -146,23 +147,23 @@ function editerRoleMembre($role, $idmembre)
 *
 * A quoi sert cette fonction : permet d'éditer le pseudo de son personnage
 *
-* Paramètres de la fonction ($royaume, $idmembre, $idpersonnage)
+* Paramètres de la fonction ($royaume, $id_membre, $id_personnage)
 *   $royaume : le royaume du personnage
-*   $idmembre : l'id du membre
-*   $idpersonnage : l'id du personnage
+*   $id_membre : l'id du membre
+*   $id_personnage : l'id du personnage
 *
 * Retour : la modification du royaume du personnage
 */
 
-function editerRoyaumePersonnage($royaume, $idmembre, $idpersonnage)
+function editerRoyaumePersonnage($royaume, $id_membre, $id_personnage)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("UPDATE `personnage` SET royaume=:royaume WHERE id_membre=:id_membre AND id_personnage=:id_personnage");
-        $requete->bindValue(":royaume", trim(str_replace(" ", "-", $royaume)), PDO::PARAM_STR);
-        $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_INT);
-        $requete->bindValue(":id_personnage", $idpersonnage, PDO::PARAM_INT);
+        $requete->bindValue(":royaume", trim(str_replace(" ", "-", strtolower($royaume))), PDO::PARAM_STR);
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
+        $requete->bindValue(":id_personnage", $id_personnage, PDO::PARAM_INT);
         
         if ($requete->execute()) {
             return "Royaume du personnage modifié avec succès.";
@@ -182,23 +183,23 @@ function editerRoyaumePersonnage($royaume, $idmembre, $idpersonnage)
 *
 * A quoi sert cette fonction : permet d'éditer le pseudo de son personnage
 *
-* Paramètres de la fonction ($pseudo, $idmembre, $idpersonnage)
+* Paramètres de la fonction ($pseudo, $id_membre, $id_personnage)
 *   $pseudo : le pseudo du personnage
-*   $idmembre : l'id du membre
-*   $idpersonnage : l'id du personnage
+*   $id_membre : l'id du membre
+*   $id_personnage : l'id du personnage
 *
 * Retour : la modification du pseudo du personnage
 */
 
-function editerPseudoPersonnage($pseudo, $idmembre, $idpersonnage)
+function editerPseudoPersonnage($pseudo, $id_membre, $id_personnage)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("UPDATE `personnage` SET pseudo_personnage=:pseudo_personnage WHERE id_membre=:id_membre AND id_personnage=:id_personnage");
-        $requete->bindValue(":pseudo_personnage", ucfirst($pseudo), PDO::PARAM_STR);
-        $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_INT);
-        $requete->bindValue(":id_personnage", $idpersonnage, PDO::PARAM_INT);
+        $requete->bindValue(":pseudo_personnage", strtolower($pseudo), PDO::PARAM_STR);
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
+        $requete->bindValue(":id_personnage", $id_personnage, PDO::PARAM_INT);
         
         if ($requete->execute()) {
             return "Pseudo de votre personnage modifié avec succès.";
@@ -219,23 +220,23 @@ function editerPseudoPersonnage($pseudo, $idmembre, $idpersonnage)
 *
 * A quoi sert cette fonction : permet d'éditer une postulation
 *
-* Paramètres de la fonction ($contenu, $idmembre, $idpostulation)
+* Paramètres de la fonction ($contenu, $id_membre, $id_postulation)
 *   $contenu : le contenu de la postulation
-*   $idmembre : l'id du membre
-*   $idpostulation : l'id de la postulation
+*   $id_membre : l'id du membre
+*   $id_postulation : l'id de la postulation
 *
 * Retour : la modification de la postulation du membre
 */
 
-function editerPostulation($contenu, $idmembre, $idpostulation)
+function editerPostulation($contenu, $id_membre, $id_postulation)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("UPDATE `postulation` SET contenu=:contenu WHERE id_membre=:id_membre AND id_postulation=:id_postulation");
         $requete->bindValue(":contenu", ucfirst($contenu), PDO::PARAM_STR);
-        $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_INT);
-        $requete->bindValue(":id_postulation", $idpostulation, PDO::PARAM_INT);
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
+        $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
         
         if ($requete->execute()) {
             return "Postulation modifiée avec succès.";
@@ -255,23 +256,23 @@ function editerPostulation($contenu, $idmembre, $idpostulation)
 *
 * A quoi sert cette fonction : permet d'éditer le statut d'une postulation
 *
-* Paramètres de la fonction ($statut, $idmembre, $idpostulation)
+* Paramètres de la fonction ($statut, $id_membre, $id_postulation)
 *   $statut : le statut de la postulation
-*   $idmembre : l'id du membre
-*   $idpostulation : l'id de la postulation
+*   $id_membre : l'id du membre
+*   $id_postulation : l'id de la postulation
 *
 * Retour : la modification du statut de la postulation
 */
 
-function editerStatutPostulation($statut, $idmembre, $idpostulation)
+function editerStatutPostulation($statut, $id_membre, $id_postulation)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("UPDATE `postulation` SET statut=:statut WHERE id_membre=:id_membre AND id_postulation=:id_postulation");
         $requete->bindValue(":statut", ucfirst($statut), PDO::PARAM_STR);
-        $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_INT);
-        $requete->bindValue(":id_postulation", $idpostulation, PDO::PARAM_INT);
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
+        $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
         
         if ($requete->execute()) {
             return "Statut de la postulation modifié avec succès.";
@@ -293,25 +294,25 @@ function editerStatutPostulation($statut, $idmembre, $idpostulation)
 *
 * A quoi sert cette fonction : permet de modifier son vote
 *
-* Paramètres de la fonction ($choix, $idvote, $idmembre, $idpostulation)
+* Paramètres de la fonction ($choix, $id_vote, $id_membre, $id_postulation)
 *   $choix : le choix du vote, pour ou contre
 *   $id_vote : l'id du vote à modifier
-*   $idmembre : l'id du membre
-*   $idpostulation : l'id de la postulation
+*   $id_membre : l'id du membre
+*   $id_postulation : l'id de la postulation
 *
 * Retour : la modification d'un vote
 */
 
-function modifierVote($choix, $idvote, $idmembre, $idpostulation)
+function modifierVote($choix, $id_vote, $id_membre, $id_postulation)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("UPDATE `vote` SET choix=:choix WHERE id_vote=:id_vote AND id_membre=:id_membre AND id_postulation=:id_postulation");
         $requete->bindValue(":choix", $choix, PDO::PARAM_BOOL);
-        $requete->bindValue(":id_vote", $idvote, PDO::PARAM_INT);
-        $requete->bindValue(":id_membre", $idmembre, PDO::PARAM_INT);
-        $requete->bindValue(":id_postulation", $idpostulation, PDO::PARAM_INT);
+        $requete->bindValue(":id_vote", $id_vote, PDO::PARAM_INT);
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
+        $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
         
         if ($requete->execute()) {
             return "Vote modifié avec succès.";
