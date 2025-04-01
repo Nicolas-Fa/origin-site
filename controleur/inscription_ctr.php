@@ -7,6 +7,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     die('Erreur : ' . basename(__FILE__));
 }
 
+require_once RACINE . "/modele/authentification.inc.php";
 include_once RACINE . "/modele/membre_bdd.inc.php";
 include_once RACINE . "/modele/ajout_bdd.inc.php";
 
@@ -20,10 +21,10 @@ if (isset($_POST["pseudo"]) && isset($_POST["email"]) && isset($_POST["mot_de_pa
     $email = htmlspecialchars($_POST["email"]);
     $pwd = $_POST["mot_de_passe"];
 
-    if (recupererPseudoMembre($pseudo)) {
+    if (recupererPseudoMembre($pseudo) == true) {
         $message = "Ce pseudo existe déjà.";
     } else {
-        if (recupererMailMembre($email)) {
+        if (recupererMailMembre($email) == true) {
             $message = "Email déjà utilisé.";
         } else {
             $inscription = sInscrire($pseudo, $email, $pwd);
@@ -45,7 +46,7 @@ if ($est_inscrit) {
     include RACINE . "/vue/profil.php";
     include RACINE . "/vue/footer.php";
 } else {
-    $titre = "Origin - Erreur lors de l'inscription";
+    $titre = "Origin - Inscription";
     include RACINE . "/vue/header.php";
     include RACINE . "/vue/inscription.php";
     include RACINE . "/vue/footer.php";

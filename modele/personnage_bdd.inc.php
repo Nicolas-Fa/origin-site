@@ -67,17 +67,17 @@ function recupererPseudoPersonnageParIdMembre($id_membre)
 *   $id_membre : l'id du membre
 *   $pseudoperso : le pseudo du personnage
 *
-* Retour : un tableau associatif avec toutes les informations sur tous les commentaires
+* Retour : le royaume d'un personnage
 */
 
-function recupererRoyaumeParIdMembre($id_membre, $pseudoperso)
+function recupererRoyaumeParIdMembre($id_membre, $pseudo_perso)
 {
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("SELECT `royaume` FROM `personnage` WHERE id_membre=:id_membre AND pseudo_personnage=:pseudo_personnage");
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
-        $requete->bindValue(":pseudo_personnage", ucfirst($pseudoperso), PDO::PARAM_STR);
+        $requete->bindValue(":pseudo_personnage", ucfirst($pseudo_perso), PDO::PARAM_STR);
         $requete->execute();
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);

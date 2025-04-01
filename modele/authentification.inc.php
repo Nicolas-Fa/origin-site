@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-include_once( RACINE . "/modele/membre_bdd.inc.php");
+include_once(RACINE . "/modele/membre_bdd.inc.php");
 
 
 /* Nom de la fonction : seConnecter
@@ -14,14 +14,15 @@ include_once( RACINE . "/modele/membre_bdd.inc.php");
 * Retour : 
 */
 
-function seConnecter ($email, $pwd){
-    if (!isset($_SESSION)){
+function seConnecter($email, $pwd)
+{
+    if (!isset($_SESSION)) {
         session_start();
     }
     $membre = recupererMailMembre($email);
     $pwd_bdd = $membre["mot_de_passe"];
 
-    if(trim($pwd_bdd)== trim(password_hash($pwd, $pwd_bdd))){
+    if (trim($pwd_bdd) == trim(password_hash($pwd, $pwd_bdd))) {
         $_SESSION["email"] = $email;
         $_SESSION["mot_de_passe"] = $pwd_bdd;
     }
@@ -37,8 +38,9 @@ function seConnecter ($email, $pwd){
 * Retour : une déconnexion du membre, fin de session
 */
 
-function seDeconnecter(){
-    if(!isset($_SESSION)){
+function seDeconnecter()
+{
+    if (!isset($_SESSION)) {
         session_start();
     }
     unset($_SESSION["email"]);
@@ -48,33 +50,54 @@ function seDeconnecter(){
 
 /* Nom de la fonction estConnecte
 *
-* A quoi sert cette fonction : 
+* A quoi sert cette fonction : vérifier si un utilisateur est connecté
 *
-* Paramètres de la fonction (a,b)
-*	a : quelque chose
-*	b : quelque chose d'autre
+* Paramètres de la fonction ()
 *
-* Retour : ce que la fonction est sencé nous afficher
+* Retour : un booleen qui indique si l'utilisateur est connecté ou pas
 */
 
-function estConnecte() {
+function estConnecte()
+{
     if (!isset($_SESSION)) {
         session_start();
     }
-    $retourne = false;
+    $reponse = false;
 
     if (isset($_SESSION["email"])) {
         $membre = recupererMailMembre($_SESSION["email"]);
-        if ($membre["email"] == $_SESSION["email"] && $membre["email"] == $_SESSION["email"]
+        if (
+            $membre["email"] == $_SESSION["email"] && $membre["email"] == $_SESSION["email"]
         ) {
-            $retourne = true;
+            $reponse = true;
         }
     }
-    return $retourne;
+    return $reponse;
 }
 
+
+/* Nom de la fonction recupererMailConnecte
+*
+* A quoi sert cette fonction : récupère l'email de l'utilisateur connecté
+*
+* Paramètres de la fonction ()
+*
+* Retour : l'adresse mail de l'utilisateur connecté
+*/
+
+function recupererMailConnecte()
+{
+    if (estConnecte()) {
+        $reponse = $_SESSION["email"];
+    } else {
+        $reponse = null;
+    }
+    return $reponse;
+}
+
+
 // ------------------------------test--------------------------------------------
-if ( $_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__) ) {
+if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
 
     header('Content-Type:text/plain');
 

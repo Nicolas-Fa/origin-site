@@ -59,6 +59,33 @@ function recupererMailMembre($email)
 }
 
 
+/* Nom de la fonction : recupererIdMembreParMail
+*
+* A quoi sert cette fonction : récupère l'id du membre en fonction de son mail
+*
+* Paramètres de la fonction ($email)
+*	$email : l'email du membre
+*
+* Retour : l'id membre associé à l'email renseigné
+*/
+
+function recupererIdMembreParMail($email)
+{
+    try {
+        $connexion = connexionBdd();
+
+        $requete = $connexion->prepare("SELECT `id_membre` FROM `membre` WHERE email=:email");
+        $requete->bindValue(":email", $email, PDO::PARAM_STR);
+        $requete->execute();
+
+        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $erreur) {
+        throw new Exception("Erreur: " . $erreur->getMessage());
+    }
+    return $resultat;
+}
+
+
 /* Nom de la fonction recupererPseudoMembre()
 *
 * A quoi sert cette fonction : récupère le membre en fonction de son pseudo
@@ -103,6 +130,59 @@ function recupererRoleMembre($role)
 
         $requete = $connexion->prepare("SELECT * FROM `membre` WHERE `role=:role`");
         $requete->bindValue(":role", ucfirst($role), PDO::PARAM_STR);
+        $requete->execute();
+
+        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $erreur) {
+        throw new Exception("Erreur: " . $erreur->getMessage());
+    }
+    return $resultat;
+}
+
+/* Nom de la fonction recupererPseudoMembreParMail()
+*
+* A quoi sert cette fonction : récupère le membre en fonction de son email
+*
+* Paramètres de la fonction ($email)
+*	$email : l'email du membre
+*
+* Retour : le pseudo du membre associé a l'email 
+*/
+
+function recupererPseudoMembreParMail($email)
+{
+    try {
+        $connexion = connexionBdd();
+
+        $requete = $connexion->prepare("SELECT `pseudo` FROM `membre` WHERE email=:email");
+        $requete->bindValue(":email", ucfirst($email), PDO::PARAM_STR);
+        $requete->execute();
+
+        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $erreur) {
+        throw new Exception("Erreur: " . $erreur->getMessage());
+    }
+    return $resultat;
+}
+
+
+/* Nom de la fonction recupererRoleMembreParMail()
+*
+* A quoi sert cette fonction : récupère le rôle du membre en fonction de son email
+*
+* Paramètres de la fonction ($email)
+*	$email : l'email du membre
+*
+* Retour : le role du membre associé à l'email
+*/
+
+function recupererRoleMembreParMail($email)
+{
+    try {
+        $connexion = connexionBdd();
+
+        $requete = $connexion->prepare("SELECT `role` FROM `membre` WHERE `email=:email`");
+        $requete->bindValue(":email", $email, PDO::PARAM_STR);
         $requete->execute();
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
