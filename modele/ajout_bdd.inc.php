@@ -21,6 +21,11 @@ function ajouterCommentaires($contenu, $id_membre, $id_postulation)
     try {
         $connexion = connexionBdd();
 
+        $contenu = trim($contenu);
+        if ($contenu === '') {
+            throw new Exception("Le commentaire ne peut pas être vide.");
+        }
+
         $requete = $connexion->prepare("INSERT INTO `commentaire`(contenu, id_membre, id_postulation) VALUES (:contenu, :id_membre, :id_postulation)");
         $requete->bindValue(":contenu", ucfirst($contenu), PDO::PARAM_STR);
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
@@ -28,7 +33,7 @@ function ajouterCommentaires($contenu, $id_membre, $id_postulation)
         
         $resultat = $requete->execute();
     } catch (PDOException $erreur) {
-        throw new Exception("Erreur: " . $erreur->getMessage());
+        throw new Exception("Erreur lors de l'ajout du commentaire : " . $erreur->getMessage());
     }
     return $resultat;
 }
@@ -52,8 +57,17 @@ function sInscrire($pseudo, $email, $pwd)
     try {
         $connexion = connexionBdd();
 
+        $email = trim($email);
+        if ($email === '') {
+            throw new Exception("L'email ne peut pas être vide.");
+        }
+        $pseudo = trim($pseudo);
+        if ($pseudo === '') {
+            throw new Exception("Le pseudo ne peut pas être vide.");
+        }
+
         $role = "Membre";
-        $pwd_crypte = password_hash($pwd, PASSWORD_DEFAULT);
+        $pwd_crypte = trim(password_hash($pwd, PASSWORD_DEFAULT));
         $requete = $connexion->prepare("INSERT INTO `membre` (pseudo, email, mot_de_passe, role) VALUES (:pseudo, :email, :mot_de_passe, :role");
         $requete->bindValue(':pseudo', ucfirst($pseudo), PDO::PARAM_STR);
         $requete->bindValue(':email', $email, PDO::PARAM_STR);
@@ -86,9 +100,19 @@ function ajouterPersonnage($pseudo_perso, $royaume, $id_membre)
     try {
         $connexion = connexionBdd();
 
+        $pseudo_perso = trim($pseudo_perso);
+        if ($pseudo_perso === '') {
+            throw new Exception("Le pseudo de votre personnage ne peut pas être vide.");
+        }
+
+        $royaume = trim($royaume);
+        if ($royaume === '') {
+            throw new Exception("Le royaume de votre personnage ne peut pas être vide.");
+        }
+        
         $requete = $connexion->prepare("INSERT INTO `personnage` (pseudo_personnage, royaume, id_membre) VALUES (:pseudo_personnage, :royaume, :id_membre");
         $requete->bindValue(':pseudo_personnage', strtolower($pseudo_perso), PDO::PARAM_STR);
-        $requete->bindValue(':royaume', trim(str_replace(" ", "-", strtolower($royaume))), PDO::PARAM_STR);
+        $requete->bindValue(':royaume', str_replace(" ", "-", strtolower($royaume)), PDO::PARAM_STR);
         $requete->bindValue(':id_membre', $id_membre, PDO::PARAM_INT);
 
         $resultat = $requete->execute();
@@ -117,6 +141,11 @@ function ajouterPostulation($contenu, $id_membre, $id_postulation)
 {
     try {
         $connexion = connexionBdd();
+
+        $contenu = trim($contenu);
+        if ($contenu === '') {
+            throw new Exception("La postulation ne peut pas être vide.");
+        }
 
         $statut = "En cours";
         $requete = $connexion->prepare("INSERT INTO `postulation`(contenu, id_membre, id_postulation, statut) VALUES (:contenu, :id_membre, :id_postulation, :statut)");

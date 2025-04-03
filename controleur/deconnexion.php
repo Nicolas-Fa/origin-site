@@ -10,7 +10,7 @@ require_once RACINE . "/modele/authentification.inc.php";
 
 seDeconnecter();
 
-
+//---------------------------------Vue-------------------------------------------
 $titre = "Origin - Se connecter";
 include (RACINE . "/vue/header.php");
 include (RACINE . "/vue/connexion.php");

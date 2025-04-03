@@ -10,12 +10,12 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 require_once RACINE . "/controleur/authentification_ctr.php";
 
 if(estConnecte()){
-    // Si on a réussi à se connecter :
+    // Si on est connecté :
     include RACINE . "/controleur/profil_ctr.php"; // on redirige l'utilisateur vers son profil
 }else{
-    // sinon, on redirige vers la page d'inscription
-    $titre = "Origin - S'enregistrer";
+    // sinon, on redirige vers la page de connexion
+    $titre = "Origin - Se connecter";
     include RACINE . "/vue/header.php";
-    include RACINE . "/vue/inscription.php";
+    include RACINE . "/vue/connexion.php";
     include RACINE . "/vue/footer.php";
 }

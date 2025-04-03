@@ -50,6 +50,7 @@ function seDeconnecter()
     }
     unset($_SESSION["email"]);
     unset($_SESSION["mot_de_passe"]);
+    session_destroy();
 }
 
 

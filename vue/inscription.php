@@ -7,5 +7,6 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 }
 ?>
 <main>
-    <h1 class="page_introuvable">TOTO</h1>
+    <?php if(isset($message)) echo $message; ?>
+    <h1 class="page_introuvable">Inscription</h1>
 </main>

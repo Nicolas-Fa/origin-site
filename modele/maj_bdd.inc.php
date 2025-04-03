@@ -89,7 +89,7 @@ function editerMdpMembre($pwd, $id_membre)
     try {
         $connexion = connexionBdd();
 
-        $pwd_crypte = password_hash($pwd, PASSWORD_DEFAULT);
+        $pwd_crypte = trim(password_hash($pwd, PASSWORD_DEFAULT));
         $requete = $connexion->prepare("UPDATE `membre` SET mot_de_passe=:mot_de_passe WHERE id_membre=:id_membre" );
         $requete->bindValue(":mot_de_passe", $pwd_crypte, PDO::PARAM_STR);
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_STR);

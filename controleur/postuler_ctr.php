@@ -11,8 +11,8 @@ session_start();
 
 require_once RACINE . "/modele/authentification.inc.php";
 
-
-$titre="La page que vous recherchez n'existe pas!";
+//---------------------------------Vue-------------------------------------------
+$titre="Origin - Postuler - Rejoignez le roster compétitif de la 10ème guilde française";
 include (RACINE . "/vue/header.php");
 include (RACINE . "/vue/postuler.php");
 include (RACINE . "/vue/footer.php");

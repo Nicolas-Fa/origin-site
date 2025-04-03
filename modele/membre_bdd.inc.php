@@ -113,14 +113,14 @@ function recupererPseudoMembre($pseudo)
 }
 
 
-/* Nom de la fonction recupererPseudoMembre()
+/* Nom de la fonction recupererRoleMembre()
 *
-* A quoi sert cette fonction : récupère le membre en fonction de son pseudo
+* A quoi sert cette fonction : récupère les membres selon leur rôle
 *
-* Paramètres de la fonction ($pseudo)
-*	$pseudo : le pseudo renseigné par le membre
+* Paramètres de la fonction ($role)
+*	$role : le role du membre
 *
-* Retour : le membre associé au pseudo renseigné
+* Retour : les membres ayant le rôle choisi
 */
 
 function recupererRoleMembre($role)

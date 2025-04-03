@@ -14,34 +14,39 @@ require_once RACINE . "/modele/ajout_bdd.inc.php";
 require_once RACINE . "/modele/maj_bdd.inc.php";
 require_once RACINE . "/modele/supprimer_bdd.inc.php";
 
-
+// si le membre est connecté.....
 if (estConnecte()) {
-    // on visualise les infos du membre
+    // on visualise les infos du membre.....
     $email = recupererMailConnecte();
     $membre = recupererMailMembre($email);
     $id_membre = $membre["id_membre"];
-    $pseudo = $membre["pseudo"];
+    $pseudo = htmlspecialchars($membre["pseudo"]);
     $role = $membre["role"];
 
-    // on visualise les personnage enregistrés du membre
+    // on visualise les personnage enregistrés du membre.....
     $personnage = recupererPersonnage();
-    $pseudo_personnage = ucfirst(recupererPseudoPersonnageParIdMembre($id_membre));
-    $royaume_personnage = ucfirst(recupererRoyaumeParIdMembre($id_membre, $pseudo_personnage));
+    $pseudo_personnage = htmlspecialchars(recupererPseudoPersonnageParIdMembre($id_membre));
+    $royaume_personnage = htmlspecialchars(recupererRoyaumeParIdMembre($id_membre, $pseudo_personnage));
 
-    // on peut ajouter un nouveau personnage
+    // on peut ajouter un nouveau personnage.....
     $creer_personnage = ajouterPersonnage($creer_pseudo_personnage, $creer_royaume_personnage, $id_membre);
 
-    // edition du profil 
-    $changer_pseudo = editerPseudoMembre($nouveau_pseudo, $id_membre);
+    // on peut éditer le profil .....
+    $changer_pseudo = htmlspecialchars(editerPseudoMembre($nouveau_pseudo, $id_membre));
     $changer_mdp = editerMdpMembre($nouveau_mdp, $id_membre);
     $changer_royaume = editerRoyaumePersonnage($nouveau_royaume, $id_membre, $id_personnage);
     $changer_pseudo_perso = editerPseudoPersonnage($nouveau_pseudo_perso, $id_membre, $id_personnage);
+    $supprimer_personnage = supprimerPersonnage($id_personnage);
+    $supprimer_compte = supprimerMembre($id_membre);
 
+
+    //----------------------On affiche le profil-------------------------------------
     $titre = "Origin - Profil de $pseudo";
     include RACINE . "/vue/header.php";
     include RACINE . "/vue/profil.php";
     include RACINE . "/vue/footer.php";
-}else{
+} else {
+    //----------------------Sinon on renvoie sur l'inscription-----------------------
     $titre = "Origin - Inscription";
     include RACINE . "/vue/header.php";
     include RACINE . "/vue/inscription.php";

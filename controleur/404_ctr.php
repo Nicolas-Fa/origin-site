@@ -6,8 +6,9 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     die('Erreur : ' . basename(__FILE__));
 }
 
+//---------------------------------Vue-------------------------------------------
 $titre="La page que vous recherchez n'existe pas!";
 include (RACINE . "/vue/header.php");
 include (RACINE . "/vue/404_vue.php");
 include (RACINE . "/vue/footer.php");
- ?>
+?>

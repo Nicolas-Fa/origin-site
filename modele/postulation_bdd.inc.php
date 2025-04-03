@@ -83,6 +83,33 @@ function recupererStatutPostuParIdPostu($id_postulation)
     return $resultat;
 }
 
+
+/* Nom de la fonction : recupererDatePostuParIdPostu
+*
+* A quoi sert cette fonction : récupère la date de la postulation en fonction de l'id de celle-ci
+*
+* Paramètres de la fonction ($id_postulation)
+*	$id_postulation : l'id de la postulation
+*
+* Retour : la date a laquelle a été postée la postulation
+*/
+
+function recupererDatePostuParIdPostu($id_postulation)
+{
+    try {
+        $connexion = connexionBdd();
+
+        $requete = $connexion->prepare("SELECT `date_de_soumission` FROM `postulation` WHERE id_postulation=:id_postulation");
+        $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
+        $requete->execute();
+
+        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $erreur) {
+        throw new Exception("Erreur: " . $erreur->getMessage());
+    }
+    return $resultat;
+}
+
 // ------------------------------test--------------------------------------------
 if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
     header('Content-Type:text/plain');

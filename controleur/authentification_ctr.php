@@ -11,9 +11,9 @@ require_once RACINE . "/modele/authentification.inc.php";
 // On va récupérer les données POST et SESSION
 
 if (isset($_POST["email"]) && isset($_POST["mot_de_passe"])) {
-    $email = htmlspecialchars($_POST["email"]);
-    $pwd = $_POST["mot_de_passe"];
-    if ($email && password_verify($pwd, $pwd_bdd)) {
+    $email = trim(htmlspecialchars($_POST["email"]));
+    $pwd = trim($_POST["mot_de_passe"]);
+    if (filter_var($email, FILTER_VALIDATE_EMAIL) && password_verify($pwd, $pwd_bdd)) {
         // Lorsque les infos sont correctes on se connecte
         seConnecter($email, $pwd);
         $messageCo = "Connexion réussie";

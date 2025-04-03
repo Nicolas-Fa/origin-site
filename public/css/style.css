@@ -49,6 +49,7 @@ body {
     background-size: cover;
     background-clip: content-box;
     background-attachment: fixed;
+    color: var(--text_color);
 }
 
 #page_404 {

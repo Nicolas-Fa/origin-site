@@ -8,8 +8,8 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 }
 
 require_once RACINE . "/modele/authentification.inc.php";
-include_once RACINE . "/modele/membre_bdd.inc.php";
-include_once RACINE . "/modele/ajout_bdd.inc.php";
+require_once RACINE . "/modele/membre_bdd.inc.php";
+require_once RACINE . "/modele/ajout_bdd.inc.php";
 
 $est_inscrit = false;
 $message = null;
@@ -36,17 +36,16 @@ if (isset($_POST["pseudo"]) && isset($_POST["email"]) && isset($_POST["mot_de_pa
         }
     }
 } else {
-    $message = "Tous les champs doivent-être remplis";
+    if ($message !== null) {
+        $message = "Tous les champs doivent-être remplis";
+    }
 }
 
-
-if ($est_inscrit) {
-    $titre = "Origin - Inscription confirmée - Profil de $pseudo";
-    include RACINE . "/vue/header.php";
-    include RACINE . "/vue/profil.php";
-    include RACINE . "/vue/footer.php";
-} else {
-    $titre = "Origin - Inscription echouée";
+//---------------------------------Vue-------------------------------------------
+if ($est_inscrit) { // si l'inscription a fonctionné : redirection vers le profil
+    include RACINE . "/controleur/profil_ctr.php";
+} else { // sinon, retour sur la page d'inscription
+    $titre = "Origin - S'inscrire - Rejoignez notre communauté!";
     include RACINE . "/vue/header.php";
     include RACINE . "/vue/inscription.php";
     include RACINE . "/vue/footer.php";
