@@ -20,6 +20,11 @@ function editerCommentaire($contenu, $id_commentaire)
     try {
         $connexion = connexionBdd();
 
+        $contenu = trim($contenu);
+        if ($contenu === '') {
+            throw new Exception("Le commentaire ne peut pas être vide.");
+        }
+
         $requete = $connexion->prepare("UPDATE `commentaire` SET contenu=:contenu WHERE id_commentaire=:id_commentaire");
         $requete->bindValue(":contenu", ucfirst($contenu), PDO::PARAM_STR);
         $requete->bindValue(":id_commentaire", $id_commentaire, PDO::PARAM_INT);
@@ -54,6 +59,11 @@ function editerPseudoMembre($pseudo, $id_membre)
 {
     try {
         $connexion = connexionBdd();
+
+        $pseudo = trim($pseudo);
+        if ($pseudo === '') {
+            throw new Exception("Le pseudo ne peut pas être vide.");
+        }
 
         $requete = $connexion->prepare("UPDATE `membre` SET pseudo=:pseudo WHERE id_membre=:id_membre");
         $requete->bindValue(":pseudo", ucfirst($pseudo), PDO::PARAM_STR);
@@ -160,6 +170,11 @@ function editerRoyaumePersonnage($royaume, $id_membre, $id_personnage)
     try {
         $connexion = connexionBdd();
 
+        $royaume = trim($royaume);
+        if ($royaume === '') {
+            throw new Exception("Le royaume de votre personnage ne peut pas être vide.");
+        }
+
         $requete = $connexion->prepare("UPDATE `personnage` SET royaume=:royaume WHERE id_membre=:id_membre AND id_personnage=:id_personnage");
         $requete->bindValue(":royaume", trim(str_replace(" ", "-", strtolower($royaume))), PDO::PARAM_STR);
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
@@ -195,6 +210,11 @@ function editerPseudoPersonnage($pseudo, $id_membre, $id_personnage)
 {
     try {
         $connexion = connexionBdd();
+
+        $pseudo = trim($pseudo);
+        if ($pseudo === '') {
+            throw new Exception("Le pseudo de votre personnage ne peut pas être vide.");
+        }
 
         $requete = $connexion->prepare("UPDATE `personnage` SET pseudo_personnage=:pseudo_personnage WHERE id_membre=:id_membre AND id_personnage=:id_personnage");
         $requete->bindValue(":pseudo_personnage", strtolower($pseudo), PDO::PARAM_STR);
@@ -232,6 +252,11 @@ function editerPostulation($contenu, $id_membre, $id_postulation)
 {
     try {
         $connexion = connexionBdd();
+
+        $contenu = trim($contenu);
+        if ($contenu === '') {
+            throw new Exception("Le contenu de la postulation ne peut pas être vide.");
+        }
 
         $requete = $connexion->prepare("UPDATE `postulation` SET contenu=:contenu WHERE id_membre=:id_membre AND id_postulation=:id_postulation");
         $requete->bindValue(":contenu", ucfirst($contenu), PDO::PARAM_STR);

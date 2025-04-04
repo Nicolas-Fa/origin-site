@@ -13,6 +13,7 @@ include_once(RACINE . "/modele/bdd.inc.php");
 
 function recupererPostulation()
 {
+    $resultat=array();
     try {
         $connexion = connexionBdd();
 

@@ -8,4 +8,9 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 ?>
 <main>
     <h1 class="page_introuvable">CONNEXION</h1>
+    <form action="./?action=connexion" method="POST">
+        <p><input type="email" name="email" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']): '' ?>" placeholder="Votre Email" required></p>
+        <p><input type="password" name="mot_de_passe" placeholder="Mot de passe" required></p>
+        <p><button type="submit">Se connecter</button></p>
+    </form>
 </main>

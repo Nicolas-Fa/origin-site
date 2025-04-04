@@ -1,5 +1,4 @@
 <?php
-session_start();
 // sécurité pour éviter l'accès aux fichiers contenant des fonctions & variables
 // verification que le script PHP est exécuté directement et pas depuis un autre fichier
 if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {

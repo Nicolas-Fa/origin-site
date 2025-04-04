@@ -21,16 +21,20 @@ function seConnecter($email, $pwd)
     }
     $membre = recupererMailMembre($email);
 
-    if(!$membre){
+    if (!$membre) {
         return "Erreur: aucun utilisateur n'a été trouvé avec cet email.";
     }
-    
+
     $pwd_bdd = $membre["mot_de_passe"];
 
-    if (trim($pwd_bdd) == trim(password_hash($pwd, $pwd_bdd))) {
+    if (password_verify($pwd, $pwd_bdd)) {
+        session_regenerate_id(true);
         $_SESSION["email"] = $email;
-        $_SESSION["mot_de_passe"] = $pwd_bdd;
+        $_SESSION["mot_de_passe"] = password_hash(trim($pwd_bdd), PASSWORD_DEFAULT);
+    } else {
+        return "Email ou mot de passe incorrect.";
     }
+    return true;
 }
 
 
@@ -51,6 +55,7 @@ function seDeconnecter()
     unset($_SESSION["email"]);
     unset($_SESSION["mot_de_passe"]);
     session_destroy();
+    session_unset();
 }
 
 
@@ -72,9 +77,15 @@ function estConnecte()
 
     if (isset($_SESSION["email"])) {
         $membre = recupererMailMembre($_SESSION["email"]);
+        // echo "<pre>";
+        // var_dump($membre);
+        // echo "</pre>";
         if (
-            $membre["email"] == $_SESSION["email"] && $membre["email"] == $_SESSION["email"]
-        ) {
+            isset($membre["email"]) // on vérifie que l'email existe
+            && $membre["email"] == $_SESSION["email"] // on vérifie que l'email renseigné corresponde à celui de la bdd
+            && isset($membre["mot_de_passe"]) // on vérifie que le mot de passe du membre existe
+            && password_verify($_SESSION["mot_de_passe"], $membre["mot_de_passe"]) // on vérifie que le mot de passe coresponde à celui de la bdd
+        ); {
             $reponse = true;
         }
     }
@@ -103,18 +114,18 @@ function recupererMailConnecte()
 
 
 // ------------------------------test--------------------------------------------
-if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
+// if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
 
-    header('Content-Type:text/plain');
+//     header('Content-Type:text/plain');
 
-    // test de connexion
-    seConnecter("origin@test.com", "1234nf");
-    if (estConnecte()) {
-        echo "Connecté";
-    } else {
-        echo "Pas connecté";
-    }
+//     // test de connexion
+//     seConnecter("origin@test.com", "1234nf");
+//     if (estConnecte()) {
+//         echo "Connecté";
+//     } else {
+//         echo "Pas connecté";
+//     }
 
-    // deconnexion
-    seDeconnecter();
-}
+//     // deconnexion
+//     seDeconnecter();
+// }

@@ -27,6 +27,8 @@ function recupererIdVoteParIdPostulation($id_postulation)
     }
     return $resultat;
 }
+
+
 /* Nom de la fonction : recupererVoteParIdPostulation
 *
 * A quoi sert cette fonction : récupérer les votes sur une postulation en fonction de l'id de celle-ci

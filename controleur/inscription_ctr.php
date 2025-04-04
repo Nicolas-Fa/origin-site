@@ -1,5 +1,4 @@
 <?php
-session_start();
 // sécurité pour éviter l'accès aux fichiers contenant des fonctions & variables
 // verification que le script PHP est exécuté directement et pas depuis un autre fichier
 if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
@@ -16,9 +15,9 @@ $message = null;
 
 // On va récupérer les données POST et SESSION et vérifier que les informations n'existent pas déjà
 
-if (isset($_POST["pseudo"]) && isset($_POST["email"]) && isset($_POST["mot_de_passe"])) {
-    $pseudo = htmlspecialchars($_POST["pseudo"]);
-    $email = htmlspecialchars($_POST["email"]);
+if (isset($_POST["pseudo"], $_POST["email"], $_POST["mot_de_passe"])) {
+    $pseudo = $_POST["pseudo"];
+    $email = $_POST["email"];
     $pwd = $_POST["mot_de_passe"];
 
     if (recupererPseudoMembre($pseudo) == true) {
@@ -30,6 +29,7 @@ if (isset($_POST["pseudo"]) && isset($_POST["email"]) && isset($_POST["mot_de_pa
             $inscription = sInscrire($pseudo, $email, $pwd);
             if ($inscription) {
                 $est_inscrit = true;
+                session_start();
             } else {
                 $message = "Enregistrement impossible";
             }

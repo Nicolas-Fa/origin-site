@@ -14,17 +14,45 @@ include_once(RACINE . "/modele/bdd.inc.php");
 
 function recupererPersonnage()
 {
+    $resultat = array();
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("SELECT * FROM `personnage`");
         $requete->execute();
 
-        $ligne = $requete->fetch(PDO::FETCH_ASSOC);
+        $ligne = $requete->fetchAll(PDO::FETCH_ASSOC);
         while ($ligne) {
             $resultat[] = $ligne;
-            $ligne = $requete->fetch(PDO::FETCH_ASSOC);
+            $ligne = $requete->fetchAll(PDO::FETCH_ASSOC);
         }
+    } catch (PDOException $erreur) {
+        throw new Exception("Erreur: " . $erreur->getMessage());
+    }
+    return $resultat;
+}
+
+
+/* Nom de la fonction : recupererIdPersonnageParIdMembre
+*
+* A quoi sert cette fonction : récupérer l'id des personnages en fonction de l'id du membre
+*
+* Paramètres de la fonction ($id_membre)
+*   $id_membre : l'id du membre
+*
+* Retour : l'id des personnages appartenant à l'ID renseignée
+*/
+
+function recupererIdPersonnageParIdMembre($id_membre)
+{
+    try {
+        $connexion = connexionBdd();
+
+        $requete = $connexion->prepare("SELECT `id_personnage` FROM `personnage` WHERE id_membre=:id_membre ORDER BY `id_personnage`");
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
+        $requete->execute();
+
+        $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
@@ -51,7 +79,7 @@ function recupererPseudoPersonnageParIdMembre($id_membre)
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->execute();
 
-        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+        $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
@@ -72,15 +100,23 @@ function recupererPseudoPersonnageParIdMembre($id_membre)
 
 function recupererRoyaumeParIdMembre($id_membre, $pseudo_perso)
 {
+    $resultat = array();
     try {
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("SELECT `royaume` FROM `personnage` WHERE id_membre=:id_membre AND pseudo_personnage=:pseudo_personnage");
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
-        $requete->bindValue(":pseudo_personnage", ucfirst($pseudo_perso), PDO::PARAM_STR);
+        foreach($pseudo_perso as $perso):
+        $requete->bindValue(":pseudo_personnage", $perso, PDO::PARAM_STR);
+        endforeach;
         $requete->execute();
 
-        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+        $ligne = $requete->fetchAll(PDO::FETCH_ASSOC);
+        while ($ligne) {
+            $resultat[] = $ligne;
+            $ligne = $requete->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
@@ -88,17 +124,17 @@ function recupererRoyaumeParIdMembre($id_membre, $pseudo_perso)
 }
 
 // ------------------------------test--------------------------------------------
-if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
-    header('Content-Type:text/plain');
+// if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
+//     header('Content-Type:text/plain');
 
-    echo "recupererPersonnage() : \n";
-    echo "<pre>";
-    print_r(recupererPersonnage());
-    echo "</pre>";
+//     echo "recupererPersonnage() : \n";
+//     echo "<pre>";
+//     print_r(recupererPersonnage());
+//     echo "</pre>";
 
-    echo "recupererPseudoPersonnageParIdMembre() : \n";
-    print_r(recupererPseudoPersonnageParIdMembre("1"));
+//     echo "recupererPseudoPersonnageParIdMembre() : \n";
+//     print_r(recupererPseudoPersonnageParIdMembre("1"));
 
-    echo "recupererRoyaumeParIdMembre() : \n";
-    print_r(recupererRoyaumeParIdMembre("1", "Llorwina"));
-}
+//     echo "recupererRoyaumeParIdMembre() : \n";
+//     print_r(recupererRoyaumeParIdMembre("1", "Llorwina"));
+// }
