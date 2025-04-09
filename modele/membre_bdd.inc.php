@@ -128,11 +128,15 @@ function recupererRoleMembre($role)
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("SELECT * FROM `membre` WHERE role=:role");
+        $requete = $connexion->prepare("SELECT `pseudo` FROM `membre` WHERE role=:role");
         $requete->bindValue(":role", ucfirst($role), PDO::PARAM_STR);
         $requete->execute();
 
-        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+        $ligne = $requete->fetch(PDO::FETCH_ASSOC);
+        while ($ligne) {
+            $resultat[] = $ligne;
+            $ligne = $requete->fetch(PDO::FETCH_ASSOC);
+        }
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }

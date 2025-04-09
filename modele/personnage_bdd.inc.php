@@ -98,24 +98,17 @@ function recupererPseudoPersonnageParIdMembre($id_membre)
 * Retour : le royaume d'un personnage
 */
 
-function recupererRoyaumeParIdMembre($id_membre, $pseudo_perso)
+function recupererRoyaumeParIdMembre($id_membre)
 {
     $resultat = array();
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("SELECT `royaume` FROM `personnage` WHERE id_membre=:id_membre AND pseudo_personnage=:pseudo_personnage");
+        $requete = $connexion->prepare("SELECT `royaume` FROM `personnage` WHERE id_membre=:id_membre");
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
-        foreach($pseudo_perso as $perso):
-        $requete->bindValue(":pseudo_personnage", $perso, PDO::PARAM_STR);
-        endforeach;
         $requete->execute();
 
-        $ligne = $requete->fetchAll(PDO::FETCH_ASSOC);
-        while ($ligne) {
-            $resultat[] = $ligne;
-            $ligne = $requete->fetchAll(PDO::FETCH_ASSOC);
-        }
+        $resultat =$requete->fetchAll(PDO::FETCH_ASSOC);
         
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());

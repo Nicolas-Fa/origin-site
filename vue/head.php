@@ -8,4 +8,5 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="preload">
     <link rel="stylesheet" href="public/css/style.css">
     <title><?= $titre ?></title>
+    <script src="public/js/script.js"></script>
 </head>

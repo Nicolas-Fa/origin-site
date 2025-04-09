@@ -2,11 +2,6 @@
     "name": "kerx22/origin-site",
     "description": "Site web de la guilde Origin",
     "type": "website",
-    "autoload": {
-        "psr-4": {
-            "Kerx22\\OriginSite\\": "src/"
-        }
-    },
     "authors": [
         {
             "name": "Nicolas Fayolle",

@@ -29,7 +29,7 @@ if (isset($_POST["pseudo"], $_POST["email"], $_POST["mot_de_passe"])) {
             $inscription = sInscrire($pseudo, $email, $pwd);
             if ($inscription) {
                 $est_inscrit = true;
-                session_start();
+                seConnecter($email, $pwd);
             } else {
                 $message = "Enregistrement impossible";
             }

@@ -22,7 +22,7 @@ function ajouterCommentaires($contenu, $id_membre, $id_postulation)
         $connexion = connexionBdd();
         
         // on vérifie que le commentaire ne soit pas vide
-        $contenu = trim($contenu);
+        $contenu = htmlspecialchars(trim($contenu));
         if ($contenu === '') {
             throw new Exception("Le commentaire ne peut pas être vide.");
         }
@@ -65,7 +65,7 @@ function sInscrire($pseudo, $email, $pwd)
             throw new Exception("L'email ne peut pas être vide.");
         }
         // on vérifie que le pseudo soit bien renseigné
-        $pseudo = trim($pseudo);
+        $pseudo = htmlspecialchars(trim($pseudo));
         if ($pseudo === '') {
             throw new Exception("Le pseudo ne peut pas être vide.");
         }
@@ -130,7 +130,7 @@ function ajouterPersonnage($pseudo_perso, $royaume, $id_membre)
     try {
         $connexion = connexionBdd();
 
-        $pseudo_perso = trim($pseudo_perso);
+        $pseudo_perso = htmlspecialchars(trim($pseudo_perso));
         if ($pseudo_perso === '') {
             throw new Exception("Le pseudo de votre personnage ne peut pas être vide.");
         }
@@ -140,7 +140,7 @@ function ajouterPersonnage($pseudo_perso, $royaume, $id_membre)
             throw new Exception("Le royaume de votre personnage ne peut pas être vide.");
         }
         
-        $requete = $connexion->prepare("INSERT INTO `personnage` (pseudo_personnage, royaume, id_membre) VALUES (:pseudo_personnage, :royaume, :id_membre");
+        $requete = $connexion->prepare("INSERT INTO `personnage` (pseudo_personnage, royaume, id_membre) VALUES (:pseudo_personnage, :royaume, :id_membre)");
         $requete->bindValue(':pseudo_personnage', strtolower($pseudo_perso), PDO::PARAM_STR);
         $requete->bindValue(':royaume', str_replace(" ", "-", strtolower($royaume)), PDO::PARAM_STR);
         $requete->bindValue(':id_membre', $id_membre, PDO::PARAM_INT);
@@ -172,7 +172,7 @@ function ajouterPostulation($contenu, $id_membre)
     try {
         $connexion = connexionBdd();
 
-        $contenu = trim($contenu);
+        $contenu = htmlspecialchars(trim($contenu));
         if ($contenu === '') {
             throw new Exception("La postulation ne peut pas être vide.");
         }

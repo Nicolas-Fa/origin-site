@@ -20,7 +20,7 @@ function editerCommentaire($contenu, $id_commentaire)
     try {
         $connexion = connexionBdd();
 
-        $contenu = trim($contenu);
+        $contenu = htmlspecialchars(trim($contenu));
         if ($contenu === '') {
             throw new Exception("Le commentaire ne peut pas être vide.");
         }
@@ -28,13 +28,13 @@ function editerCommentaire($contenu, $id_commentaire)
         $requete = $connexion->prepare("UPDATE `commentaire` SET contenu=:contenu WHERE id_commentaire=:id_commentaire");
         $requete->bindValue(":contenu", ucfirst($contenu), PDO::PARAM_STR);
         $requete->bindValue(":id_commentaire", $id_commentaire, PDO::PARAM_INT);
-        
+
         if ($requete->execute()) {
-            return "Commentaire modifié avec succès.";
+            $message =  "Commentaire modifié avec succès.";
         } else {
-            return "Erreur lors de la modification du commentaire.";
+            $message = "Erreur lors de la modification du commentaire.";
         }
-        
+        return $message;
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
@@ -60,7 +60,7 @@ function editerPseudoMembre($pseudo, $id_membre)
     try {
         $connexion = connexionBdd();
 
-        $pseudo = trim($pseudo);
+        $pseudo = htmlspecialchars(trim($pseudo));
         if ($pseudo === '') {
             throw new Exception("Le pseudo ne peut pas être vide.");
         }
@@ -68,13 +68,13 @@ function editerPseudoMembre($pseudo, $id_membre)
         $requete = $connexion->prepare("UPDATE `membre` SET pseudo=:pseudo WHERE id_membre=:id_membre");
         $requete->bindValue(":pseudo", ucfirst($pseudo), PDO::PARAM_STR);
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
-        
+
         if ($requete->execute()) {
-            return "Pseudo modifié avec succès.";
+            $message = "Pseudo modifié avec succès.";
         } else {
-            return "Erreur lors de la modification du pseudo.";
+            $message = "Erreur lors de la modification du pseudo.";
         }
-        
+        return $message;
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
@@ -100,16 +100,16 @@ function editerMdpMembre($pwd, $id_membre)
         $connexion = connexionBdd();
 
         $pwd_crypte = trim(password_hash($pwd, PASSWORD_DEFAULT));
-        $requete = $connexion->prepare("UPDATE `membre` SET mot_de_passe=:mot_de_passe WHERE id_membre=:id_membre" );
+        $requete = $connexion->prepare("UPDATE `membre` SET mot_de_passe=:mot_de_passe WHERE id_membre=:id_membre");
         $requete->bindValue(":mot_de_passe", $pwd_crypte, PDO::PARAM_STR);
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_STR);
-        
+
         if ($requete->execute()) {
-            return "Mot de passe modifié avec succès.";
+            $message = "Mot de passe modifié avec succès.";
         } else {
-            return "Erreur lors de la modification du mot de passe.";
+            $message = "Erreur lors de la modification du mot de passe.";
         }
-        
+        return $message;
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
@@ -137,13 +137,13 @@ function editerRoleMembre($role, $id_membre)
         $requete = $connexion->prepare("UPDATE `membre` SET role=:role WHERE id_membre=:id_membre");
         $requete->bindValue(":role", ucfirst($role), PDO::PARAM_STR);
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
-        
+
         if ($requete->execute()) {
-            return "Rôle du membre modifié avec succès.";
+            $message = "Rôle du membre modifié avec succès.";
         } else {
-            return "Erreur lors de la modification du rôle.";
+            $message = "Erreur lors de la modification du rôle.";
         }
-        
+        return $message;
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
@@ -165,27 +165,27 @@ function editerRoleMembre($role, $id_membre)
 * Retour : la modification du royaume du personnage
 */
 
-function editerRoyaumePersonnage($royaume, $id_membre, $id_personnage)
+function editerRoyaumePersonnage($royaume, $id_personnage)
 {
     try {
         $connexion = connexionBdd();
 
-        $royaume = trim($royaume);
+        $royaume = htmlspecialchars(trim($royaume));
         if ($royaume === '') {
             throw new Exception("Le royaume de votre personnage ne peut pas être vide.");
         }
 
-        $requete = $connexion->prepare("UPDATE `personnage` SET royaume=:royaume WHERE id_membre=:id_membre AND id_personnage=:id_personnage");
+        $requete = $connexion->prepare("UPDATE `personnage` SET royaume=:royaume WHERE id_personnage=:id_personnage");
         $requete->bindValue(":royaume", trim(str_replace(" ", "-", strtolower($royaume))), PDO::PARAM_STR);
-        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->bindValue(":id_personnage", $id_personnage, PDO::PARAM_INT);
-        
+
         if ($requete->execute()) {
-            return "Royaume du personnage modifié avec succès.";
+            $message = "Royaume du personnage modifié avec succès.";
         } else {
-            return "Erreur lors de la modification du royaume.";
+            $message = "Erreur lors de la modification du royaume.";
         }
-        
+        return $message;
+
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
@@ -206,27 +206,28 @@ function editerRoyaumePersonnage($royaume, $id_membre, $id_personnage)
 * Retour : la modification du pseudo du personnage
 */
 
-function editerPseudoPersonnage($pseudo, $id_membre, $id_personnage)
+function editerPseudoPersonnage($pseudo, $id_personnage)
 {
     try {
         $connexion = connexionBdd();
 
-        $pseudo = trim($pseudo);
+        $pseudo = htmlspecialchars(trim($pseudo));
         if ($pseudo === '') {
             throw new Exception("Le pseudo de votre personnage ne peut pas être vide.");
         }
 
-        $requete = $connexion->prepare("UPDATE `personnage` SET pseudo_personnage=:pseudo_personnage WHERE id_membre=:id_membre AND id_personnage=:id_personnage");
+        $requete = $connexion->prepare("UPDATE `personnage` SET pseudo_personnage=:pseudo_personnage WHERE id_personnage=:id_personnage");
         $requete->bindValue(":pseudo_personnage", strtolower($pseudo), PDO::PARAM_STR);
-        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
+        // $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->bindValue(":id_personnage", $id_personnage, PDO::PARAM_INT);
-        
+
         if ($requete->execute()) {
-            return "Pseudo de votre personnage modifié avec succès.";
+            $message = "Pseudo de votre personnage modifié avec succès.";
         } else {
-            return "Erreur lors de la modification du pseudo de votre personnage.";
+            $message = "Erreur lors de la modification du pseudo de votre personnage.";
         }
-        
+        return $message;
+
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
@@ -253,7 +254,7 @@ function editerPostulation($contenu, $id_membre, $id_postulation)
     try {
         $connexion = connexionBdd();
 
-        $contenu = trim($contenu);
+        $contenu = htmlspecialchars(trim($contenu));
         if ($contenu === '') {
             throw new Exception("Le contenu de la postulation ne peut pas être vide.");
         }
@@ -262,13 +263,14 @@ function editerPostulation($contenu, $id_membre, $id_postulation)
         $requete->bindValue(":contenu", ucfirst($contenu), PDO::PARAM_STR);
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
-        
+
         if ($requete->execute()) {
-            return "Postulation modifiée avec succès.";
+            $message = "Postulation modifiée avec succès.";
         } else {
-            return "Erreur lors de la modification de la postulation.";
+            $message = "Erreur lors de la modification de la postulation.";
         }
-        
+        return $message;
+
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
@@ -298,13 +300,13 @@ function editerStatutPostulation($statut, $id_membre, $id_postulation)
         $requete->bindValue(":statut", ucfirst($statut), PDO::PARAM_STR);
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
-        
+
         if ($requete->execute()) {
-            return "Statut de la postulation modifié avec succès.";
+            $message = "Statut de la postulation modifié avec succès.";
         } else {
-            return "Erreur lors de la modification du statut de la postulation.";
+            $message = "Erreur lors de la modification du statut de la postulation.";
         }
-        
+        return $message;
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
@@ -338,13 +340,13 @@ function modifierVote($choix, $id_vote, $id_membre, $id_postulation)
         $requete->bindValue(":id_vote", $id_vote, PDO::PARAM_INT);
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
-        
+
         if ($requete->execute()) {
-            return "Vote modifié avec succès.";
+            $message = "Vote modifié avec succès.";
         } else {
-            return "Erreur lors de la modification du vote.";
+            $message = "Erreur lors de la modification du vote.";
         }
-        
+        return $message;
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
