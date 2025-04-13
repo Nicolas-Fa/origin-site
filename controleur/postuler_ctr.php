@@ -13,13 +13,36 @@ require_once RACINE . "/modele/ajout_bdd.inc.php";
 
 $email = recupererMailConnecte();
 $membre = recupererMailMembre($email);
-$role_membre = recupererRoleMembre("membre");
+$role = $membre["role"];
+// var_dump($role);
 $id_membre = $membre["id_membre"];
 $titan = recupererRoleMembre("titan");
 
-if (estConnecte() && $role_membre) {
-    $ajout_contenu_postulation = ajouterPostulation($contenu, $id_membre);
+if (estConnecte() && $role == "membre") {
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["contenu_postulation"])) {
+        // on récupère le contenu du formulaire
+        $contenu_postulation = $_POST["contenu_postulation"];
+        $url_logs = $_POST["page_de_logs"];
 
+        // on vérifie que l'url est valide
+        if(!empty($url_logs) && !filter_var($url_logs, FILTER_VALIDATE_URL)) {
+            throw new Exception("L'URL fournie n'est pas valide");
+        }
+
+        // on ajoute l'url des logs au contenu
+        $contenu = $contenu_postulation;
+        if(!empty($url_logs)){
+            $contenu .= " Logs : $url_logs";
+        }
+
+        // on enregistre le contenu dans la base de données
+        $ajout_contenu_postulation = ajouterPostulation($contenu, $id_membre);
+        $_SESSION["message_postulation_envoyee"] = "Votre postulation a bien été enregistrée";
+
+        // on redirige vers la page d'accueil
+        header("Location: index.php?action=postuler");
+        exit;
+    }
 
     //---------------------------------Vue-------------------------------------------
     $titre = "Origin - Postuler - Rejoignez le roster compétitif de la 10ème guilde française";

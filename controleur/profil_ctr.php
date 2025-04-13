@@ -143,7 +143,7 @@ if (estConnecte()) {
         $compte_supprime = supprimerMembre($supprimer_son_compte);
         $_SESSION["message_suppression_compte"] = $compte_supprime;
 
-        // on redirige vers la même page
+        // on redirige vers la page d'accueil
         header("Location: index.php?action=accueil");
         exit;
     }

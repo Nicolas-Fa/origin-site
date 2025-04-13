@@ -24,6 +24,19 @@ $titan = recupererRoleMembre("Titan");
 // var_dump($titan);
 // echo "</pre>";
 
+// on va chercher les images
+$chemin_images = RACINE . "/public/images";
+// puis on scanne le dossier
+$fichiers = scandir($chemin_images);
+// pour n'en filtrer que les images de boss
+$images_boss = array_filter($fichiers, function($fichiers){
+    return preg_match('/^boss_\d+\.webp$/', $fichiers); // on récupère les images qui commencent par boss_ avec un ou plusieurs chiffres, en format .webp
+});
+
+// et on les trie dans l'ordre
+natsort($images_boss);
+
+
 //---------------------------------Vue-------------------------------------------
 $titre="Origin - Accueil - Guilde Horde WoW PvE HL Serveur Sargeras";
 include (RACINE . "/vue/header.php");

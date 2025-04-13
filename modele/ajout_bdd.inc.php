@@ -22,7 +22,7 @@ function ajouterCommentaires($contenu, $id_membre, $id_postulation)
         $connexion = connexionBdd();
         
         // on vérifie que le commentaire ne soit pas vide
-        $contenu = htmlspecialchars(trim($contenu));
+        $contenu = htmlspecialchars(trim($contenu), ENT_QUOTES, 'UTF-8');
         if ($contenu === '') {
             throw new Exception("Le commentaire ne peut pas être vide.");
         }
@@ -142,7 +142,7 @@ function ajouterPersonnage($pseudo_perso, $royaume, $id_membre)
         
         $requete = $connexion->prepare("INSERT INTO `personnage` (pseudo_personnage, royaume, id_membre) VALUES (:pseudo_personnage, :royaume, :id_membre)");
         $requete->bindValue(':pseudo_personnage', strtolower($pseudo_perso), PDO::PARAM_STR);
-        $requete->bindValue(':royaume', str_replace(" ", "-", strtolower($royaume)), PDO::PARAM_STR);
+        $requete->bindValue(':royaume', strtolower(str_replace(" ", "-", ($royaume))), PDO::PARAM_STR);
         $requete->bindValue(':id_membre', $id_membre, PDO::PARAM_INT);
 
         $resultat = $requete->execute();

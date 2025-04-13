@@ -46,6 +46,7 @@ body {
   background-attachment: fixed;
   color: var(--text_color);
   font-family: "Exo 2";
+  font-size: 16px;
 }
 
 .container {
@@ -57,9 +58,10 @@ body {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  margin: 0 auto;
 }
 
-/* --------------------------------------------------------------------------------------- */
+/* -----------------------------------Header---------------------------------------------- */
 
 nav {
   font-size: 16px;
@@ -78,7 +80,8 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin: 0 auto;
+  margin-top: 16px;
 }
 
 header a {
@@ -111,7 +114,7 @@ header a img {
   position: absolute;
   top: 100%;
   right: 0;
-  width: auto;
+  width: max-content;
   max-height: 0;
   overflow: hidden;
   background-color: #131313;
@@ -125,7 +128,6 @@ header a img {
 
 .nav_liste li a {
   display: block;
-  color: var(--text_color);
   text-decoration: none;
   padding: 0.75rem 1rem;
   border-bottom: 1px solid #333;
@@ -134,11 +136,175 @@ header a img {
 #burger {
   display: block;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 24px;
 }
 
 main .container {
   flex-direction: column;
+}
+
+/* ---------------------------------------Page Connexion---------------------------------- */
+#connexion {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#connexion h1 {
+  border-bottom: none;
+  border-top: 1px solid var(--text_color);
+  padding-top: 32px;
+  margin-top: 16px;
+}
+
+#connexion p.inscription {
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+#connexion a.inscription {
+  border: 1px solid var(--text_color);
+  padding: 8px;
+  margin: 0 0 4px;
+  border-radius: 5px;
+}
+
+#connexion a.inscription:hover {
+  color: var(--hover);
+  text-decoration: underline;
+  border-color: var(--hover);
+}
+
+/* ---------------------------------------Page Inscription-------------------------------- */
+#inscription {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#inscription h1 {
+  border-bottom: none;
+  border-top: 1px solid var(--text_color);
+  padding-top: 32px;
+  margin-top: 16px;
+}
+
+/* ---------------------------------------Page Accueil------------------------------------ */
+img {
+  max-width: 500px;
+  width: 100%;
+}
+
+hgroup h1 {
+  margin-bottom: 24px;
+}
+
+figure {
+  margin: 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+figure img:nth-child(odd) {
+  margin-right: 5%;
+}
+figure img:nth-child(even) {
+  margin-left: 5%;
+}
+
+figure img {
+  width: 45%;
+}
+
+hgroup {
+  margin-bottom: 16px;
+}
+
+hgroup h2,
+hgroup h3,
+hgroup h4 {
+  font-size: 21px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+hgroup p {
+  margin: 8px 0;
+}
+
+#medias {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 100%;
+  height: auto;
+}
+
+#twitch_videos {
+  display: none;
+}
+
+#liste_roster {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+#liste_roster h2 {
+  text-align: center;
+}
+
+#liste_roster ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+#liste_roster ul li {
+  padding: 0 8px;
+}
+/* ---------------------------------------Postuler---------------------------------------- */
+#formulaire_postulation {
+  width: 100%;
+}
+
+.champ_formulaire_postulation {
+  width: 100%;
+}
+
+.champ_formulaire_postulation textarea {
+  border-color: var(--text_color);
+  background-color: var(--fond);
+  color: var(--text_color);
+  margin: 8px 0;
+  border-radius: 5px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.champ_formulaire_postulation textarea:hover {
+  border-color: var(--hover);
+}
+
+.champ_logs_postulation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.champ_logs_postulation input {
+  margin: 8px 0;
+  width: 100%;
+}
+
+.message {
+  text-align: center;
+  font-size: 21px;
 }
 
 /* ---------------------------------------Page 404---------------------------------------- */
@@ -159,39 +325,32 @@ main .container {
 }
 
 /* ---------------------------------------Profil------------------------------------------ */
-/* main .container {
-    flex-direction: column;
-    align-content: center;
-} */
-
-h1 {
+h1,
+h2 {
   border-bottom: 1px solid var(--text_color);
   font-size: 21px;
+  padding-bottom: 8px;
 }
 
-.titre_profil {
+.titre {
   width: 100%;
   text-align: center;
   margin-bottom: 16px;
-  padding-bottom: 16px;
+  padding: 16px 0;
 }
 
-#edition_personnage ul li {
+#mes_personnages ul li {
   width: 100%;
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
 }
-#edition_personnage ul li p {
+#mes_personnages ul li p {
   margin-bottom: 8px;
 }
 
-.bouton_profil {
-  font-size: 14px;
-}
-
-#edition_personnage ul li button {
+#mes_personnages ul li button {
   justify-content: flex-start;
   flex-direction: row;
 }
@@ -203,7 +362,8 @@ h1 {
   display: block;
 }
 
-.bouton_profil {
+.bouton {
+  font-size: 14px;
   background-color: var(--fond);
   border: 1px solid var(--text_color);
   border-radius: 5px;
@@ -222,7 +382,7 @@ input {
   border: 1px solid var(--text_color);
   border-radius: 5px;
   font-family: "Exo 2";
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text_color);
   padding: 8px;
   margin-top: 4px;
@@ -247,13 +407,27 @@ fieldset {
   flex-wrap: wrap;
 }
 
-fieldset legend {
+fieldset.fieldset_profil legend {
   margin-bottom: 8px;
 }
 
-fieldset input {
+fieldset.fieldset_profil input {
   max-width: max-content;
   width: auto;
+  margin: 8px 0;
+}
+
+#reglages_compte {
+  margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid var(--text_color);
+  border-bottom: 1px solid var(--text_color);
+  padding: 16px 0;
+}
+
+#reglages_compte div {
   margin: 8px 0;
 }
 
@@ -261,16 +435,47 @@ fieldset input {
 
 /* menu nav */
 @media screen and (min-width: 768px) {
+  body {
+    font-size: 17px;
+  }
+
+  h1,
+  h2 {
+    font-size: 35px;
+  }
+
+  #connexion h1,
+  #inscription h1 {
+    border-top: none;
+  }
+
+  header a {
+    max-width: 250px;
+  }
+
+  .logo_origin {
+    max-width: 250px;
+  }
+
+  a img.logo_origin {
+    justify-items: center;
+  }
+
+  hgroup h3,
+  hgroup h4 {
+    font-size: 26px;
+  }
+
   #burger {
     display: none;
   }
 
   header {
+    max-width: 100%;
     display: flex;
     flex-direction: column;
-    align-content: center;
     border-bottom: 1px solid var(--text_color);
-    margin-bottom: 16px;
+    align-items: center;
   }
 
   header .logo_origin {
@@ -290,5 +495,97 @@ fieldset input {
   .nav_liste li a {
     padding: 0;
     border: none;
+  }
+
+  body {
+    max-width: 100%;
+  }
+
+  /* --------------------------------ACCUEIL----------------------- */
+  #communication {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--text_color);
+  }
+
+  #communication .progression {
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    border-right: 1px solid var(--text_color);
+  }
+
+  #communication .progression figure {
+    width: 100%;
+  }
+
+  #communication .progression h2 {
+    width: 100%;
+  }
+
+  #communication .progression p {
+    padding-right: 16px;
+  }
+
+  #communication img:nth-child(odd) {
+    margin-right: 0;
+  }
+
+  #communication img:nth-child(even) {
+    margin-left: 0;
+  }
+
+  #communication img {
+    width: 12.5%;
+  }
+
+  #medias {
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 16px;
+  }
+
+  #medias h2 {
+    border: none;
+  }
+
+  #medias iframe {
+    border: none;
+    margin: 16px 0;
+    width: 100%;
+  }
+
+  #twitch_videos {
+    display: block;
+  }
+  #twitch_videos iframe {
+    width: 100%;
+  }
+  #liste_roster {
+    margin-top: 0;
+  }
+
+  /* -------------------------PROFIL------------------------------- */
+
+  #reglages_compte {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  #reglages_compte div {
+    margin: 0 8px;
+  }
+  /* -------------------------POSTULATION-------------------------- */
+
+  .champ_logs_postulation input {
+    display: flex;
+    justify-self: center;
+    width: 35%;
+  }
+  .champ_formulaire_postulation textarea {
+    width: 50%;
   }
 }

@@ -6,5 +6,5 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     die('Erreur : ' . basename(__FILE__));
 }
 ?>
-<?php if(isset($message)) echo $message; ?>
+<?php if(isset($message)): echo $message; endif;?>
 <h1>Candidatures</h1>

@@ -7,7 +7,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 }
 ?>
 
-<body class="container">
+<main class="container accueil">
 
     <p><?php //si un membre a supprimé son compte
         if (isset($_SESSION["message_suppression_compte"])) {
@@ -18,14 +18,73 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
         }
         ?></p>
 
-    <h1></h1>
+    <!-----------------------Progression des boss--------------------------->
+    <div id="communication">
+        <div class="progression">
+            <h2>Progression de la guilde</h2>
+            <figure>
+                <?php foreach ($images_boss as $images): ?>
+                    <img src="public/images/<?= $images ?>" alt="Origin <?= substr($images, 0, 6) ?>">
+                <?php endforeach; ?>
+            </figure>
+            <hgroup>
+                <h1>Qui sommes-nous ?</h1>
+
+                <h3>Origin est une guilde du serveur Sargeras-EU, Horde/Alliance.</h3>
+                <p>Notre objectif principal est le PvE HL, dans une ambiance détendue mais concentrée afin d'obtenir les meilleurs résultats. Le PvE HL consiste à tomber tous les boss Mythiques avant la sortie du nouveau raid. Pour cela, nous demandons une certaine rigueur en raid et en dehors afin de mieux les appréhender.
+                </p>
+
+                <h3>Ce que nous pouvons vous apporter</h3>
+                <p> Une structure fiable et compétitive en 3 soirs par semaine avec des personnes déterminées, qui optimisent leur personnage, se renseignent sur leur classe et s'entraident de façon à obtenir une bonne ambiance avec les résultats qui vont avec.
+                </p>
+
+                <h3>Mais que recherchons-nous ?</h3>
+                <p> Des joueurs qui ont la niaque, qui sont matures et ont une réelle envie de performance en un minimum de temps. On a tous une vie, on aime tous WoW, alors on se donne les moyens de profiter à 100% des deux.</p>
+
+                <h3>Une présence sur les trois soirs obligatoires :</h3>
+                <p>Mercredi — 21h à 00h</p>
+                <p>Jeudi — 21h à 00h</p>
+                <p> Dimanche — 21h à 00h</p>
+
+                <h4>Palmarès :</h4>
+                <p>Nerub'ar Palace - 1er serveur (10e FR / 196e World)</p>
+                <p>Amirdrassil - 1er serveur (11e FR / 245e World)</p>
+                <p>Aberrus - 2e serveur (13e FR / 294e World)</p>
+                <p>Caveau des Incarnations - 2e serveur (17e FR / 307e World) </p>
+                <p>Sepulcher of the First Ones - 3e serveur (18e FR / 327e World)</p>
+                <p>Sanctum of Domination - 3e serveur (18e FR / 393e World)</p>
+                <p>Castle Nathria - 4e serveur (23e FR / 364e World)</p>
+                <p>Ny'alotha - 3e serveur (30e FR / 469e World)</p>
+                <p>The Eternal Palace - 3e serveur (27e FR / 546e World)</p>
+                <p>Battle of Dazar'alor - 5e serveur (55e FR / 1035e World)</p>
+            </hgroup>
+        </div>
+
+        <div id="medias">
+            <h2></h2>
+            <iframe
+                src="https://www.youtube.com/embed/0VZz7v0-LVs?si=TlCQP79vRfIdvDZ4"
+                title="Reine Ansurek Myhique"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+                loading="lazy"
+                class="videos">
+            </iframe>
+
+            <div id="twitch_videos" class="videos"></div>
+        </div>
+    </div>
 
     <!--------------------Liste des membres du roster----------------------->
-    <ul id="liste_roster">
-        <?php if (count($titan) > 0) :
-            for ($i = 0; $i < count($titan); $i++): ?>
-                <li><?= ucfirst($titan[$i]["pseudo"]) ?></li>
-        <?php endfor;
-        endif; ?>
-    </ul>
-</body>
+    <div id="liste_roster">
+        <h2>Notre roster mythique</h2>
+        <ul>
+            <?php if (count($titan) > 0) :
+                for ($i = 0; $i < count($titan); $i++): ?>
+                    <li class=""><?= ucfirst($titan[$i]["pseudo"]) ?></li>
+            <?php endfor;
+            endif; ?>
+        </ul>
+    </div>
+</main>

@@ -1,15 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // selection des boutons "editer"
-  const formulaire = document.querySelectorAll(".editer");
+  // on vérifie qu'on est sur la page de profil
+  if (window.location.search.includes("profil")) {
+    // selection des boutons "editer"
+    const formulaire = document.querySelectorAll(".editer");
 
-  // ouverture et fermeture des formulaires
-  formulaire.forEach((button) => {
-    button.addEventListener("click", function () {
-      const id = button.getAttribute("data-id");
-      const type = button.getAttribute("data-type");
-      afficherFormulaireEdition(id, type);
+    // ouverture et fermeture des formulaires
+    formulaire.forEach((button) => {
+      button.addEventListener("click", function () {
+        const id = button.getAttribute("data-id");
+        const type = button.getAttribute("data-type");
+        afficherFormulaireEdition(id, type);
+      });
     });
-  });
+  }
 
   // menu burger
   const burger = document.getElementById("burger");
@@ -23,6 +26,125 @@ document.addEventListener("DOMContentLoaded", function () {
       icone_burger.classList.toggle("fa-bars");
       icone_burger.classList.toggle("fa-xmark");
     });
+  }
+
+  //on vérifie qu'on est bien sur la page d'accueil
+  if (window.location.search.includes("accueil")) {
+    // on crée un tableau pour la partie medias (twitch)
+    // cette partie sera à mettre à jour dans une seconde version avec l'utilisation de OAuth token de twitch
+    const videos_twitch = [
+      { type: "video", value: "2423051942" },
+      { type: "channel", value: "uzui_tv_" }, // ajouter du contenu s'il y a besoin d'autres streamers
+    ];
+
+    // on récupère le container des vidéos twitch
+    const container = document.getElementById("twitch_videos");
+
+    videos_twitch.forEach((video, index) => {
+      // on donne un id à chaque lecteur
+      const id_lecteur = `lecteur_twitch_${index}`;
+
+      // Crée une div pour chaque lecteur
+      const div_lecteur = document.createElement("div");
+      div_lecteur.id = id_lecteur;
+      div_lecteur.classList.add("lecteur_twitch");
+      container.appendChild(div_lecteur);
+
+      // Crée le lecteur Twitch
+      const options = {
+        parent: ["localhost"], // changer pour le nom du site lors de la mise en production
+      };
+
+      if (video.type === "channel") {
+        options.channel = video.value;
+      } else if (video.type === "video") {
+        options.video = video.value;
+      }
+
+      const lecteur = new Twitch.Player(id_lecteur, options);
+
+      lecteur.addEventListener(Twitch.Player.READY, () => {
+        lecteur.setMuted(true); // vidéo mutée par défaut
+        lecteur.pause(); // pas de lecture automatique
+      });
+    });
+  }
+
+  //on vérifie qu'on est bien sur la page de profil
+  if (window.location.search.includes("profil")) {
+    // visualisation des personnages
+    // on récupère le bouton
+    const boutons_voir = document.querySelectorAll(".visualiser_personnage");
+
+    // on récupère les information du champ sur lequel sera mis la visualisation du personnage
+    const voir_personnage = document.getElementById("visualisation_personnage");
+    const nom_personnage = voir_personnage.querySelector(".nom_personnage");
+    const race_personnage = voir_personnage.querySelector(".race_personnage");
+    const classe_personnage =
+      voir_personnage.querySelector(".classe_personnage");
+    const image_personnage = voir_personnage.querySelector(".image_personnage");
+    const erreur_message = voir_personnage.querySelector(".erreur_personnage");
+
+    boutons_voir.forEach((bouton) => {
+      bouton.addEventListener("click", async () => {
+        const pseudo = bouton.dataset.pseudo;
+        const royaume = bouton.dataset.royaume;
+
+        // Réinitialisation des champs
+        nom_personnage.textContent = "";
+        race_personnage.textContent = "";
+        classe_personnage.textContent = "";
+        erreur_message.textContent = "";
+        image_personnage.src = "";
+        image_personnage.style.display = "none";
+
+        const url = `https://eu.api.blizzard.com/profile/wow/character/${royaume}/${pseudo}/appearance?namespace=profile-eu&locale=fr_FR`;
+
+        try {
+          const response = await fetch(url);
+          if (!response.ok) throw new Error(`Erreur API : ${response.status}`);
+
+          const data = await response.json();
+
+          nom_personnage.textContent = `${
+            pseudo.charAt(0).toUpperCase() + pseudo.slice(1)
+          } - ${royaume}`;
+          race_personnage.textContent = `Race : ${
+            data.race?.name ?? "Inconnue"
+          }`;
+          classe_personnage.textContent = `Classe : ${
+            data.character_class?.name ?? "Inconnue"
+          }`;
+
+          const imageData = data.assets?.find((a) => a.key === "main");
+          if (imageData) {
+            image_personnage.src = imageData.value;
+          }
+        } catch (error) {
+          erreur_message.textContent = `Erreur : ${error.message}`;
+        }
+      });
+    });
+  }
+
+  // on vérifie qu'on est bien sur la page de postulation
+  if (window.location.search.includes("postuler")) {
+    // compteur de mots des postulations
+    const textarea = document.getElementById("postulation");
+    const compteur = document.getElementById("compteur");
+    // console.log(textarea);
+    // console.log(compteur);
+
+    // on modifie le compteur en fonction de ce qui est écrit
+    const mettreAJourCompteur = () => {
+      compteur.textContent = `${textarea.value.length} / 750`;
+    };
+
+    // a chaque frappe de l'utilisateur, le compteur s'actualise
+    textarea.addEventListener("input", mettreAJourCompteur);
+
+    // On initialise au cas où du texte est prérempli
+    mettreAJourCompteur();
   }
 });
 

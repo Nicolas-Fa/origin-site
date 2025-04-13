@@ -20,6 +20,8 @@ function recupererCommentaires()
         $requete = $connexion->prepare("SELECT * FROM `commentaire`");
         $requete->execute();
 
+        $resultat = [];
+
         $ligne = $requete->fetch(PDO::FETCH_ASSOC);
         while ($ligne) {
             $resultat[] = $ligne;

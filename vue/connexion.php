@@ -7,10 +7,15 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 }
 ?>
 <main>
-    <h1 class="page_introuvable">CONNEXION</h1>
-    <form action="./?action=connexion" method="POST">
-        <p><input type="email" name="email" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']): '' ?>" placeholder="Votre Email" required aria-label="Renseignez votre email ici"></p>
-        <p><input type="password" name="mot_de_passe" placeholder="Mot de passe" required aria-label="Renseignez votre mot de passe ici"></p>
-        <p><button type="submit">Se connecter</button></p>
-    </form>
+    <section id="connexion">
+        <h1>CONNEXION</h1>
+        <form action="./?action=connexion" method="POST">
+            <p><input type="email" name="email" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>" placeholder="Votre Email" required aria-label="Renseignez votre email ici"></p>
+            <p><input type="password" name="mot_de_passe" placeholder="Mot de passe" required aria-label="Renseignez votre mot de passe ici"></p>
+            <button type="submit" class="bouton">Se connecter</button>
+            <p class="inscription">Vous n'avez pas de compte?</p>
+            <a href="?action=inscription" aria-label="S'inscrire" class="inscription">S'inscrire</a>
+        </form>
+    </section>
+
 </main>

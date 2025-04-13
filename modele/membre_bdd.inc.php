@@ -20,6 +20,8 @@ function recupererMembres()
         $requete = $connexion->prepare("SELECT * FROM `membre`");
         $requete->execute();
 
+        $resultat = [];
+
         $ligne = $requete->fetch(PDO::FETCH_ASSOC);
         while ($ligne) {
             $resultat[] = $ligne;
@@ -132,6 +134,8 @@ function recupererRoleMembre($role)
         $requete->bindValue(":role", ucfirst($role), PDO::PARAM_STR);
         $requete->execute();
 
+        $resultat = [];
+
         $ligne = $requete->fetch(PDO::FETCH_ASSOC);
         while ($ligne) {
             $resultat[] = $ligne;
@@ -185,7 +189,7 @@ function recupererRoleMembreParMail($email)
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("SELECT `role` FROM `membre` WHERE `email=:email`");
+        $requete = $connexion->prepare("SELECT `role` FROM `membre` WHERE email=:email");
         $requete->bindValue(":email", $email, PDO::PARAM_STR);
         $requete->execute();
 

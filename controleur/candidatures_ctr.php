@@ -10,15 +10,22 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 require_once RACINE . "/modele/authentification.inc.php";
 require_once RACINE . "/modele/commentaire_bdd.inc.php";
 require_once RACINE . "/modele/postulation_bdd.inc.php";
+require_once RACINE . "/modele/vote_bdd.php";
 require_once RACINE . "/modele/ajout_bdd.inc.php";
 require_once RACINE . "/modele/maj_bdd.inc.php";
 require_once RACINE . "/modele/supprimer_bdd.inc.php";
 
 $postulation = recupererPostulation();
-$id_postulation = $postulation["id_postulation"];
-$membre_postulant = $postulation["id_membre"];
+echo "<pre>";
+var_dump($postulation);
+echo "</pre>";
+for ($i = 0; $i < count($postulation); $i++) {
+    $id_postulation = $postulation[$i]["id_postulation"];
+    $membre_postulant = $postulation[$i]["id_membre"];
+}
+
 $date_postulation = recupererDatePostuParIdPostu($id_postulation);
-$contenu_postulation = htmlspecialchars(recupererContenuParIdMembre($membre_postulant));
+$contenu_postulation = recupererContenuParIdMembre($membre_postulant);
 $statut_postulation = recupererStatutPostuParIdPostu($id_postulation);
 $votes_pour = recupererVoteParIdPostulation(true, $id_postulation);
 $votes_contre = recupererVoteParIdPostulation(false, $id_postulation);
@@ -28,33 +35,48 @@ if (estConnecte()) {
     $email = recupererMailConnecte();
     $membre = recupererMailMembre($email);
     $id_membre = $membre["id_membre"];
-    $pseudo = htmlspecialchars($membre["pseudo"]);
-    $role_membre = recupererRoleMembreParMail($email);
+    $pseudo = $membre["pseudo"];
+    $role = recupererRoleMembreParMail($email);
     $titan = recupererRoleMembre("titan");
     $moderateur = recupererRoleMembre("moderateur");
     $commentaire = recupererCommentaires();
-    $contenu_commentaire = htmlspecialchars($commentaire["contenu"]);
-    $id_commentaire = $commentaire["id_commentaire"];
+    // echo "<pre>";
+    // var_dump($commentaire);
+    // echo "</pre>";
+    for ($i = 0; $i < count($commentaire); $i++) {
+        $contenu_commentaire = $commentaire[$i]["contenu"];
+        $id_commentaire = $commentaire[$i]["id_commentaire"];
+        echo "<pre>";
+        var_dump($contenu_commentaire);
+        echo "</pre>";
+    }
     $id_vote = recupererIdVoteParIdPostulation($id_postulation);
 
     // on peut ajouter un commentaire.....
     if ($titan || $moderateur) {
-        $ajout_commentaire = htmlspecialchars(ajouterCommentaires($contenu_commentaire, $id_membre, $postulation["id_postulation"]), ENT_QUOTES, 'UTF-8');
-        $date_commentaire = recupererDateCommentaireParIdPostulation($id_postulation);
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["commentaire"])) {
+            $ajout_commentaire = ajouterCommentaires($contenu_commentaire, $id_membre, $id_postulation);
+            $date_commentaire = recupererDateCommentaireParIdPostulation($id_postulation);
+        }
+        // ou le modifier.....
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["commentaire"])) {
+            $modifier_commentaire = editerCommentaire($contenu_commentaire, $id_commentaire);
+        }
+
+        // on peut ajouter un vote.....
+        // pour
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["vote_pour"])) {
+
+            $voter_pour = ajouterVote(true, $id_membre, $id_postulation);
+        }
+        // ou contre
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["vote_contre"])) {
+            $voter_contre = ajouterVote(false, $id_membre, $id_postulation);
+        }
+        // ou le modifier.....
+        $modifier_vote_pour = modifierVote(false, $id_vote, $id_membre, $id_postulation);
+        $modifier_vote_contre = modifierVote(true, $id_vote, $id_membre, $id_postulation);
     }
-
-    // ou le modifier.....
-    if ($titan || $moderateur) {
-        $modifier_commentaire = (editerCommentaire($contenu_commentaire, $id_commentaire));
-    }
-
-    // on peut ajouter un vote.....
-    $voter_pour = ajouterVote(true, $id_membre, $id_postulation);
-    $voter_contre = ajouterVote(false, $id_membre, $id_postulation);
-
-    // ou le modifier.....
-    $modifier_vote_pour = modifierVote(false, $id_vote, $id_membre, $id_postulation);
-    $modifier_vote_contre = modifierVote(true, $id_vote, $id_membre, $id_postulation);
 
     // modération de l'espace candidatures 
     if ($moderateur) {
