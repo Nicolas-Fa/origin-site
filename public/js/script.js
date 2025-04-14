@@ -137,8 +137,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // on modifie le compteur en fonction de ce qui est écrit
     const mettreAJourCompteur = () => {
-      compteur.textContent = `${textarea.value.length} / 750`;
+      const caracteres = textarea.value.replace(/\s/g, ""); // on retire les espaces et d'éventuels espaces au début
+      compteur.textContent = `${caracteres.length} / 750`;
     };
+
+    // a chaque frappe de l'utilisateur, le compteur s'actualise
+    textarea.addEventListener("input", mettreAJourCompteur);
+
+    // On initialise au cas où du texte est prérempli
+    mettreAJourCompteur();
 
     // a chaque frappe de l'utilisateur, le compteur s'actualise
     textarea.addEventListener("input", mettreAJourCompteur);

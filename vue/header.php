@@ -28,16 +28,16 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                 <!-- navigation visible par les personnes enregistrées et connectées -->
                 <?php if (isset($_SESSION["email"])) : ?>
                     <li><a href="?action=profil" aria-label="Lien vers la page de profil">Profil</a></li>
-                <?php endif; ?>
-                <?php if (isset($_SESSION["email"]) && ($role !== ucfirst("titan"))) : ?>
+                <?php endif;  
+                if (isset($_SESSION["email"]) && ($role == "Membre") || ($role == "Moderateur")) : ?>
                     <li class="nav_visiteur"><a href="?action=postuler" aria-label="Lien vers le formulaire de postulation">Postuler</a></li>
                 <?php endif;
-                if (isset($_SESSION["email"]) && ($role == ucfirst("titan"))) : ?>
-                    <!-- navigation visible par les membres du roster -->
+                if (isset($_SESSION["email"]) && ($role == "Titan") || ($role == "Moderateur")) : ?>
+                    <!-- navigation visible par les membres ayant le rôle titan -->
                     <li class="nav_roster"><a href="?action=candidatures" aria-label="Lien vers les candidatures">Candidatures</a></li>
                     <!-- navigation visible par les visiteurs  -->
-                <?php endif; ?>
-                <?php if (!isset($_SESSION["email"])) : ?>
+                <?php endif; 
+                if (!isset($_SESSION["email"])) : ?>
                     <li class="nav_visiteur"><a href="?action=connexion" aria-label="Se connecter">Se connecter</a></li>
                     <li class="nav_visiteur"><a href="?action=inscription" aria-label="S'inscrire">S'inscrire</a></li>
                 <?php endif; ?>

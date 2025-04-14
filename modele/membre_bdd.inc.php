@@ -115,6 +115,33 @@ function recupererPseudoMembre($pseudo)
 }
 
 
+/* Nom de la fonction recupererPseudoMembreParIdMembre($id_membre)
+*
+* A quoi sert cette fonction : récupère le pseudo du membre en fonction de son id
+*
+* Paramètres de la fonction ($id_membre)
+*	$id_membre : l'id du membre
+*
+* Retour : le pseudo du membre associé à son id
+*/
+
+function recupererPseudoMembreParIdMembre($id_membre)
+{
+    try {
+        $connexion = connexionBdd();
+
+        $requete = $connexion->prepare("SELECT `pseudo` FROM `membre` WHERE id_membre=:id_membre");
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
+        $requete->execute();
+
+        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $erreur) {
+        throw new Exception("Erreur: " . $erreur->getMessage());
+    }
+    return $resultat;
+}
+
+
 /* Nom de la fonction recupererRoleMembre()
 *
 * A quoi sert cette fonction : récupère les membres selon leur rôle
