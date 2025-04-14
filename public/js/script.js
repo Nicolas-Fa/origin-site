@@ -80,8 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const voir_personnage = document.getElementById("visualisation_personnage");
     const nom_personnage = voir_personnage.querySelector(".nom_personnage");
     const race_personnage = voir_personnage.querySelector(".race_personnage");
-    const classe_personnage =
-      voir_personnage.querySelector(".classe_personnage");
+    const classe_personnage = voir_personnage.querySelector(".classe_personnage");
     const image_personnage = voir_personnage.querySelector(".image_personnage");
     const erreur_message = voir_personnage.querySelector(".erreur_personnage");
 
