@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 14 avr. 2025 à 16:31
+-- Généré le : mer. 16 avr. 2025 à 19:22
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -40,10 +40,12 @@ CREATE TABLE `commentaire` (
 --
 
 INSERT INTO `commentaire` (`id_commentaire`, `contenu`, `date_commentaire`, `id_postulation`, `id_membre`) VALUES
-(22, 'Aliquam erat volutpat, pellentesque in nulla in nisi dictum interdum, phasellus ac ultricies ex, vel scelerisque tae com', '2025-04-14 09:06:21', 9, 16),
-(23, 'Aliquam erat volutpat, pellentesque in nulla in nisi dictum interdum, llor com', '2025-04-14 09:06:36', 8, 5),
+(22, 'L&#039;alcool c&#039;est cool! C&#039;est pour ça qu&#039;il y a le mot &quot;cool&quot; dans alcool!', '2025-04-14 09:06:21', 9, 16),
 (24, 'Aliquam erat volutpat, supertoto com', '2025-04-14 09:06:50', 7, 11),
-(25, 'Aliquam erat volutpat, pellentesque in nulla in nisi dictum interdum, phasellus ac thierry com', '2025-04-14 09:39:07', 7, 13);
+(25, 'Aliquam erat volutpat, pellentesque in nulla in nisi dictum interdum, phasellus ac thierry com', '2025-04-14 09:39:07', 7, 13),
+(36, 'Ok tier', '2025-04-16 07:15:04', 7, 1),
+(38, 'Un mec vraiment éclaté', '2025-04-16 07:25:27', 8, 5),
+(39, 'L&#039;alcool c&#039;est cool! C&#039;est pour ça qu&#039;il y a le mot cool dans alcool !', '2025-04-16 08:01:30', 7, 5);
 
 -- --------------------------------------------------------
 
@@ -56,7 +58,7 @@ CREATE TABLE `membre` (
   `pseudo` varchar(50) NOT NULL,
   `email` varchar(120) NOT NULL,
   `mot_de_passe` varchar(255) NOT NULL,
-  `role` varchar(50) NOT NULL
+  `role` enum('Membre','Titan','Moderateur','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -64,7 +66,7 @@ CREATE TABLE `membre` (
 --
 
 INSERT INTO `membre` (`id_membre`, `pseudo`, `email`, `mot_de_passe`, `role`) VALUES
-(1, 'test', 'origin@test.com', '$2y$10$hmj0LZNB7zwavgdTTZw.au.hmuQavXaf8msv/L8hAXXj0mbNzMygW', 'membre'),
+(1, 'test', 'origin@test.com', '$2y$10$hmj0LZNB7zwavgdTTZw.au.hmuQavXaf8msv/L8hAXXj0mbNzMygW', 'Titan'),
 (5, 'Llorwina', 'llorwina@gmail.com', '2yuDAAwrXQQEw', 'Titan'),
 (11, 'SuperToto', 'toto@toto.com', '$2y$10$N9T3ZOZ.lYqX3XBHmaUg7uHE2ishqH.szfDtO0OIsum.65LBEkH5e', 'Titan'),
 (13, 'Thierry', 'thierry.bouedo@free.bzh', '$2y$10$PuKZ.uDS4zqDPrVLR22PS.p2feu1Jg6PmUhSySMHBxb.qceUwPxui', 'Titan'),
@@ -89,11 +91,11 @@ CREATE TABLE `personnage` (
 --
 
 INSERT INTO `personnage` (`pseudo_personnage`, `royaume`, `id_membre`, `id_personnage`) VALUES
-('eniira', 'Sargeras', 1, 1),
-('Jondar', 'Sargeras', 1, 2),
+('aszhara', 'Sargeras', 1, 2),
 ('Llorwina', 'Sargeras', 5, 4),
 ('toto', 'totoland', 11, 14),
-('krukarn', 'sargeras', 1, 15);
+('krukarn', 'sargeras', 1, 15),
+('toto', 'sargeras', 1, 18);
 
 -- --------------------------------------------------------
 
@@ -183,7 +185,7 @@ ALTER TABLE `vote`
 -- AUTO_INCREMENT pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
-  MODIFY `id_commentaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_commentaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT pour la table `membre`
@@ -195,7 +197,7 @@ ALTER TABLE `membre`
 -- AUTO_INCREMENT pour la table `personnage`
 --
 ALTER TABLE `personnage`
-  MODIFY `id_personnage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_personnage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `postulation`
