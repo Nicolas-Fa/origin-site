@@ -1,4 +1,5 @@
 <?php
+
 // controleur principal :
 require (dirname(__FILE__) . "/controleur/config.php");
 require (RACINE . "/controleur/routage.php");

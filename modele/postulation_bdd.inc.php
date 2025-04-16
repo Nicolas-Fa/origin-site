@@ -33,6 +33,31 @@ function recupererPostulation()
     return $resultat;
 }
 
+// ------------------ By Thierry B. -------------------
+// Récupère toutes les postulations avec le statut 'En cours' ansi que le pseudo du membre postulant
+function recupererPostulationsEnCours()
+{
+    try {
+        $connexion = connexionBdd();
+
+        $requete = $connexion->prepare(
+            "SELECT `id_postulation`, `contenu`, 
+                DATE_FORMAT(date_de_soumission, '%d/%m/%Y à %Hh%imin%ss') AS `date_formatee`, 
+                `statut`, pseudo
+            FROM `postulation`
+            JOIN `membre` USING(id_membre)
+            WHERE statut = 'En cours'
+            ORDER BY id_postulation");
+        $requete->execute();
+
+        return ($requete->fetchAll(PDO::FETCH_ASSOC));
+
+    } catch (PDOException $erreur) {
+        throw new Exception("Erreur: " . $erreur->getMessage());
+    }
+}
+// ----------------------------------------------------
+
 /* Nom de la fonction : recupererContenuParIdMembre
 *
 * A quoi sert cette fonction : récupère le contenu de la postulation en fonction de l'id du membre

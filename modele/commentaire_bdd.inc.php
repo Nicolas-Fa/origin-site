@@ -60,6 +60,28 @@ function recupererCommentaireParIdPostulation($id_postulation)
     return $resultat;
 }
 
+// ------------------ By Thierry B. -------------------
+// récupère tous les commentaires avec le pseudo de l'auteur sur une postulation identifiée par son id
+
+function recupererCommentairesParIdPostulation($id_postulation)
+{
+    try {
+        $connexion = connexionBdd();
+
+        $requete = $connexion->prepare("SELECT 
+            contenu, DATE_FORMAT(date_commentaire, '%d/%m/%Y à %Hh%imin%ss') AS date_formatee, pseudo
+            FROM commentaire
+            JOIN membre USING(id_membre)
+            WHERE id_postulation=:id_postulation");
+        $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
+        $requete->execute();
+
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $erreur) {
+        throw new Exception("Erreur: " . $erreur->getMessage());
+    }
+}
+// ----------------------------------------------------
 
 /* Nom de la fonction : recupererDateCommentaireParIdPostulation
 *

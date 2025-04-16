@@ -1,20 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // on vérifie qu'on est sur la page de profil
-  if (window.location.search.includes("profil")) {
-    // selection des boutons "editer"
-    const formulaire = document.querySelectorAll(".editer");
-
-    // ouverture et fermeture des formulaires
-    formulaire.forEach((button) => {
-      button.addEventListener("click", function () {
-        const id = button.getAttribute("data-id");
-        const type = button.getAttribute("data-type");
-        afficherFormulaireEdition(id, type);
-      });
-    });
-  }
-
-  // menu burger
+  // ------------------menu burger------------------------------------
   const burger = document.getElementById("burger");
   const nav_liste = document.querySelector(".nav_liste");
   const icone_burger = burger?.querySelector("i");
@@ -28,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // --------------------affichage twitch---------------------------------
   //on vérifie qu'on est bien sur la page d'accueil
   if (window.location.search.includes("accueil")) {
     // on crée un tableau pour la partie medias (twitch)
@@ -70,6 +56,35 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // -----------------------boutons d'édition de la page de profil---------------------
+  // on vérifie qu'on est sur la page de profil
+  if (window.location.search.includes("profil")) {
+    // selection des boutons "editer"
+    const formulaire = document.querySelectorAll(".editer");
+
+    // ouverture et fermeture des formulaires
+    formulaire.forEach((button) => {
+      button.addEventListener("click", function () {
+        const id = button.getAttribute("data-id");
+        const type = button.getAttribute("data-type");
+        afficherFormulaireEdition(id, type);
+      });
+    });
+  }
+
+  // ------------------boutons d'affichage de formulaire pour les commentaires--------------
+  if (window.location.search.includes("candidatures")) {
+    const formulaire = document.querySelectorAll(".commenter");
+
+    formulaire.forEach((button) => {
+      button.addEventListener("click", function () {
+        const id = button.getAttribute("data-id");
+        afficherFormulaireCommentaire(id);
+      });
+    });
+  }
+
+  // --------------------------------API de visualisation de personnage---------------------
   //on vérifie qu'on est bien sur la page de profil
   if (window.location.search.includes("profil")) {
     // visualisation des personnages
@@ -127,6 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // ------------------------------compteur de mots----------------------------------------
   // on vérifie qu'on est bien sur la page de postulation
   if (window.location.search.includes("postuler")) {
     // compteur de mots des postulations
@@ -167,21 +183,40 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 function afficherFormulaireEdition(id, type) {
   // on récupère tous les formulaires
-  const tousLesForm = document.querySelectorAll(".formulaire_edition");
-  // on sélectionne le bon formulaire en fonction du type
+  const tous_les_form = document.querySelectorAll(".formulaire_edition");
+  // on sélectionne le bon formulaire en fonction du type et de l'id
   const form = document.getElementById(`editer_${type}_${id}`);
-
   // s'il n'y a pas de formulaire, arrêt de la fonction
   if (!form) return;
 
-  tousLesForm.forEach((form) => {
-    form.classList.replace("actif", "cache"); // on cache les formulaires ouverts
-  });
-
   // s'il y a un formulaire, et qu'il a la classe "cache"
   if (form && form.classList.contains("cache")) {
+    tous_les_form.forEach((form) => {
+      form.classList.replace("actif", "cache"); // on cache les formulaires ouverts
+    });
     form.classList.replace("cache", "actif"); // on remplace "cache" par "actif"
   } else {
     form.classList.replace("actif", "cache"); // on remplace "actif" par "caché"
+  }
+}
+
+function afficherFormulaireCommentaire(id) {
+  // on récupère les formulaires
+  const formulaire_commentaire = document.querySelectorAll(
+    ".formulaire_commentaire"
+  );
+  // on récupère les formulaires en fonction de l'id
+  const form = document.getElementById(`commenter_postulation_${id}`);
+
+  // s'il n'y a pas de formulaire, arrêt de la fonction
+  if (!form) return;
+  // s'il y a un formulaire qui a la class "cache"
+  if (form && form.classList.contains("cache")) {
+    formulaire_commentaire.forEach((form) => {
+      form.classList.replace("actif", "cache"); // on ferme tous les formulaires ouverts
+    });
+    form.classList.replace("cache", "actif"); // on active le formulaire
+  } else {
+    form.classList.replace("actif", "cache"); // sinon on referme le formulaire
   }
 }

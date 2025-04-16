@@ -80,6 +80,12 @@ function estConnecte()
         // echo "<pre>";
         // var_dump($membre);
         // echo "</pre>";
+        $_SESSION["role"] = $membre["role"];
+        $_SESSION["pseudo"] = $membre["pseudo"];
+        $_SESSION["id_membre"] = $membre["id_membre"];
+        // echo "<pre>";
+        // var_dump($_SESSION);
+        // echo "</pre>";
         if (
             isset($membre["email"]) // on vérifie que l'email existe
             && $membre["email"] == $_SESSION["email"] // on vérifie que l'email renseigné corresponde à celui de la bdd

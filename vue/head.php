@@ -14,4 +14,5 @@
     <title><?= $titre ?></title>
     <script src="https://player.twitch.tv/js/embed/v1.js"></script>
     <script src="public/js/script.js"></script>
+    <script type="module" src="public/js/token.js"></script>
 </head>

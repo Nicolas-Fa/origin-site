@@ -6,6 +6,21 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     die('Erreur : ' . basename(__FILE__));
 }
 
+// on vérifie que l'utilisateur est connecté on lui demande de s'inscrire
+if (!estConnecte()) {
+    $message = "Vous n'avez pas l'autorisation d'accéder à cette page";
+    $titre = "Origin - Inscription";
+    include RACINE . "/vue/header.php";
+    include RACINE . "/vue/connexion.php";
+    include RACINE . "/vue/footer.php";
+    exit;
+}
+
+// si il est connecté et que c'est déjà un utilisateur validé on le renvoie à l'accueil
+if ($_SESSION["role"]["role"] == "Titan") {
+    include(RACINE . "/controleur/accueil_ctr.php");
+    exit;
+}
 
 require_once RACINE . "/modele/authentification.inc.php";
 require_once RACINE . "/modele/membre_bdd.inc.php";
@@ -25,13 +40,13 @@ if (estConnecte() && $role == "membre") {
         $url_logs = $_POST["page_de_logs"];
 
         // on vérifie que l'url est valide
-        if(!empty($url_logs) && !filter_var($url_logs, FILTER_VALIDATE_URL)) {
+        if (!empty($url_logs) && !filter_var($url_logs, FILTER_VALIDATE_URL)) {
             throw new Exception("L'URL fournie n'est pas valide");
         }
 
         // on ajoute l'url des logs au contenu
         $contenu = $contenu_postulation;
-        if(!empty($url_logs)){
+        if (!empty($url_logs)) {
             $contenu .= " Logs : $url_logs";
         }
 
@@ -49,16 +64,5 @@ if (estConnecte() && $role == "membre") {
     include(RACINE . "/vue/header.php");
     include(RACINE . "/vue/postuler.php");
     include(RACINE . "/vue/footer.php");
-} elseif ($titan) {
-    $titre = "Origin - Accueil - Guilde Horde WoW PvE HL Serveur Sargeras";
-    include(RACINE . "/vue/header.php");
-    include(RACINE . "/vue/accueil.php");
-    include(RACINE . "/vue/footer.php");
-} else {
-    // sinon renvoi à la page d'inscription
-    $message = "Vous n'avez pas l'autorisation d'accéder à cette page";
-    $titre = "Origin - Inscription";
-    include RACINE . "/vue/header.php";
-    include RACINE . "/vue/inscription.php";
-    include RACINE . "/vue/footer.php";
+    exit;
 }

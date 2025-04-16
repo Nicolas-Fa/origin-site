@@ -1,59 +1,57 @@
-<?php
-// sécurité pour éviter l'accès aux fichiers contenant des fonctions & variables
-// verification que le script PHP est exécuté directement et pas depuis un autre fichier
-if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
-    // si c'est le cas, arrêt du script + message d'erreur
-    die('Erreur : ' . basename(__FILE__));
-}
-?>
 <main class="container">
-    <?php if (isset($message)): echo $message;
-    endif; ?>
+    <p class="message_commenter">
+        <?php if (isset($_SESSION["message_commentaire"])) {
+            echo ($_SESSION["message_commentaire"]);
+            unset($_SESSION["message_commentaire"]);
+        } ?></p>
+
     <h1>Candidatures</h1>
     <section id="liste_candidats">
         <!-- on affiche les candidatures -->
+        <?php
+        $index = 0;
+        foreach ($postulations as $postulation) : ?>
+            <h3>Candidature de <?= $postulation["pseudo"]; ?></h3>
+            <h4>Postée le <?= $postulation["date_formatee"]; ?></h4>
+            <p><?= ucfirst($postulation["contenu"]); ?></p>
+            <p>Statut : <?= $postulation["statut"]; ?></p>
 
-        <?php foreach ($postulation as $onePost) : ?>
-            <h3>Candidature de <?= $onePost["pseudo"]; ?></h3>
-            <h4>Postée le <?= date("d-m-Y H:i:s", strtotime($onePost["date_de_soumission"])); ?></h4>
-            <p><?= ucfirst($onePost["contenu"]); ?></p>
-            <p>Statut : <?= $onePost["statut"]; ?></p>
-        <?php endforeach ?>
+            <br>
+                <button class="commenter bouton" data-id="<?= $postulation["id_postulation"]; ?>">Commenter la postulation de <?= $postulation["pseudo"] ?></button>
+            <form action="./?action=candidatures" method="post" class="formulaire_commentaire cache" id="commenter_postulation_<?= $postulation["id_postulation"] ?>">
+                <input name="commentaire_postulation" type="hidden" value="<?= $postulation['id_postulation']; ?>" />
+                <textarea name="contenu_commentaire" maxlength="250" rows="6" cols="50" required></textarea>
+                <button type="submit" class="bouton" aria-label="Envoyer le commentaire">Envoyer</button>
+            </form>
+            <p class="message">
+                <?php if (isset($_SESSION["message_postulation_envoyee"])) {
+                    //on affiche le message de validation d'envoi de la postulation
+                    echo $_SESSION["message_postulation_envoyee"];
+                    // on le supprime de la session pour ne pas le réafficher à chaque fois
+                    unset($_SESSION["message_postulation_envoyee"]);
+                } ?>
+            </p>
+            <br><br>
+            <h3>Commentaires :</h3>
+            <?php
+            foreach ($agregat_commentaires[$index] as $commentaire) : ?>
+                <h4>Posté le <?= $commentaire["date_formatee"]; ?> par <?= $commentaire["pseudo"]; ?></h4>
+                <p><?= $commentaire["contenu"]; ?></p>
+                <?php if ($commentaire["pseudo"] == $_SESSION["pseudo"]) : ?>
+                    <button class="editer bouton" data-id="<?= $postulation["id_postulation"] ?>">Modifier votre commentaire</button>
+                    <form action="./?action=candidatures" method="post" class="modifier_formulaire cache" id="editer_commentaire_<?= $postulation["id_postulation"] ?>">
+                    <input name="commentaire_postulation" type="hidden" value="<?= $postulation['id_postulation']; ?>" />
+                <textarea name="contenu_commentaire" maxlength="250" rows="6" cols="50" required><?= $commentaire["contenu"]; ?></textarea>
+                <button type="submit" class="bouton" aria-label="Envoyer le commentaire">Envoyer</button>
+                    </form>
 
+            <?php endif;
+            endforeach; ?>
+            <br>
+        <?php
+            $index++;
+        endforeach;
+        ?>
 
-
-        <?php for ($i = 0; $i < count($postulation); $i++) : ?>
-            <?php $id_postulation_actuelle = $postulation[$i]["id_postulation"]; ?>
-            <h3>Candidature de <?= $postulants[$i]["pseudo"]; ?></h3>
-            <h4>Postée le <?= $date_de_soumission[$i]; ?></h4>
-            <p><?= ucfirst($postulation[$i]["contenu"]); ?></p>
-            <p>Statut : <?= $statut_postulation[$i]["statut"]; ?></p>
-            <!-- si on est connecté et que le role est suffisant, on peut commenter la postulation -->
-            <?php if (isset($_SESSION["email"]) && ($role == ucfirst("titan")) || ($role == ucfirst("moderateur"))) : ?>
-                <form action="./?action=candidatures" method="post" id="commentaire_postulation_<?= $id_postulation_actuelle; ?>">
-                    <textarea name="contenu_commentaire" id="commenter_postulation_<?= $id_postulation_actuelle; ?>" maxlength="250" rows="6" cols="50" required></textarea>
-                    <button type="submit" class="bouton" aria-label="Envoyer le commentaire">Envoyer</button>
-                    <p class="message">
-                        <?php if (isset($_SESSION["message_postulation_envoyee"])) {
-                            //on affiche le message de validation d'envoi de la postulation
-                            echo $_SESSION["message_postulation_envoyee"];
-                            // on le supprime de la session pour ne pas le réafficher à chaque fois
-                            unset($_SESSION["message_postulation_envoyee"]);
-                        } ?>
-                    </p>
-
-                </form><br><br>
-            <?php endif; ?>
-            <div class="partie_commentaires">
-                <?php foreach ($commentaires as $commentaire): if ($commentaire["id_postulation"] == $id_postulation_actuelle): ?>
-                        <h5><?= $commentaire["pseudo"], " - ",
-                            $commentaire["date_commentaire"]; ?></h5>
-                        <p><?= ucfirst($commentaire["contenu"]); ?></p>
-                <?php endif;
-                endforeach; ?>
-            </div>
-
-
-        <?php endfor; ?>
     </section>
 </main>

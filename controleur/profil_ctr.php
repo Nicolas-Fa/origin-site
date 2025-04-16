@@ -5,7 +5,13 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     // si c'est le cas, arrêt du script + message d'erreur
     die('Erreur : ' . basename(__FILE__));
 }
-
+if(!estConnecte()){
+    $titre = "Origin - Inscription";
+    include RACINE . "/vue/header.php";
+    include RACINE . "/vue/connexion.php";
+    include RACINE . "/vue/footer.php";
+    exit;
+}
 
 require_once RACINE . "/modele/authentification.inc.php";
 require_once RACINE . "/modele/membre_bdd.inc.php";
@@ -15,7 +21,6 @@ require_once RACINE . "/modele/maj_bdd.inc.php";
 require_once RACINE . "/modele/supprimer_bdd.inc.php";
 
 // si le membre est connecté.....
-if (estConnecte()) {
     // on visualise les infos du membre.....
     $email = recupererMailConnecte();
     $membre = recupererMailMembre($email);
@@ -154,10 +159,4 @@ if (estConnecte()) {
     include RACINE . "/vue/header.php";
     include RACINE . "/vue/profil.php";
     include RACINE . "/vue/footer.php";
-} else {
-    //----------------------Sinon on renvoie sur l'inscription-----------------------
-    $titre = "Origin - Inscription";
-    include RACINE . "/vue/header.php";
-    include RACINE . "/vue/inscription.php";
-    include RACINE . "/vue/footer.php";
-}
+    exit;
