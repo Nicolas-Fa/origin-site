@@ -1,4 +1,7 @@
 <?php
+require_once RACINE . "/modele/authentification.inc.php";
+require_once RACINE . "/modele/membre_bdd.inc.php";
+
 if (!estConnecte()) {
     /* l'utilisateur n'est pas connecté */
     $message = "Vous n'avez pas l'autorisation d'accéder à cette page";
@@ -21,9 +24,6 @@ if ($_SESSION["role"] != "Titan" && $_SESSION["role"] != "Moderateur") {
 }
 
 
-
-require_once RACINE . "/modele/authentification.inc.php";
-require_once RACINE . "/modele/membre_bdd.inc.php";
 require_once RACINE . "/modele/commentaire_bdd.inc.php";
 require_once RACINE . "/modele/postulation_bdd.inc.php";
 require_once RACINE . "/modele/vote_bdd.php";
@@ -59,18 +59,12 @@ foreach ($commentaires as $commentaire) {
     $id_auteur = $commentaire["id_membre"];
     array_push($auteurs, $id_auteur);
 }
-echo "<pre>";
-var_dump($commentaire);
-echo "</pre>";
+// echo "<pre>";
+// var_dump($commentaire);
+// echo "</pre>";
 
-for ($i = 0; $i < count($auteurs); $i++) {
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["editer_commentaire"]) && isset($_POST["contenu_edition"])) {
-        $modification = editerCommentaire(
-            $_POST["contenu_edition"],
-            $commentaires[$i]["id_commentaire"]
-        );
-    }
-}
+
+
 
 // echo "<pre>";
 // var_dump($commentaire);
@@ -80,9 +74,6 @@ for ($i = 0; $i < count($auteurs); $i++) {
 
 // --- Récupérer toutes les postulations en cours
 $postulations = recupererPostulationsEnCours();
-// echo "<pre>";
-// var_dump($postulations);
-// echo "</pre>";
 
 // --- Récupérer tous les commentaires pour chaque postulation en cours
 // Les commentaires sont classées par postulations
@@ -91,9 +82,22 @@ foreach ($postulations as $postulation) {
     $commentaires = recupererCommentairesParIdPostulation($postulation["id_postulation"]);
     array_push($agregat_commentaires, $commentaires);
 }
+echo "<pre>";
+var_dump($postulation);
+echo "</pre>";
 
-
-
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["contenu_edition"])) {
+    if (isset($commentaire["id_postulation"]) && ($commentaire["id_postulation"] == $postulation["id_postulation"])) {
+        $modification = editerCommentaire(
+            $_POST["contenu_edition"],
+            $commentaire["id_commentaire"]
+        );
+        $_SESSION["message_commentaire"] = "Votre commentaire a bien été modifié";
+        // on redirige vers la même page pour éviter une nouvelle soumission
+        header("Location: index.php?action=candidatures");
+        exit;
+    }
+}
 // -------------------- Génération de la vue------------------
 
 if ($_SESSION["role"] != null && $_SESSION["role"] != "Membre") {

@@ -15,7 +15,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
             <h2>Mes personnages</h2>
             <ul>
                 <?php for ($i = 0; $i < count($pseudo_personnage); $i++): ?>
-                    <?php $id = $id_personnage[$i]["id_personnage"]; ?>
+                    <?php $id = $id_personnage[$i]["id_personnage"]; var_dump($id)?>
                     <li>
                         <p><?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]), " - ", ucfirst($royaume_personnage[$i]["royaume"]); ?></p>
                         <!------------------------------Formulaires de modification---------------------------------->
@@ -25,11 +25,6 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                             <button class="editer bouton" data-id="<?= $id; ?>" data-type="pseudo" aria-label="Editer le pseudo du personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">Éditer le pseudo</button>
                             <!-- Bouton edition du royaume -->
                             <button class="editer bouton" data-id="<?= $id; ?>" data-type="royaume" aria-label="Editer le royaume du personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">Éditer le royaume</button>
-                            <!-- partie suppression de personnage -->
-                            <button class="bouton" type="submit" name="supprimer_personnage" aria-label="Bouton de suppression pour le personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]), " ", ucfirst($royaume_personnage[$i]["royaume"]); ?>">Supprimer</button>
-                            <form action="./?action=profil" method="POST" onsubmit="return confirm('Confirmer la suppression? (cette action est irréversible)')">
-                                <input type="hidden" name="id_personnage_a_supprimer" value="<?= $id_personnage[$i]["id_personnage"]; ?>">
-                            </form>
 
                             <!-- Formulaire d'edition du personnage, caché par défaut -->
                             <form action="./?action=profil" method="POST" id="editer_pseudo_<?= $id ?>" class="formulaire_edition cache">
@@ -43,6 +38,11 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                                 <input type="hidden" name="id_personnage" value="<?= $id; ?>">
                                 <input type="text" name="nouveau_royaume" placeholder="Nouveau royaume" aria-label="Nouveau royaume de votre personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">
                                 <button class="bouton" type="submit" name="valider_edition" aria-label="Bouton de validation : Nouveau royaume de votre personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">Valider</button>
+                            </form>
+                            <!-- partie suppression de personnage -->
+                            <form action="./?action=profil" method="POST" onsubmit="return confirm('Confirmer la suppression? (cette action est irréversible)')">
+                                <input type="hidden" name="id_personnage_a_supprimer" value="<?= $id; ?>">
+                                <button class="bouton" type="submit" name="supprimer_personnage" aria-label="Bouton de suppression pour le personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]), " ", ucfirst($royaume_personnage[$i]["royaume"]); ?>">Supprimer</button>
                             </form>
                         </div>
                     </li>

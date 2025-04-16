@@ -20,7 +20,7 @@ function supprimerCommentaire($id_commentaire)
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("DELETE FROM `commentaire` WHERE id_commentaire=:id_commentaire");
-        $requete->bindValue(":id_commentaire", $id_commentaire);
+        $requete->bindValue(":id_commentaire", $id_commentaire, PDO::PARAM_INT);
         $requete->execute();
         $lignessupprimees = $requete->rowCount();
         if ($lignessupprimees > 0) {
@@ -54,7 +54,7 @@ function supprimerMembre($id_membre)
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("DELETE FROM `membre` WHERE id_membre=:id_membre");
-        $requete->bindValue(":id_membre", $id_membre);
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->execute();
         $lignessupprimees = $requete->rowCount();
         if ($lignessupprimees > 0) {
@@ -88,7 +88,7 @@ function supprimerPersonnage($id_personnage)
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("DELETE FROM `personnage` WHERE id_personnage=:id_personnage");
-        $requete->bindValue(":id_personnage", $id_personnage);
+        $requete->bindValue(":id_personnage", $id_personnage, PDO::PARAM_INT);
         $requete->execute();
         $lignessupprimees = $requete->rowCount();
         if ($lignessupprimees > 0) {
@@ -122,7 +122,7 @@ function supprimerPostulation($id_postulation)
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("DELETE FROM `postulation` WHERE id_postulation=:id_postulation");
-        $requete->bindValue(":id_postulation", $id_postulation);
+        $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
         $requete->execute();
         $lignessupprimees = $requete->rowCount();
         if ($lignessupprimees > 0) {
@@ -156,7 +156,7 @@ function supprimerVote($id_vote)
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("DELETE FROM `vote` WHERE id_vote=:id_vote");
-        $requete->bindValue(":id_vote", $id_vote);
+        $requete->bindValue(":id_vote", $id_vote, PDO::PARAM_INT);
         $requete->execute();
         $lignessupprimees = $requete->rowCount();
         if ($lignessupprimees > 0) {

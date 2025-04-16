@@ -17,7 +17,7 @@
             <p>Statut : <?= $postulation["statut"]; ?></p>
 
             <br>
-                <button class="commenter bouton" data-id="<?= $postulation["id_postulation"]; ?>">Commenter la postulation de <?= $postulation["pseudo"] ?></button>
+            <button class="commenter bouton" data-id="<?= $postulation["id_postulation"]; ?>">Commenter la postulation de <?= $postulation["pseudo"] ?></button>
             <form action="./?action=candidatures" method="post" class="formulaire_commentaire cache" id="commenter_postulation_<?= $postulation["id_postulation"] ?>">
                 <input name="commentaire_postulation" type="hidden" value="<?= $postulation['id_postulation']; ?>" />
                 <textarea name="contenu_commentaire" maxlength="250" rows="6" cols="50" required></textarea>
@@ -40,9 +40,9 @@
                 <?php if ($commentaire["pseudo"] == $_SESSION["pseudo"]) : ?>
                     <button class="editer bouton" data-id="<?= $postulation["id_postulation"] ?>">Modifier votre commentaire</button>
                     <form action="./?action=candidatures" method="post" class="modifier_formulaire cache" id="editer_commentaire_<?= $postulation["id_postulation"] ?>">
-                    <input name="commentaire_postulation" type="hidden" value="<?= $postulation['id_postulation']; ?>" />
-                <textarea name="contenu_commentaire" maxlength="250" rows="6" cols="50" required><?= $commentaire["contenu"]; ?></textarea>
-                <button type="submit" class="bouton" aria-label="Envoyer le commentaire">Envoyer</button>
+                        <input name="editer_commentaire" type="hidden" value="<?= $postulation['id_postulation']; ?>" />
+                        <textarea name="contenu_edition" maxlength="250" rows="6" cols="50" required><?= $commentaire["contenu"]; ?></textarea>
+                        <button type="submit" class="bouton" aria-label="Envoyer le commentaire">Envoyer</button>
                     </form>
 
             <?php endif;

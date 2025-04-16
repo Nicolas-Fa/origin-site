@@ -5,6 +5,9 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     // si c'est le cas, arrêt du script + message d'erreur
     die('Erreur : ' . basename(__FILE__));
 }
+require_once RACINE . "/modele/authentification.inc.php";
+require_once RACINE . "/modele/membre_bdd.inc.php";
+
 if(!estConnecte()){
     $titre = "Origin - Inscription";
     include RACINE . "/vue/header.php";
@@ -13,8 +16,6 @@ if(!estConnecte()){
     exit;
 }
 
-require_once RACINE . "/modele/authentification.inc.php";
-require_once RACINE . "/modele/membre_bdd.inc.php";
 require_once RACINE . "/modele/personnage_bdd.inc.php";
 require_once RACINE . "/modele/ajout_bdd.inc.php";
 require_once RACINE . "/modele/maj_bdd.inc.php";
@@ -130,7 +131,7 @@ require_once RACINE . "/modele/supprimer_bdd.inc.php";
     if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id_personnage_a_supprimer"])) {
         // on récupère les données du formulaire POST
         $personnage_a_supprimer = $_POST["id_personnage_a_supprimer"];
-
+        
         // on supprime le personnage dans la base de données
         $personnage_supprime = supprimerPersonnage($personnage_a_supprimer);
         $_SESSION["message_suppression"] = $personnage_supprime;

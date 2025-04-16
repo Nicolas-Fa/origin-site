@@ -84,6 +84,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  if (window.location.search.includes("candidatures")) {
+    const formulaire = document.querySelectorAll(".editer");
+
+    formulaire.forEach((button) => {
+      button.addEventListener("click", function () {
+        const id = button.getAttribute("data-id");
+        modifierCommentaire(id);
+      });
+    });
+  }
+
   // --------------------------------API de visualisation de personnage---------------------
   //on vérifie qu'on est bien sur la page de profil
   if (window.location.search.includes("profil")) {
@@ -95,7 +106,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const voir_personnage = document.getElementById("visualisation_personnage");
     const nom_personnage = voir_personnage.querySelector(".nom_personnage");
     const race_personnage = voir_personnage.querySelector(".race_personnage");
-    const classe_personnage = voir_personnage.querySelector(".classe_personnage");
+    const classe_personnage =
+      voir_personnage.querySelector(".classe_personnage");
     const image_personnage = voir_personnage.querySelector(".image_personnage");
     const erreur_message = voir_personnage.querySelector(".erreur_personnage");
 
@@ -211,11 +223,33 @@ function afficherFormulaireCommentaire(id) {
   if (!form) return;
   // s'il y a un formulaire qui a la class "cache"
   if (form && form.classList.contains("cache")) {
-    formulaire_commentaire.forEach((form) => {
+    formulaire_commentaire.forEach(form => {
       form.classList.replace("actif", "cache"); // on ferme tous les formulaires ouverts
     });
     form.classList.replace("cache", "actif"); // on active le formulaire
   } else {
     form.classList.replace("actif", "cache"); // sinon on referme le formulaire
   }
+}
+
+function modifierCommentaire(id) {
+  // on récupère les formulaires
+  const formulaire_commentaire = document.querySelectorAll(
+    ".modifier_formulaire"
+  );
+  // on récupère les formulaires en fonction de l'id de la postulation
+  const form = document.getElementById(`editer_commentaire_${id}`);
+
+  // s'il n'y a pas de formulaire, arret de la fonction
+  if(!form) return;
+  // s'il y a un formulaire avec la classe "cache"
+  if(form && form.classList.contains("cache")) {
+    formulaire_commentaire.forEach(form => {
+      form.classList.replace("actif", "cache"); // on ferme les formulaires ouverts
+    });
+    form.classList.replace("cache", "actif");
+  }else{
+    form.classList.replace("actif", "cache");
+  }
+
 }
