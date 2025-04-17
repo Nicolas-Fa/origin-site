@@ -1,8 +1,6 @@
 <?php
-require_once RACINE . "/modele/authentification.inc.php";
-require_once RACINE . "/modele/membre_bdd.inc.php";
 
-if (!estConnecte()) {
+if (!isset($_SESSION['email'])) {
     /* l'utilisateur n'est pas connecté */
     $message = "Vous n'avez pas l'autorisation d'accéder à cette page";
     $titre = "Origin - Inscription";
@@ -13,7 +11,7 @@ if (!estConnecte()) {
 }
 
 // l'utilisateur est connecté puisque son role est rangé dans la session
-if ($_SESSION["role"] != "Titan" && $_SESSION["role"] != "Moderateur") {
+if ($_SESSION["role"] != "Titan" && $_SESSION["role"] != "Moderateur" && $_SESSION["role"] != "Admin") {
     // c'est un simple membre
     $message = "Vous n'avez pas l'autorisation d'accéder à cette page";
     $titre = "Origin - Postuler - Rejoignez le roster compétitif de la 10ème guilde française";
@@ -24,6 +22,8 @@ if ($_SESSION["role"] != "Titan" && $_SESSION["role"] != "Moderateur") {
 }
 
 
+require_once RACINE . "/modele/authentification.inc.php";
+require_once RACINE . "/modele/membre_bdd.inc.php";
 require_once RACINE . "/modele/commentaire_bdd.inc.php";
 require_once RACINE . "/modele/postulation_bdd.inc.php";
 require_once RACINE . "/modele/vote_bdd.php";
@@ -51,26 +51,19 @@ if (
     exit;
 }
 // ou le modifier.....
-$commentaires = recupererCommentaires();
-
-$auteurs = [];
-foreach ($commentaires as $commentaire) {
-    // on récupère le pseudo du membre qui a posté le commentaire 
-    $id_auteur = $commentaire["id_membre"];
-    array_push($auteurs, $id_auteur);
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["contenu_edition"])) {
+    editerCommentaire(
+        $_POST["contenu_edition"],
+        $_POST["editer_commentaire"]
+    );
+    $_SESSION["message_commentaire"] = "Votre commentaire a bien été modifié";
+    // on redirige vers la même page pour éviter une nouvelle soumission
+    header("Location: index.php?action=candidatures");
+    exit;
 }
-// echo "<pre>";
-// var_dump($commentaire);
-// echo "</pre>";
 
 
-
-
-// echo "<pre>";
-// var_dump($commentaire);
-// echo "</pre>";
 // ... to be done ...
-
 
 // --- Récupérer toutes les postulations en cours
 $postulations = recupererPostulationsEnCours();
@@ -82,37 +75,59 @@ foreach ($postulations as $postulation) {
     $commentaires = recupererCommentairesParIdPostulation($postulation["id_postulation"]);
     array_push($agregat_commentaires, $commentaires);
 }
-echo "<pre>";
-var_dump($postulation);
-echo "</pre>";
+//echo "<pre>";
+//var_dump($commentaire);
+//echo "</pre>";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["contenu_edition"])) {
-    if (isset($commentaire["id_postulation"]) && ($commentaire["id_postulation"] == $postulation["id_postulation"])) {
-        $modification = editerCommentaire(
-            $_POST["contenu_edition"],
-            $commentaire["id_commentaire"]
-        );
-        $_SESSION["message_commentaire"] = "Votre commentaire a bien été modifié";
-        // on redirige vers la même page pour éviter une nouvelle soumission
-        header("Location: index.php?action=candidatures");
-        exit;
-    }
+// récupérer les votes pour chaque postulation en cours
+$agregat_votes = [];
+foreach ($postulations as $postulation) {
+    $votes = recupererVotesParIdPostulation($postulation["id_postulation"]);
+    array_push($agregat_votes, $votes);
 }
-// -------------------- Génération de la vue------------------
 
-if ($_SESSION["role"] != null && $_SESSION["role"] != "Membre") {
-    $titre = "Origin - Candidatures - Recrutement des raiders mythique";
-    include RACINE . "/vue/header.php";
-    include RACINE . "/vue/candidatures.php"; // on accède à la page des candidatures sur lesquelles on peut commenter
-    include RACINE . "/vue/footer.php";
+// on peut ajouter un vote.....
+// pour
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_pour"])) {
+    ajouterVote(true, $_SESSION["id_membre"], $_POST["voter_pour"]);
+    $_SESSION["message_vote"] = "Votre vote a bien été enregistré";
+    header("Location: index.php?action=candidatures");
     exit;
 }
+// ou contre
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_contre"])) {
+    ajouterVote(false, $_SESSION["id_membre"], $_POST["voter_contre"]);
+    $_SESSION["message_vote"] = "Votre vote a bien été enregistré";
+    header("Location: index.php?action=candidatures");
+    exit;
+}
+
+echo "<pre>";
+var_dump($agregat_votes[1][0]["id_vote"]);
+echo "</pre>";
+
+// ou le modifier.....
+// if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_contre"])) {
+//     modifierVote(0, $votes["id_vote"], $_SESSION["id_membre"], $_POST["voter_contre"]);
+//     $_SESSION["message_vote"] = "Votre vote a bien été modifié";
+// }
+// if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_pour"]) ) {
+//     modifierVote(1, $votes["id_vote"], $_SESSION["id_membre"], $_POST["voter_pour"]);
+//     $_SESSION["message_vote"] = "Votre vote a bien été modifié";
+// }
+
+
+// -------------------- Génération de la vue------------------
+
+$titre = "Origin - Candidatures - Recrutement des raiders mythique";
+include RACINE . "/vue/header.php";
+include RACINE . "/vue/candidatures.php"; // on accède à la page des candidatures sur lesquelles on peut commenter
+include RACINE . "/vue/footer.php";
+exit;
 
 
 // ------------------ if available according to the role ------------------
 
-$votes_pour = recupererVoteParIdPostulation(true, $id_postulation);
-$votes_contre = recupererVoteParIdPostulation(false, $id_postulation);
 
 if (estConnecte()) {
     // On récupère les informations.....
@@ -124,8 +139,6 @@ if (estConnecte()) {
     // echo "<pre>";
     // var_dump($role);
     // echo "</pre>";
-    $titan = recupererRoleMembre("titan");
-    $moderateur = recupererRoleMembre("moderateur");
     $commentaires = recupererCommentaires();
     // echo "<pre>";
     // var_dump($commentaires);
@@ -144,17 +157,11 @@ if (estConnecte()) {
     // var_dump($commentaire["date_commentaire"]);
     // echo "</pre>";
 
-    // $contenu_commentaire = [];
-    // for ($i = 0; $i < count($commentaires); $i++) {
-    //     $contenu_commentaire[] = $commentaires[$i]["contenu"];
-    //     $id_commentaire = $commentaires[$i]["id_commentaire"];
-    // }
-
 
     $id_vote = recupererIdVoteParIdPostulation($id_postulation);
 
     // on peut ajouter un commentaire.....
-    if ($titan || $moderateur) {
+    if ($_SESSION["role"] == "Titan" || $_SESSION["role"] == "Moderateur") {
         if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["commentaire_postulation_$id_postulation"])) {
             $ajout_commentaire = ajouterCommentaires($contenu_commentaire, $id_membre, $id_postulation);
         }
@@ -179,7 +186,7 @@ if (estConnecte()) {
     }
 
     // modération de l'espace candidatures 
-    if ($moderateur) {
+    if ($_SESSION["role"] == "Moderateur") {
         $supprimer_postulation = supprimerPostulation($id_postulation);
         $supprimer_commentaire = supprimerCommentaire($id_commentaire);
     }

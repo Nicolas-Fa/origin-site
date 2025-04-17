@@ -29,31 +29,28 @@ function recupererIdVoteParIdPostulation($id_postulation)
 }
 
 
-/* Nom de la fonction : recupererVoteParIdPostulation
+/* Nom de la fonction : recupererVotesParIdPostulation
 *
 * A quoi sert cette fonction : récupérer les votes sur une postulation en fonction de l'id de celle-ci
 *
-* Paramètres de la fonction ($choix, $id_postulation)
-*   $choix : le choix du vote, pour ou contre
+* Paramètres de la fonction ($id_postulation)
 *   $id_postulation : la postulation concernée par le vote
 *
 * Retour : L'ensemble des votes pour une postulation donnée correspondant à un choix
 */
 
-function recupererVoteParIdPostulation($choix, $id_postulation)
+function recupererVotesParIdPostulation($id_postulation)
 {
     try {
         $connexion = connexionBdd();
-
-        $requete = $connexion->prepare("SELECT * FROM `vote` WHERE choix=:choix AND id_postulation=:id_postulation");
-        $requete->bindValue(":choix", $choix, PDO::PARAM_BOOL);
+        $requete = $connexion->prepare("SELECT * FROM `vote` WHERE id_postulation=:id_postulation");
         $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
+        $requete->execute();
 
-        $resultat = $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
-    return $resultat;
 }
 
 
@@ -62,5 +59,5 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     header('Content-Type:text/plain');
 
     echo "recupererVoteParIdPostulation() : \n";
-    print_r(recupererVoteParIdPostulation("1", "1"));
+    print_r(recupererVotesParIdPostulation("1", "1"));
 }

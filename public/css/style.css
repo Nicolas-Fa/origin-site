@@ -321,6 +321,12 @@ hgroup p {
   font-size: 21px;
 }
 
+/* ---------------------------------------Candidatures------------------------------------ */
+form .voter button {
+  max-width: 25px;
+}
+
+
 /* ---------------------------------------Page 404---------------------------------------- */
 
 #page_404 {
@@ -588,6 +594,14 @@ fieldset.fieldset_profil input {
   #reglages_compte div {
     margin: 0 8px;
   }
+
+  .boutons_edition {
+    display: flex;
+  }
+  
+  .boutons_edition button {
+    margin-right: 8px;
+  }
   /* -------------------------POSTULATION-------------------------- */
 
   .champ_logs_postulation input {
@@ -597,5 +611,15 @@ fieldset.fieldset_profil input {
   }
   .champ_formulaire_postulation textarea {
     width: 50%;
+  }
+
+  .candidature {
+    /* display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center; */
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--text_color);
   }
 }

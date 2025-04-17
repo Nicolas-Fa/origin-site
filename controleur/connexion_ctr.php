@@ -8,10 +8,10 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 
 require_once RACINE . "/controleur/authentification_ctr.php";
 
-if(estConnecte()){
+if (estConnecte()) {
     // Si on est connecté :
     include RACINE . "/controleur/profil_ctr.php"; // on redirige l'utilisateur vers son profil
-}else{
+} else {
     // sinon, on redirige vers la page de connexion
     $titre = "Origin - Se connecter";
     include RACINE . "/vue/header.php";

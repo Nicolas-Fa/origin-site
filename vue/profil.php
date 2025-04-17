@@ -15,7 +15,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
             <h2>Mes personnages</h2>
             <ul>
                 <?php for ($i = 0; $i < count($pseudo_personnage); $i++): ?>
-                    <?php $id = $id_personnage[$i]["id_personnage"]; var_dump($id)?>
+                    <?php $id = $id_personnage[$i]["id_personnage"]; ?>
                     <li>
                         <p><?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]), " - ", ucfirst($royaume_personnage[$i]["royaume"]); ?></p>
                         <!------------------------------Formulaires de modification---------------------------------->

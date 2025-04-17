@@ -33,9 +33,9 @@ require_once RACINE . "/modele/supprimer_bdd.inc.php";
     $role = $membre["role"];
 
     // on récupère tous les personnage enregistrés.....
-    $personnage = recupererPersonnage();
+    $personnages = recupererPersonnage();
     // echo "<pre>";
-    // var_dump($personnage);
+    // var_dump($personnages);
     // echo "</pre>";
 
     // on récupère l'id des personnages du membre
