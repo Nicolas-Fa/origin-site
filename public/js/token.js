@@ -1,10 +1,10 @@
 import {CLIENT_ID, CLIENT_SECRET} from "./vars.js";
 
-export async function fetchCharacterInfo() {
+export async function fetchCharacterInfo(royaume, pseudo) {
     const authResponse = await fetch("https://oauth.battle.net/token", {
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/json;charset=UTF-8",
         },
         body: `grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`,
     });
@@ -16,6 +16,10 @@ export async function fetchCharacterInfo() {
             headers: {Authorization: `Bearer ${access_token}`},
         }
     );
+
+    if (!response.ok) {
+        throw new Error(`Erreur API : ${response.status}`);
+    }
 
     const characterInfo = await response.json();
     return characterInfo;

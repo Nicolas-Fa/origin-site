@@ -13,7 +13,8 @@ function connexionBdd()
         require_once RACINE . "/vendor/autoload.php";
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
         $dotenv->load();
-        $pdo = new PDO("mysql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_NAME'], $_ENV['DB_LOGIN'], $_ENV['DB_PWD']);
+        $dsn="mysql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_NAME'] . "; charset=utf8";
+        $pdo = new PDO($dsn, $_ENV['DB_LOGIN'], $_ENV['DB_PWD']);
         return $pdo;
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());

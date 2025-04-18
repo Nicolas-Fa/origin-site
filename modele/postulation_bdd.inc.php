@@ -42,7 +42,7 @@ function recupererPostulationsEnCours()
 
         $requete = $connexion->prepare(
             "SELECT `id_postulation`, `contenu`, 
-                DATE_FORMAT(date_de_soumission, '%d/%m/%Y à %Hh%imin%ss') AS `date_formatee`, 
+                DATE_FORMAT(date_de_soumission, '%d/%m/%Y à %Hh%imin') AS `date_formatee`, 
                 `statut`, pseudo
             FROM `postulation`
             JOIN `membre` USING(id_membre)

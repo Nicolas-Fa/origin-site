@@ -1,3 +1,4 @@
+import {fetchCharacterInfo} from "./token.js";
 document.addEventListener("DOMContentLoaded", function () {
   // ------------------menu burger------------------------------------
   const burger = document.getElementById("burger");
@@ -58,7 +59,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // -----------------------boutons d'édition de la page de profil---------------------
   // on vérifie qu'on est sur la page de profil
-  if (window.location.search.includes("profil")) {
+  if (
+    window.location.search.includes("profil") ||
+    window.location.search.includes("connexion")
+  ) {
     // selection des boutons "editer"
     const formulaire = document.querySelectorAll(".editer");
 
@@ -97,7 +101,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // --------------------------------API de visualisation de personnage---------------------
   //on vérifie qu'on est bien sur la page de profil
-  if (window.location.search.includes("profil")) {
+  if (
+    window.location.search.includes("profil") ||
+    window.location.search.includes("connexion")
+  ) {
     // visualisation des personnages
     // on récupère le bouton
     const boutons_voir = document.querySelectorAll(".visualiser_personnage");
@@ -112,8 +119,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     boutons_voir.forEach((bouton) => {
       bouton.addEventListener("click", async () => {
-        const pseudo = bouton.dataset.pseudo;
-        const royaume = bouton.dataset.royaume;
+        const pseudo = bouton.getAttribute("data-pseudo");
+        console.log(pseudo);
+        const royaume = bouton.getAttribute("data-royaume");
+        console.log(royaume);
 
         // Réinitialisation des champs
         nom_personnage.textContent = "";
@@ -123,13 +132,8 @@ document.addEventListener("DOMContentLoaded", function () {
         image_personnage.src = "";
         image_personnage.style.display = "none";
 
-        const url = `https://eu.api.blizzard.com/profile/wow/character/${royaume}/${pseudo}/appearance?namespace=profile-eu&locale=fr_FR`;
-
         try {
-          const response = await fetch(url);
-          if (!response.ok) throw new Error(`Erreur API : ${response.status}`);
-
-          const data = await response.json();
+          const data =  await fetchCharacterInfo(royaume, pseudo)
 
           nom_personnage.textContent = `${
             pseudo.charAt(0).toUpperCase() + pseudo.slice(1)
@@ -144,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const imageData = data.assets?.find((a) => a.key === "main");
           if (imageData) {
             image_personnage.src = imageData.value;
+            image_personnage.style.display = "block";
           }
         } catch (error) {
           erreur_message.textContent = `Erreur : ${error.message}`;
@@ -222,7 +227,7 @@ function afficherFormulaireCommentaire(id) {
   if (!form) return;
   // s'il y a un formulaire qui a la class "cache"
   if (form && form.classList.contains("cache")) {
-    formulaire_commentaire.forEach(form => {
+    formulaire_commentaire.forEach((form) => {
       form.classList.replace("actif", "cache"); // on ferme tous les formulaires ouverts
     });
     form.classList.replace("cache", "actif"); // on active le formulaire
@@ -240,15 +245,14 @@ function modifierCommentaire(id) {
   const form = document.getElementById(`editer_commentaire_${id}`);
 
   // s'il n'y a pas de formulaire, arret de la fonction
-  if(!form) return;
+  if (!form) return;
   // s'il y a un formulaire avec la classe "cache"
-  if(form && form.classList.contains("cache")) {
-    formulaire_commentaire.forEach(form => {
+  if (form && form.classList.contains("cache")) {
+    formulaire_commentaire.forEach((form) => {
       form.classList.replace("actif", "cache"); // on ferme les formulaires ouverts
     });
     form.classList.replace("cache", "actif");
-  }else{
+  } else {
     form.classList.replace("actif", "cache");
   }
-
 }

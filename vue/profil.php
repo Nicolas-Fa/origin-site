@@ -19,10 +19,13 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                     <li>
                         <p><?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]), " - ", ucfirst($royaume_personnage[$i]["royaume"]); ?></p>
                         <!------------------------------Formulaires de modification---------------------------------->
-                        <!-- Bouton edition du personnage -->
+                        <!-- Bouton edition -->
                         <div class="boutons_edition">
-                            <button class="visualiser_personnage bouton" data-pseudo="<?= ($pseudo_personnage[$i]["pseudo_personnage"]); ?>" data-royaume="<?= ($royaume_personnage[$i]["royaume"]); ?>" data-id="<?= $id ?>" aria-label="Voir le personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">Voir le personnage</button>
+                            <button class="visualiser_personnage bouton" data-pseudo="<?= lcfirst($pseudo_personnage[$i]["pseudo_personnage"]); ?>" data-royaume="<?= lcfirst($royaume_personnage[$i]["royaume"]); ?>" data-id="<?= $id ?>" aria-label="Voir le personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">Voir le personnage</button>
+                            
+                            <!-- Bouton edition du pseudo personnage -->
                             <button class="editer bouton" data-id="<?= $id; ?>" data-type="pseudo" aria-label="Editer le pseudo du personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">Éditer le pseudo</button>
+                            
                             <!-- Bouton edition du royaume -->
                             <button class="editer bouton" data-id="<?= $id; ?>" data-type="royaume" aria-label="Editer le royaume du personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">Éditer le royaume</button>
 
@@ -47,7 +50,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                         </div>
                     </li>
                 <?php endfor; ?>
-                <p class="message_edition">
+                <p class="message">
                     <?php if (isset($_SESSION["message_suppression"])) {
                         echo ($_SESSION["message_suppression"]); // on affiche le message de suppression du personnage
                         unset($_SESSION["message_suppression"]); // on le supprime de la session pour ne pas le réafficher à chaque fois

@@ -9,7 +9,7 @@ require_once RACINE . "/modele/authentification.inc.php";
 require_once RACINE . "/modele/membre_bdd.inc.php";
 
 if(!estConnecte()){
-    $titre = "Origin - Inscription";
+    $titre = "Origin - Connexion";
     include RACINE . "/vue/header.php";
     include RACINE . "/vue/connexion.php";
     include RACINE . "/vue/footer.php";

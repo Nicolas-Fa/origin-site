@@ -330,16 +330,14 @@ function editerStatutPostulation($statut, $id_membre, $id_postulation)
 * Retour : la modification d'un vote
 */
 
-function modifierVote($choix, $id_vote, $id_membre, $id_postulation)
+function modifierVote($choix, $id_vote)
 {
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("UPDATE `vote` SET choix=:choix WHERE id_vote=:id_vote AND id_membre=:id_membre AND id_postulation=:id_postulation");
+        $requete = $connexion->prepare("UPDATE `vote` SET choix=:choix WHERE id_vote=:id_vote");
         $requete->bindValue(":choix", $choix, PDO::PARAM_BOOL);
         $requete->bindValue(":id_vote", $id_vote, PDO::PARAM_INT);
-        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
-        $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
 
         if ($requete->execute()) {
             $message = "Vote modifié avec succès.";

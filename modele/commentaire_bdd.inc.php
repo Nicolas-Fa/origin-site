@@ -69,7 +69,7 @@ function recupererCommentairesParIdPostulation($id_postulation)
         $connexion = connexionBdd();
 
         $requete = $connexion->prepare("SELECT 
-            id_commentaire, contenu, DATE_FORMAT(date_commentaire, '%d/%m/%Y à %Hh%imin%ss') AS date_formatee, pseudo
+            id_commentaire, contenu, DATE_FORMAT(date_commentaire, '%d/%m/%Y à %Hh%imin') AS date_formatee, pseudo
             FROM commentaire
             JOIN membre USING(id_membre)
             WHERE id_postulation=:id_postulation");

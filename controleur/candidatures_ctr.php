@@ -86,36 +86,22 @@ foreach ($postulations as $postulation) {
     array_push($agregat_votes, $votes);
 }
 
-// on peut ajouter un vote.....
-// pour
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_pour"])) {
-    ajouterVote(true, $_SESSION["id_membre"], $_POST["voter_pour"]);
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_pour"])) 
+{
+    enregister_vote(true, $_POST["voter_pour"], $_SESSION["id_membre"]);
+    //ajouterVote(true, $_SESSION["id_membre"], $_POST["voter_pour"]);
     $_SESSION["message_vote"] = "Votre vote a bien été enregistré";
     header("Location: index.php?action=candidatures");
     exit;
 }
 // ou contre
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_contre"])) {
-    ajouterVote(false, $_SESSION["id_membre"], $_POST["voter_contre"]);
+    enregister_vote(false, $_POST["voter_contre"], $_SESSION["id_membre"]);
+    //ajouterVote(false, $_SESSION["id_membre"], $_POST["voter_contre"]);
     $_SESSION["message_vote"] = "Votre vote a bien été enregistré";
     header("Location: index.php?action=candidatures");
     exit;
 }
-
-echo "<pre>";
-var_dump($agregat_votes[1][0]["id_vote"]);
-echo "</pre>";
-
-// ou le modifier.....
-// if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_contre"])) {
-//     modifierVote(0, $votes["id_vote"], $_SESSION["id_membre"], $_POST["voter_contre"]);
-//     $_SESSION["message_vote"] = "Votre vote a bien été modifié";
-// }
-// if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_pour"]) ) {
-//     modifierVote(1, $votes["id_vote"], $_SESSION["id_membre"], $_POST["voter_pour"]);
-//     $_SESSION["message_vote"] = "Votre vote a bien été modifié";
-// }
-
 
 // -------------------- Génération de la vue------------------
 
@@ -126,72 +112,22 @@ include RACINE . "/vue/footer.php";
 exit;
 
 
-// ------------------ if available according to the role ------------------
+// ----- fonction de prise en compte du vote par un membre sur une postulation -----
 
-
-if (estConnecte()) {
-    // On récupère les informations.....
-    $email = recupererMailConnecte();
-    $membre = recupererMailMembre($email);
-    $id_membre = $membre["id_membre"];
-    $pseudo = $membre["pseudo"];
-    $role = $membre["role"];
-    // echo "<pre>";
-    // var_dump($role);
-    // echo "</pre>";
-    $commentaires = recupererCommentaires();
-    // echo "<pre>";
-    // var_dump($commentaires);
-    // echo "</pre>";
-
-    foreach ($commentaires as $commentaire) {
-        // on récupère le pseudo du membre qui a posté le commentaire 
-        $pseudo_auteur = recupererPseudoMembreParIdMembre($commentaire["id_membre"]);
-        $commentaire["pseudo"] = $pseudo_auteur["pseudo"];
-        // on récupère la date du commentaire dans la bdd
-        $date_commentaire_bdd = recupererDateCommentaireParIdPostulation($id_postulation);
-        // on la formate au format europeen
-        $commentaire["date_commentaire"] = date("d-m-Y H:i:s", strtotime($date_commentaire_bdd["date_commentaire"]));
+function enregister_vote($vote, $id_postulation, $id_votant) {
+    // Le votant a-t-il déjà voté pour cette postulation ?
+    $vote_actuel=recupererVoteParIdPostulationEtParIdMembre($id_postulation, $id_votant);
+    if ($vote_actuel == null) {
+        // le membre n'a jamais voté pour cette postulation -> ajout du vote
+        ajouterVote($vote, $id_votant, $id_postulation);
+        return;
     }
-    // echo "<pre>";
-    // var_dump($commentaire["date_commentaire"]);
-    // echo "</pre>";
-
-
-    $id_vote = recupererIdVoteParIdPostulation($id_postulation);
-
-    // on peut ajouter un commentaire.....
-    if ($_SESSION["role"] == "Titan" || $_SESSION["role"] == "Moderateur") {
-        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["commentaire_postulation_$id_postulation"])) {
-            $ajout_commentaire = ajouterCommentaires($contenu_commentaire, $id_membre, $id_postulation);
-        }
-        // ou le modifier.....
-        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["commentaire"])) {
-            $modifier_commentaire = editerCommentaire($contenu_commentaire, $id_commentaire);
-        }
-
-        // on peut ajouter un vote.....
-        // pour
-        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["vote_pour"])) {
-
-            $voter_pour = ajouterVote(true, $id_membre, $id_postulation);
-        }
-        // ou contre
-        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["vote_contre"])) {
-            $voter_contre = ajouterVote(false, $id_membre, $id_postulation);
-        }
-        // ou le modifier.....
-        $modifier_vote_pour = modifierVote(false, $id_vote, $id_membre, $id_postulation);
-        $modifier_vote_contre = modifierVote(true, $id_vote, $id_membre, $id_postulation);
-    }
-
+    // sinon, le votant s'est déjà exprimé sur cette postulation -> modification de son vote
+    modifierVote($vote, $vote_actuel['id_vote']);
+    return;
+}
     // modération de l'espace candidatures 
     if ($_SESSION["role"] == "Moderateur") {
         $supprimer_postulation = supprimerPostulation($id_postulation);
         $supprimer_commentaire = supprimerCommentaire($id_commentaire);
     }
-
-    //---------------------------------Vue-------------------------------------------
-
-
-}

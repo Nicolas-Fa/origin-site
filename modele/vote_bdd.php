@@ -29,14 +29,15 @@ function recupererIdVoteParIdPostulation($id_postulation)
 }
 
 
-/* Nom de la fonction : recupererVotesParIdPostulation
+/* Nom de la fonction : recupererVoteParIdPostulationEtParIdMembre
 *
-* A quoi sert cette fonction : récupérer les votes sur une postulation en fonction de l'id de celle-ci
+* A quoi sert cette fonction : récupérer les votes sur une postulation par un membre donné
 *
-* Paramètres de la fonction ($id_postulation)
+* Paramètres de la fonction ($id_postulation, $id_membre)
 *   $id_postulation : la postulation concernée par le vote
+*   $id_membre : le membre titulaire du (possible) vote
 *
-* Retour : L'ensemble des votes pour une postulation donnée correspondant à un choix
+* Retour : Le vote du membre pour une postulation donnée ; le vote peut être inexistant
 */
 
 function recupererVotesParIdPostulation($id_postulation)
@@ -48,6 +49,34 @@ function recupererVotesParIdPostulation($id_postulation)
         $requete->execute();
 
         return $requete->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $erreur) {
+        throw new Exception("Erreur: " . $erreur->getMessage());
+    }
+}
+
+/* Nom de la fonction : recupererVoteParIdPostulationEtParIdMembre
+*
+* A quoi sert cette fonction : récupérer les votes sur une postulation par un membre donné
+*
+* Paramètres de la fonction ($id_postulation)
+*   $id_postulation : la postulation concernée par le vote
+*   $id_membre : le membre titulaire du (possible) vote
+*
+* Retour : Le vote du membre pour une postulation donnée ; le vote peut être inexistant
+*/
+
+function recupererVoteParIdPostulationEtParIdMembre($id_postulation, $id_membre)
+{
+    try {
+        $connexion = connexionBdd();
+        $requete = $connexion->prepare("SELECT * 
+            FROM `vote` 
+            WHERE id_postulation=:id_postulation AND id_membre=:id_membre");
+        $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
+        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
+        $requete->execute();
+
+        return $requete->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
