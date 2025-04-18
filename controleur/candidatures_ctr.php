@@ -74,9 +74,9 @@ foreach ($postulations as $postulation) {
     $commentaires = recupererCommentairesParIdPostulation($postulation["id_postulation"]);
     array_push($agregat_commentaires, $commentaires);
 }
-echo "<pre>";
-var_dump($postulations);
-echo "</pre>";
+// echo "<pre>";
+// var_dump($postulations);
+// echo "</pre>";
 
 // récupérer les votes pour chaque postulation en cours
 $agregat_votes = [];

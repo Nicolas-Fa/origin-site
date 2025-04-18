@@ -106,8 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.search.includes("profil") ||
     window.location.search.includes("connexion")
   ) {
-    console.log(CLIENT_ID);
-    console.log(CLIENT_SECRET);
     // visualisation des personnages
     // on récupère le bouton
     const boutons_voir = document.querySelectorAll(".visualiser_personnage");
@@ -116,16 +114,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const voir_personnage = document.getElementById("visualisation_personnage");
     const nom_personnage = voir_personnage.querySelector(".nom_personnage");
     const race_personnage = voir_personnage.querySelector(".race_personnage");
-    const classe_personnage = voir_personnage.querySelector(".classe_personnage");
+    const classe_personnage =
+      voir_personnage.querySelector(".classe_personnage");
     const image_personnage = voir_personnage.querySelector(".image_personnage");
     const erreur_message = voir_personnage.querySelector(".erreur_personnage");
 
     boutons_voir.forEach((bouton) => {
       bouton.addEventListener("click", async () => {
         const pseudo = bouton.getAttribute("data-pseudo");
-        console.log(pseudo);
+        // console.log(pseudo);
         const royaume = bouton.getAttribute("data-royaume");
-        console.log(royaume);
+        // console.log(royaume);
 
         // Réinitialisation des champs
         nom_personnage.textContent = "";
@@ -136,22 +135,28 @@ document.addEventListener("DOMContentLoaded", function () {
         image_personnage.style.display = "none";
 
         try {
-          const data = await fetchCharacterInfo(royaume, pseudo);
-
+          const { character, media } = await fetchCharacterInfo(
+            royaume,
+            pseudo
+          );
+          // console.log(character);
           nom_personnage.textContent = `${
             pseudo.charAt(0).toUpperCase() + pseudo.slice(1)
-          } - ${royaume.charAt(0).toUpperCase() +royaume.slice(1)}`;
+          } - ${royaume.charAt(0).toUpperCase() + royaume.slice(1)}`;
           race_personnage.textContent = `Race : ${
-            data.race?.name ?? "Inconnue"
+            character.playable_race?.name ?? "Inconnue"
           }`;
           classe_personnage.textContent = `Classe : ${
-            data.character_class?.name ?? "Inconnue"
+            character.playable_class?.name ?? "Inconnue"
           }`;
 
-          const imageData = data.assets?.find((a) => a.key === "main");
+          const imageData = media.assets?.find(
+            (asset) => asset.key === "main-raw"
+          ).value;
+          document.querySelector(".image_personnage").src = imageData;
+          image_personnage.style.display = "block";
           if (imageData) {
-            image_personnage.src = imageData.value;
-            image_personnage.style.display = "block";
+            image_personnage.src = imageData;
           }
         } catch (error) {
           erreur_message.textContent = `Erreur : ${error.message}`;

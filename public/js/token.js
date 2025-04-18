@@ -13,17 +13,26 @@ export async function fetchCharacterInfo(royaume, pseudo) {
     
     var access_token = data.access_token
 
-    const response = await fetch(
-        `https://eu.api.blizzard.com/profile/wow/character/${royaume}/${pseudo}/appearance?namespace=profile-eu&locale=fr_FR`, {
+    const mediaData = await fetch(
+        `https://eu.api.blizzard.com/profile/wow/character/${royaume}/${pseudo}/character-media?namespace=profile-eu&locale=fr_FR&${access_token}`, {
+            headers: {Authorization: `Bearer ${access_token}`},
+        }
+    );
+    const characterInfo = await fetch(
+        `https://eu.api.blizzard.com/profile/wow/character/${royaume}/${pseudo}/appearance?namespace=profile-eu&locale=fr_FR&${access_token}`, {
             headers: {Authorization: `Bearer ${access_token}`},
         }
     );
     
-    if (!response.ok) {
-        throw new Error(`Erreur API : ${response.status}`);
+    if (!characterInfo.ok) {
+        throw new Error(`Erreur API : ${characterInfo.status}`);
+    }
+    if (!mediaData.ok) {
+        throw new Error(`Erreur API : ${mediaData.status}`);
     }
     ;
-    const characterInfo = await response.json();
+    const character = await characterInfo.json();
+    const media = await mediaData.json();
     
-    return characterInfo;
+    return {character, media}
 }}

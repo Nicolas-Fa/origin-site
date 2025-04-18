@@ -65,7 +65,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
             <h3 class="nom_personnage"></h3>
             <p class="race_personnage"></p>
             <p class="classe_personnage"></p>
-            <img src="" alt="Aperçu du personnage" class="image_personnage">
+            <img class="image_personnage">
             <p class="erreur_personnage"></p>
         </div>
     </section>
