@@ -34,6 +34,16 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                     <li class="nav_roster"><a href="?action=candidatures" aria-label="Lien vers les candidatures">Candidatures</a></li>
                     <!-- navigation visible par les visiteurs  -->
                 <?php endif; 
+                if (isset($_SESSION["email"]) && (($_SESSION["role"] == "Admin") || ($_SESSION["role"] == "Moderateur"))) : ?>
+                    <!-- navigation visible par les membres ayant le rôle titan -->
+                    <li class="nav_admin"><a href="?action=moderation_candidatures" aria-label="Lien vers la modération des candidatures">Gérer candidatures</a></li>
+                    <!-- navigation visible par les visiteurs  -->
+                <?php endif; 
+                if (isset($_SESSION["email"]) && (($_SESSION["role"] == "Admin") || ($_SESSION["role"] == "Moderateur"))) : ?>
+                    <!-- navigation visible par les membres ayant le rôle titan -->
+                    <li class="nav_admin"><a href="?action=gestion_utilisateurs" aria-label="Lien vers la modération des utilisateurs">Gérer utilisateurs</a></li>
+                    <!-- navigation visible par les visiteurs  -->
+                <?php endif; 
                 if (!isset($_SESSION["email"])) : ?>
                     <li class="nav_visiteur"><a href="?action=connexion" aria-label="Se connecter">Se connecter</a></li>
                     <li class="nav_visiteur"><a href="?action=inscription" aria-label="S'inscrire">S'inscrire</a></li>

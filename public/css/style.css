@@ -223,6 +223,7 @@ figure {
   flex-wrap: wrap;
   width: 100%;
   margin-bottom: 8px;
+  justify-content: center;
 }
 
 figure img:nth-child(odd) {

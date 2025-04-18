@@ -1,4 +1,5 @@
-import {fetchCharacterInfo} from "./token.js";
+import { fetchCharacterInfo } from "./token.js";
+import { CLIENT_ID, CLIENT_SECRET } from "./vars.js";
 document.addEventListener("DOMContentLoaded", function () {
   // ------------------menu burger------------------------------------
   const burger = document.getElementById("burger");
@@ -105,6 +106,8 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.search.includes("profil") ||
     window.location.search.includes("connexion")
   ) {
+    console.log(CLIENT_ID);
+    console.log(CLIENT_SECRET);
     // visualisation des personnages
     // on récupère le bouton
     const boutons_voir = document.querySelectorAll(".visualiser_personnage");
@@ -133,11 +136,11 @@ document.addEventListener("DOMContentLoaded", function () {
         image_personnage.style.display = "none";
 
         try {
-          const data =  await fetchCharacterInfo(royaume, pseudo)
+          const data = await fetchCharacterInfo(royaume, pseudo);
 
           nom_personnage.textContent = `${
             pseudo.charAt(0).toUpperCase() + pseudo.slice(1)
-          } - ${royaume}`;
+          } - ${royaume.charAt(0).toUpperCase() +royaume.slice(1)}`;
           race_personnage.textContent = `Race : ${
             data.race?.name ?? "Inconnue"
           }`;

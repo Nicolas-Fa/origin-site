@@ -9,7 +9,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 
 <main class="container">
 
-    <h1 class="titre">Profil de <?= $pseudo ?></h1>
+    <h1 class="titre">Profil de <?= ucfirst($pseudo) ?></h1>
     <section id="mes_personnages">
         <div class="liste_personnages">
             <h2>Mes personnages</h2>
@@ -22,7 +22,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                         <!-- Bouton edition -->
                         <div class="boutons_edition">
                             <button class="visualiser_personnage bouton" data-pseudo="<?= lcfirst($pseudo_personnage[$i]["pseudo_personnage"]); ?>" data-royaume="<?= lcfirst($royaume_personnage[$i]["royaume"]); ?>" data-id="<?= $id ?>" aria-label="Voir le personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">Voir le personnage</button>
-                            
+
                             <!-- Bouton edition du pseudo personnage -->
                             <button class="editer bouton" data-id="<?= $id; ?>" data-type="pseudo" aria-label="Editer le pseudo du personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">Éditer le pseudo</button>
                             

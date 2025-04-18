@@ -21,7 +21,6 @@ if ($_SESSION["role"] != "Titan" && $_SESSION["role"] != "Moderateur" && $_SESSI
     exit;           // fin du script
 }
 
-
 require_once RACINE . "/modele/authentification.inc.php";
 require_once RACINE . "/modele/membre_bdd.inc.php";
 require_once RACINE . "/modele/commentaire_bdd.inc.php";
@@ -75,9 +74,9 @@ foreach ($postulations as $postulation) {
     $commentaires = recupererCommentairesParIdPostulation($postulation["id_postulation"]);
     array_push($agregat_commentaires, $commentaires);
 }
-//echo "<pre>";
-//var_dump($commentaire);
-//echo "</pre>";
+echo "<pre>";
+var_dump($postulations);
+echo "</pre>";
 
 // récupérer les votes pour chaque postulation en cours
 $agregat_votes = [];
@@ -126,8 +125,4 @@ function enregister_vote($vote, $id_postulation, $id_votant) {
     modifierVote($vote, $vote_actuel['id_vote']);
     return;
 }
-    // modération de l'espace candidatures 
-    if ($_SESSION["role"] == "Moderateur") {
-        $supprimer_postulation = supprimerPostulation($id_postulation);
-        $supprimer_commentaire = supprimerCommentaire($id_commentaire);
-    }
+    
