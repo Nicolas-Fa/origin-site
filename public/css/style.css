@@ -27,7 +27,7 @@
 
 /* ---------------------------------------Reset------------------------------------------- */
 body {
-  background-color: #0F151B;
+  background-color: #0f151b;
 }
 
 * {
@@ -73,6 +73,7 @@ h4 {
   flex-direction: column;
   flex-wrap: wrap;
   margin: 0 auto;
+  padding: 16px;
 }
 
 /* -----------------------------------Header---------------------------------------------- */
@@ -103,9 +104,9 @@ header a {
   width: 100%;
 }
 
-/* header a img {
+.back {
   background-color: #d9d9d9;
-} */
+}
 
 .navigation a:hover {
   color: var(--hover);
@@ -234,7 +235,7 @@ figure img:nth-child(even) {
 }
 
 figure img {
-  max-width: 165px;
+  max-width: 120px;
   width: 100%;
 }
 
@@ -330,7 +331,11 @@ p .message {
 }
 
 /* ---------------------------------------Candidatures------------------------------------ */
-
+#liste_candidats .vide {
+  text-align: center;
+  font-size: 21px;
+  padding: 50px 0;
+}
 
 section .candidature {
   display: flex;
@@ -378,7 +383,7 @@ section .candidature {
   border: none;
 }
 
-.candidature .votes .voter .voter_pour i, 
+.candidature .votes .voter .voter_pour i,
 .candidature .votes .voter .voter_contre i {
   font-size: 24px;
   color: var(--text_color);
@@ -387,14 +392,14 @@ section .candidature {
 .candidature .votes form {
   width: px;
 }
-.candidature .commentaires button{
+.candidature .commentaires button {
   margin-top: 8px;
 }
 
-.candidature .commentaires{
+.candidature .commentaires {
   margin-bottom: 16px;
 }
-.candidature .commentaires .un_commentaire{
+.candidature .commentaires .un_commentaire {
   padding-bottom: 16px;
 }
 
@@ -523,6 +528,47 @@ fieldset.fieldset_profil input {
   margin: 8px 0;
 }
 
+/* ------------------------------------BACK OFFICE------------------------------ */
+.back {
+  background-color: #d9d9d9;
+}
+
+.back h1,
+.back h2,
+.back h3,
+.back h4,
+.back p {
+  color: black;
+}
+
+.back button {
+  background-color: #d9d9d9;
+  color: black;
+  border-color: black;
+}
+
+.back .candidature .votes .voter button {
+  background-color: #d9d9d9;
+}
+
+.back #utilisateurs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.back #utilisateurs .utilisateur {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  padding: 16px;
+}
+
+.back #utilisateurs .utilisateur form{
+margin: 8px;
+}
+
 /* ------------------------------------RESPONSIVE------------------------------- */
 
 /* menu nav */
@@ -601,7 +647,7 @@ fieldset.fieldset_profil input {
   }
 
   #communication .progression {
-    padding-top: 16px;
+    padding: 16px 0 0 0;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -673,11 +719,19 @@ fieldset.fieldset_profil input {
   .boutons_edition {
     display: flex;
   }
-  
+
   .boutons_edition button {
     margin-right: 8px;
   }
   /* -------------------------POSTULATION-------------------------- */
+  .moderation {
+    display: flex;
+    justify-content: center;
+  }
+
+  .moderation form {
+    margin: 8px;
+  }
 
   .champ_logs_postulation input {
     display: flex;

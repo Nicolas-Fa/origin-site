@@ -60,7 +60,6 @@ function recupererCommentaireParIdPostulation($id_postulation)
     return $resultat;
 }
 
-// ------------------ By Thierry B. -------------------
 // récupère tous les commentaires avec le pseudo de l'auteur sur une postulation identifiée par son id
 
 function recupererCommentairesParIdPostulation($id_postulation)

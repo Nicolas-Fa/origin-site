@@ -30,9 +30,6 @@ require_once RACINE . "/modele/ajout_bdd.inc.php";
 require_once RACINE . "/modele/maj_bdd.inc.php";
 require_once RACINE . "/modele/supprimer_bdd.inc.php";
 
-// echo "<pre>";
-// var_dump($_SESSION);
-// echo "</pre>";
 // --- Ajout d'un commentaire
 if (
     $_SERVER["REQUEST_METHOD"] === "POST"
@@ -61,9 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["contenu_edition"])) {
     exit;
 }
 
-
-// ... to be done ...
-
 // --- Récupérer toutes les postulations en cours
 $postulations = recupererPostulationsEnCours();
 
@@ -88,7 +82,6 @@ foreach ($postulations as $postulation) {
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_pour"])) 
 {
     enregister_vote(true, $_POST["voter_pour"], $_SESSION["id_membre"]);
-    //ajouterVote(true, $_SESSION["id_membre"], $_POST["voter_pour"]);
     $_SESSION["message_vote"] = "Votre vote a bien été enregistré";
     header("Location: index.php?action=candidatures");
     exit;
@@ -96,7 +89,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_pour"]))
 // ou contre
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_contre"])) {
     enregister_vote(false, $_POST["voter_contre"], $_SESSION["id_membre"]);
-    //ajouterVote(false, $_SESSION["id_membre"], $_POST["voter_contre"]);
     $_SESSION["message_vote"] = "Votre vote a bien été enregistré";
     header("Location: index.php?action=candidatures");
     exit;

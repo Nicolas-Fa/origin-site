@@ -9,7 +9,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 // on vérifie que l'utilisateur est connecté on lui demande de s'inscrire
 if (!isset($_SESSION['role'])) {
     $message = "Vous n'avez pas l'autorisation d'accéder à cette page";
-    $titre = "Origin - Inscription";
+    $titre = "Origin - Se connecter";
     include RACINE . "/vue/header.php";
     include RACINE . "/vue/connexion.php";
     include RACINE . "/vue/footer.php";
@@ -17,7 +17,7 @@ if (!isset($_SESSION['role'])) {
 }
 
 // si il est connecté et que c'est déjà un utilisateur validé on le renvoie à l'accueil
-if ($_SESSION["role"] == "Titan") {
+if (isset($_SESSION) && $_SESSION["role"] == "Titan") {
     include(RACINE . "/controleur/accueil_ctr.php");
     exit;
 }
@@ -33,7 +33,6 @@ $role = $membre["role"];
 $id_membre = $membre["id_membre"];
 $titan = recupererRoleMembre("titan");
 
-if (estConnecte() && $_SESSION["role"] == "membre") {
     if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["contenu_postulation"])) {
         // on récupère le contenu du formulaire
         $contenu_postulation = $_POST["contenu_postulation"];
@@ -65,4 +64,3 @@ if (estConnecte() && $_SESSION["role"] == "membre") {
     include(RACINE . "/vue/postuler.php");
     include(RACINE . "/vue/footer.php");
     exit;
-}

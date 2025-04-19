@@ -122,21 +122,21 @@ function editerMdpMembre($pwd, $id_membre)
 *
 * A quoi sert cette fonction : permet d'éditer le rôle d'un membre
 *
-* Paramètres de la fonction ($role, $id_membre)
+* Paramètres de la fonction ($role, $pseudo)
 *   $role : le role du membre
-*   $id_membre : l'id du membre
+*   $pseudo : le pseudo du membre
 *
 * Retour : la modification du rôle d'un membre
 */
 
-function editerRoleMembre($role, $id_membre)
+function editerRoleMembre($role, $pseudo)
 {
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("UPDATE `membre` SET role=:role WHERE id_membre=:id_membre");
+        $requete = $connexion->prepare("UPDATE `membre` SET role=:role WHERE pseudo=:pseudo");
         $requete->bindValue(":role", ucfirst($role), PDO::PARAM_STR);
-        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
+        $requete->bindValue(":pseudo", $pseudo, PDO::PARAM_STR);
 
         if ($requete->execute()) {
             $message = "Rôle du membre modifié avec succès.";
@@ -283,22 +283,20 @@ function editerPostulation($contenu, $id_membre, $id_postulation)
 *
 * A quoi sert cette fonction : permet d'éditer le statut d'une postulation
 *
-* Paramètres de la fonction ($statut, $id_membre, $id_postulation)
+* Paramètres de la fonction ($statut, $id_postulation)
 *   $statut : le statut de la postulation
-*   $id_membre : l'id du membre
 *   $id_postulation : l'id de la postulation
 *
 * Retour : la modification du statut de la postulation
 */
 
-function editerStatutPostulation($statut, $id_membre, $id_postulation)
+function editerStatutPostulation($statut, $id_postulation)
 {
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("UPDATE `postulation` SET statut=:statut WHERE id_membre=:id_membre AND id_postulation=:id_postulation");
+        $requete = $connexion->prepare("UPDATE `postulation` SET statut=:statut WHERE id_postulation=:id_postulation");
         $requete->bindValue(":statut", ucfirst($statut), PDO::PARAM_STR);
-        $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
 
         if ($requete->execute()) {

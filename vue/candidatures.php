@@ -23,14 +23,6 @@
                     <textarea name="contenu_commentaire" maxlength="250" rows="6" cols="50" required></textarea>
                     <button type="submit" class="bouton" aria-label="Envoyer le commentaire" aria-labelledby="Bouton pour envoyer le commentaire">Envoyer</button>
                 </form>
-                <p class="message">
-                    <?php if (isset($_SESSION["message_postulation_envoyee"])) {
-                        //on affiche le message de validation d'envoi de la postulation
-                        echo $_SESSION["message_postulation_envoyee"];
-                        // on le supprime de la session pour ne pas le réafficher à chaque fois
-                        unset($_SESSION["message_postulation_envoyee"]);
-                    } ?>
-                </p>
 
                 <div class="votes">
                     <?php
@@ -73,7 +65,6 @@
                                 <textarea name="contenu_edition" maxlength="250" rows="6" cols="50" required><?= $commentaire["contenu"]; ?></textarea>
                                 <button type="submit" class="bouton" aria-label="Envoyer le commentaire">Envoyer</button>
                             </form>
-
                     <?php endif; ?>
                     </div>
                     <?php endforeach; ?>

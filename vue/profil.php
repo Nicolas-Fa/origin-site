@@ -42,6 +42,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                                 <input type="text" name="nouveau_royaume" placeholder="Nouveau royaume" aria-label="Nouveau royaume de votre personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">
                                 <button class="bouton" type="submit" name="valider_edition" aria-label="Bouton de validation : Nouveau royaume de votre personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">Valider</button>
                             </form>
+                            
                             <!-- partie suppression de personnage -->
                             <form action="./?action=profil" method="POST" onsubmit="return confirm('Confirmer la suppression? (cette action est irréversible)')">
                                 <input type="hidden" name="id_personnage_a_supprimer" value="<?= $id; ?>">
