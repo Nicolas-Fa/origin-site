@@ -20,17 +20,11 @@ function recupererPostulation()
         $requete = $connexion->prepare("SELECT * FROM `postulation`");
         $requete->execute();
 
-        $resultat = [];
-
-        $ligne = $requete->fetch(PDO::FETCH_ASSOC);
-        while ($ligne) {
-            $resultat[] = $ligne;
-            $ligne = $requete->fetch(PDO::FETCH_ASSOC);
-        }
+        return ($requete->fetchAll(PDO::FETCH_ASSOC));
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
-    return $resultat;
+
 }
 
 // ------------------ By Thierry B. -------------------

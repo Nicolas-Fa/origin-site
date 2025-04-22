@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 16 avr. 2025 à 19:22
+-- Généré le : sam. 19 avr. 2025 à 23:08
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -40,12 +40,7 @@ CREATE TABLE `commentaire` (
 --
 
 INSERT INTO `commentaire` (`id_commentaire`, `contenu`, `date_commentaire`, `id_postulation`, `id_membre`) VALUES
-(22, 'L&#039;alcool c&#039;est cool! C&#039;est pour ça qu&#039;il y a le mot &quot;cool&quot; dans alcool!', '2025-04-14 09:06:21', 9, 16),
-(24, 'Aliquam erat volutpat, supertoto com', '2025-04-14 09:06:50', 7, 11),
-(25, 'Aliquam erat volutpat, pellentesque in nulla in nisi dictum interdum, phasellus ac thierry com', '2025-04-14 09:39:07', 7, 13),
-(36, 'Ok tier', '2025-04-16 07:15:04', 7, 1),
-(38, 'Un mec vraiment éclaté', '2025-04-16 07:25:27', 8, 5),
-(39, 'L&#039;alcool c&#039;est cool! C&#039;est pour ça qu&#039;il y a le mot cool dans alcool !', '2025-04-16 08:01:30', 7, 5);
+(36, 'Ok Simone !', '2025-04-16 07:15:04', 7, 1);
 
 -- --------------------------------------------------------
 
@@ -58,7 +53,7 @@ CREATE TABLE `membre` (
   `pseudo` varchar(50) NOT NULL,
   `email` varchar(120) NOT NULL,
   `mot_de_passe` varchar(255) NOT NULL,
-  `role` enum('Membre','Titan','Moderateur','') NOT NULL
+  `role` enum('Membre','Titan','Moderateur','Admin') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -66,12 +61,13 @@ CREATE TABLE `membre` (
 --
 
 INSERT INTO `membre` (`id_membre`, `pseudo`, `email`, `mot_de_passe`, `role`) VALUES
-(1, 'test', 'origin@test.com', '$2y$10$hmj0LZNB7zwavgdTTZw.au.hmuQavXaf8msv/L8hAXXj0mbNzMygW', 'Titan'),
-(5, 'Llorwina', 'llorwina@gmail.com', '2yuDAAwrXQQEw', 'Titan'),
-(11, 'SuperToto', 'toto@toto.com', '$2y$10$N9T3ZOZ.lYqX3XBHmaUg7uHE2ishqH.szfDtO0OIsum.65LBEkH5e', 'Titan'),
-(13, 'Thierry', 'thierry.bouedo@free.bzh', '$2y$10$PuKZ.uDS4zqDPrVLR22PS.p2feu1Jg6PmUhSySMHBxb.qceUwPxui', 'Titan'),
-(15, 'Kiri', 'kiri@origin.com', 'kiri1234', 'Titan'),
-(16, 'Tærys', 'tae@origin.com', 'taerys1234', 'Titan');
+(1, 'test', 'origin@test.com', '$2y$10$hmj0LZNB7zwavgdTTZw.au.hmuQavXaf8msv/L8hAXXj0mbNzMygW', 'Membre'),
+(5, 'Llorwina', 'llorwina@gmail.com', '2yuDAAwrXQQEw', 'Admin'),
+(17, 'Uzui', 'uzui@origin.test', '$2y$10$AbGLqDIGIvUbuLUUYawK0Oj7yqo.RO2EBz98Sg62MJTsYgJvpmyOe', 'Membre'),
+(18, 'Linoae', 'linoae@origin.com', '$2y$10$F7qZFVoNQvoPCLxPBSaAkutxOThjhPYuA0myvVFYeliVPODdwaT.G', 'Membre'),
+(19, 'Tærys', 'taerys@origin.com', '$2y$10$bu0XBkX/h54mF1dv38iK6OpfvwrUtRFDEO1jv72srN/3uHkzYjM.G', 'Membre'),
+(20, 'Hûntor', 'huntor@origin.com', '$2y$10$5isAmQ5tMmYYZVmPi4RmGuet857J8EZRmp3ZEyO3I.fRUa.DvO/ti', 'Membre'),
+(21, 'Nhrotz', 'nhrotz@origin.com', '$2y$10$8oGNnTzzi6.RoOU.qc3p5e.sgc1a25fyWsSiftbSX/4pK2wZI.kMy', 'Membre');
 
 -- --------------------------------------------------------
 
@@ -91,11 +87,22 @@ CREATE TABLE `personnage` (
 --
 
 INSERT INTO `personnage` (`pseudo_personnage`, `royaume`, `id_membre`, `id_personnage`) VALUES
-('aszhara', 'Sargeras', 1, 2),
+('krukarn', 'Sargeras', 1, 2),
 ('Llorwina', 'Sargeras', 5, 4),
-('toto', 'totoland', 11, 14),
-('krukarn', 'sargeras', 1, 15),
-('toto', 'sargeras', 1, 18);
+('aszhara', 'sargeras', 1, 15),
+('bwonsamdi', 'sargeras', 1, 18),
+('eniira', 'khaz-modan', 5, 19),
+('uzudrood', 'sargeras', 17, 20),
+('uzupal', 'sargeras', 17, 21),
+('uzuwar', 'sargeras', 17, 23),
+('uzuhunt', 'sargeras', 17, 24),
+('linoae', 'sargeras', 18, 25),
+('tærys', 'sargeras', 19, 26),
+('taeylquaida', 'sargeras', 19, 27),
+('hûntor', 'sargeras', 20, 28),
+('warlocktor', 'sargeras', 20, 29),
+('nhrotz', 'sargeras', 21, 30),
+('nhrotza', 'sargeras', 21, 31);
 
 -- --------------------------------------------------------
 
@@ -106,7 +113,7 @@ INSERT INTO `personnage` (`pseudo_personnage`, `royaume`, `id_membre`, `id_perso
 CREATE TABLE `postulation` (
   `id_postulation` int(11) NOT NULL,
   `contenu` varchar(1500) NOT NULL,
-  `statut` varchar(20) NOT NULL,
+  `statut` enum('En cours','Validee','Refusee','') NOT NULL,
   `date_de_soumission` timestamp NULL DEFAULT current_timestamp(),
   `id_membre` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -116,9 +123,7 @@ CREATE TABLE `postulation` (
 --
 
 INSERT INTO `postulation` (`id_postulation`, `contenu`, `statut`, `date_de_soumission`, `id_membre`) VALUES
-(7, 'Toujours une nouvelle postulation Logs : https://www.warcraftlogs.com/character/id/40314961', 'En cours', '2025-04-11 12:41:46', 1),
-(8, 'une postulation pour kiri', 'En cours', '2025-04-14 07:10:24', 15),
-(9, 'une postulation pour tae', 'Validée', '2025-04-14 07:10:42', 16);
+(7, 'Toujours une nouvelle postulation Logs : https://www.warcraftlogs.com/character/id/40314961', 'En cours', '2025-04-11 12:41:46', 1);
 
 -- --------------------------------------------------------
 
@@ -133,6 +138,13 @@ CREATE TABLE `vote` (
   `id_postulation` int(11) NOT NULL,
   `id_membre` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `vote`
+--
+
+INSERT INTO `vote` (`id_vote`, `choix`, `date_de_vote`, `id_postulation`, `id_membre`) VALUES
+(129, 0, '2025-04-17 14:24:58', 7, 5);
 
 --
 -- Index pour les tables déchargées
@@ -185,19 +197,19 @@ ALTER TABLE `vote`
 -- AUTO_INCREMENT pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
-  MODIFY `id_commentaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_commentaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT pour la table `membre`
 --
 ALTER TABLE `membre`
-  MODIFY `id_membre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_membre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `personnage`
 --
 ALTER TABLE `personnage`
-  MODIFY `id_personnage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_personnage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT pour la table `postulation`
@@ -209,7 +221,7 @@ ALTER TABLE `postulation`
 -- AUTO_INCREMENT pour la table `vote`
 --
 ALTER TABLE `vote`
-  MODIFY `id_vote` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_vote` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- Contraintes pour les tables déchargées

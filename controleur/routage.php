@@ -24,6 +24,7 @@ function navigation($action = "defaut")
     $choix_action["connexion"] = "authentification_ctr.php";
     $choix_action["inscription"] = "inscription_ctr.php";
     $choix_action["deconnexion"] = "deconnexion.php";
+    $choix_action["regles"] = "regles_ctr.php";
     $choix_action["page404"] = "404_ctr.php";
 
     $fichier_ctrl = $choix_action[$action];

@@ -16,72 +16,48 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // --------------------affichage twitch---------------------------------
-  //on vérifie qu'on est bien sur la page d'accueil
-  if (window.location.search.includes("accueil")) {
-    // on crée un tableau pour la partie medias (twitch)
-    // cette partie sera à mettre à jour dans une seconde version avec l'utilisation de OAuth token de twitch
-    const videos_twitch = [
-      { type: "video", value: "2423051942" },
-      { type: "channel", value: "uzui_tv_" }, // ajouter du contenu s'il y a besoin d'autres streamers
-    ];
+  // on vérifie que la place réservée pour twitch existe
+  const twitch_embed = document.getElementById("twitch-embed");
 
-    // on récupère le container des vidéos twitch
-    const container = document.getElementById("twitch_videos");
+  if (twitch_embed) {
+    const bouton_twitch = document.querySelector("#activer_twitch")
+    bouton_twitch.addEventListener("click", () => {
+      // on cache le bouton au clic
+      bouton_twitch.classList.add("cache");
+      // on crée le script twitch 
+      const script = document.createElement("script");
+      script.src = "https://player.twitch.tv/js/embed/v1.js";
+      script.onload = () => {
+        const lecteur = new Twitch.Player("twitch-embed", {
+          video: "2419639839",
+          muted: true,
+        });
 
-    videos_twitch.forEach((video, index) => {
-      // on donne un id à chaque lecteur
-      const id_lecteur = `lecteur_twitch_${index}`;
-
-      // Crée une div pour chaque lecteur
-      const div_lecteur = document.createElement("div");
-      div_lecteur.id = id_lecteur;
-      div_lecteur.classList.add("lecteur_twitch");
-      container.appendChild(div_lecteur);
-
-      // Crée le lecteur Twitch
-      const options = {
-        parent: ["localhost"], // changer pour le nom du site lors de la mise en production
+        lecteur.addEventListener(Twitch.Player.READY, () => {
+          lecteur.pause(); // pas de lecture automatique
+        });
       };
-
-      if (video.type === "channel") {
-        options.channel = video.value;
-      } else if (video.type === "video") {
-        options.video = video.value;
-      }
-
-      const lecteur = new Twitch.Player(id_lecteur, options);
-
-      lecteur.addEventListener(Twitch.Player.READY, () => {
-        lecteur.setMuted(true); // vidéo mutée par défaut
-        lecteur.pause(); // pas de lecture automatique
-      });
+      document.head.appendChild(script);
     });
   }
-
   // -----------------------boutons d'édition de la page de profil---------------------
-  // on vérifie qu'on est sur la page de profil
-  if (
-    window.location.search.includes("profil") ||
-    window.location.search.includes("connexion")
-  ) {
-    // selection des boutons "editer"
-    const formulaire = document.querySelectorAll(".editer");
+  // selection des boutons "editer"
+  const formulaire = document.querySelectorAll(".editer");
 
-    // ouverture et fermeture des formulaires
-    formulaire.forEach((button) => {
-      button.addEventListener("click", function () {
-        const id = button.getAttribute("data-id");
-        const type = button.getAttribute("data-type");
-        afficherFormulaireEdition(id, type);
-      });
+  // ouverture et fermeture des formulaires
+  formulaire.forEach((button) => {
+    button.addEventListener("click", function () {
+      const id = button.getAttribute("data-id");
+      const type = button.getAttribute("data-type");
+      afficherFormulaireEdition(id, type);
     });
-  }
+  });
 
   // ------------------boutons d'affichage de formulaire pour les commentaires--------------
   if (window.location.search.includes("candidatures")) {
-    const formulaire = document.querySelectorAll(".commenter");
+    const commentaire = document.querySelectorAll(".commenter");
 
-    formulaire.forEach((button) => {
+    commentaire.forEach((button) => {
       button.addEventListener("click", function () {
         const id = button.getAttribute("data-id");
         afficherFormulaireCommentaire(id);
@@ -111,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const boutons_voir = document.querySelectorAll(".visualiser_personnage");
 
     // on récupère les information du champ sur lequel sera mis la visualisation du personnage
-    const voir_personnage = document.getElementById("visualisation_personnage");
+    const voir_personnage = document.querySelector("#visualisation_personnage");
     const nom_personnage = voir_personnage.querySelector(".nom_personnage");
     const race_personnage = voir_personnage.querySelector(".race_personnage");
     const classe_personnage =
@@ -155,6 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
           ).value;
           document.querySelector(".image_personnage").src = imageData;
           image_personnage.style.display = "block";
+          image_personnage.alt = nom_personnage.textContent;
           if (imageData) {
             image_personnage.src = imageData;
           }

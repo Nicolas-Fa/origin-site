@@ -26,10 +26,6 @@
 }
 
 /* ---------------------------------------Reset------------------------------------------- */
-body {
-  background-color: #0f151b;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -46,7 +42,8 @@ ul {
 }
 
 body {
-  /* background-color: var(--fond); */
+  background-color: #0f151b;
+  height: 100vh;
   background-size: cover;
   background-clip: content-box;
   background-attachment: fixed;
@@ -76,6 +73,9 @@ h4 {
   padding: 16px;
 }
 
+main {
+  height: auto;
+}
 /* -----------------------------------Header---------------------------------------------- */
 
 nav {
@@ -208,13 +208,26 @@ h1 {
   margin-top: 16px;
 }
 
+#inscription form p {
+  margin: 8px 0;
+}
+
+#inscription form a {
+  color: var(--content_color);
+  text-decoration: underline;
+}
+
 /* ---------------------------------------Page Accueil------------------------------------ */
 img {
   max-width: 500px;
   width: 100%;
 }
 
-hgroup h1 {
+#communication .progression {
+  max-width: 90%;
+}
+
+.progression section h1 {
   margin-bottom: 24px;
 }
 
@@ -239,35 +252,35 @@ figure img {
   width: 100%;
 }
 
-hgroup {
+.progression section {
   margin-bottom: 16px;
 }
 
-hgroup h2,
-hgroup h3,
-hgroup h4 {
+.progression section h2 {
   font-size: 21px;
   margin-top: 16px;
   margin-bottom: 8px;
 }
 
-hgroup p {
+.progression section p {
   margin: 8px 0;
 }
 
 #medias {
+  max-width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-content: center;
-  width: 100%;
   height: auto;
 }
 
-#twitch_videos {
+#twitch-embed {
   display: none;
 }
 
 #liste_roster {
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -528,6 +541,24 @@ fieldset.fieldset_profil input {
   margin: 8px 0;
 }
 
+/* ------------------------------------Regles de la communauté------------------ */
+.regles {
+  color: var(--content_color);
+}
+
+.regles h1,
+h2 {
+  color: var(--text_color);
+  text-align: center;
+}
+
+.regles section {
+  margin: 16px 0;
+}
+
+.regles p, li {
+  margin: 16px 0;
+}
 /* ------------------------------------BACK OFFICE------------------------------ */
 .back {
   background-color: #d9d9d9;
@@ -556,7 +587,9 @@ fieldset.fieldset_profil input {
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .back #utilisateurs .utilisateur {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -565,10 +598,19 @@ fieldset.fieldset_profil input {
   padding: 16px;
 }
 
-.back #utilisateurs .utilisateur form{
-margin: 8px;
+.back #utilisateurs .utilisateur form {
+  margin: 8px;
 }
 
+/* ------------------------------------Footer----------------------------------- */
+.footer p {
+  padding: 24px 0;
+  text-align: center;
+}
+
+.footer a {
+  color: var(--content_color);
+}
 /* ------------------------------------RESPONSIVE------------------------------- */
 
 /* menu nav */
@@ -597,8 +639,7 @@ margin: 8px;
     width: 125px;
   }
 
-  hgroup h3,
-  hgroup h4 {
+  .progression section h2 {
     font-size: 26px;
   }
 
@@ -647,11 +688,12 @@ margin: 8px;
   }
 
   #communication .progression {
+    max-width: 100%;
+    width: 100%;
     padding: 16px 0 0 0;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    width: 100%;
     border-right: 1px solid var(--text_color);
   }
 
@@ -695,10 +737,10 @@ margin: 8px;
     width: 100%;
   }
 
-  #twitch_videos {
+  #twitch-embed {
     display: block;
   }
-  #twitch_videos iframe {
+  #twitch-embed iframe {
     width: 100%;
   }
   #liste_roster {
@@ -706,6 +748,20 @@ margin: 8px;
   }
 
   /* -------------------------PROFIL------------------------------- */
+  #mes_personnages {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #mes_personnages .liste_personnages {
+    width: 100%;
+    max-width: 50%;
+  }
+
+  #mes_personnages .visualisation_personnage {
+    text-align: center;
+  }
 
   #reglages_compte {
     flex-direction: row;
@@ -755,5 +811,10 @@ margin: 8px;
   #liste_candidats .candidature button {
     width: max-content;
     align-self: center;
+  }
+
+  /* -------------back utilisateurs */
+  .back #utilisateurs .utilisateur {
+    width: 30%;
   }
 }

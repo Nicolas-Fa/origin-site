@@ -6,7 +6,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     die('Erreur : ' . basename(__FILE__));
 }
 ?>
-<main>
+<main class="container">
     <section id="inscription">
         <?php if (isset($message)) echo $message; ?>
         <h1>INSCRIPTION</h1>
@@ -14,7 +14,8 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
             <p><input type="text" name="pseudo" value="<?= isset($_POST['pseudo']) ? htmlspecialchars($_POST['pseudo']) : '' ?>" placeholder="Votre Pseudo" required></p>
             <p><input type="email" name="email" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>" placeholder="Votre Email" required></p>
             <p><input type="password" name="mot_de_passe" placeholder="Mot de passe" required></p>
-            <p><button type="submit" class="bouton">S'inscrire</button></p>
+            <p>En m'inscrivant je m'engage à respecter les <a href="./?action=regles">règles de la communauté</a></p>
+            <p><button type="submit" class="bouton" aria-label="S'inscrire">S'inscrire</button></p>
         </form>
     </section>
 </main>

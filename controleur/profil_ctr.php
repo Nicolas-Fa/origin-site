@@ -59,10 +59,10 @@ require_once RACINE . "/modele/supprimer_bdd.inc.php";
     // on peut ajouter un nouveau personnage.....
     if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["creation_pseudo"], $_POST["creation_royaume"])) {
         // récupération des données du formulaire PÖST
-        $creer_pseudo_personnage = $_POST["creation_pseudo"];
-        $creer_royaume_personnage = $_POST["creation_royaume"];
+        $pseudo_personnage = $_POST["creation_pseudo"];
+        $royaume_personnage = $_POST["creation_royaume"];
         // on insère le nouveau personnage en base de données
-        $creer_personnage = ajouterPersonnage($creer_pseudo_personnage, $creer_royaume_personnage, $id_membre);
+        $creer_personnage = ajouterPersonnage($pseudo_personnage, $royaume_personnage, $_SESSION["id_membre"]);
         $_SESSION["message"] = "Le personnage a bien été enregistré";
         // on redirige vers la même page pour éviter une nouvelle soumission
         header("Location: index.php?action=profil");

@@ -14,7 +14,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 <body>
     <header>
         <a href="?action=accueil"><img class="logo_origin" src="public/images/logo.webp" alt="Logo de la guilde Origin"></a>
-        <!----------------------------------Menu navigation------------------------------------------>
+        <!-- Menu navigation -->
         <nav class="navigation">
             <div id="burger">
                 <a href="#" aria-label="Menu déroulant"><i class="fa-solid fa-bars"></i></a>

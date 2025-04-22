@@ -18,14 +18,14 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                     <?php $id = $id_personnage[$i]["id_personnage"]; ?>
                     <li>
                         <p><?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]), " - ", ucfirst($royaume_personnage[$i]["royaume"]); ?></p>
-                        <!------------------------------Formulaires de modification---------------------------------->
+                        <!-- Formulaires de modification -->
                         <!-- Bouton edition -->
                         <div class="boutons_edition">
                             <button class="visualiser_personnage bouton" data-pseudo="<?= lcfirst($pseudo_personnage[$i]["pseudo_personnage"]); ?>" data-royaume="<?= lcfirst($royaume_personnage[$i]["royaume"]); ?>" data-id="<?= $id ?>" aria-label="Voir le personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">Voir le personnage</button>
 
                             <!-- Bouton edition du pseudo personnage -->
                             <button class="editer bouton" data-id="<?= $id; ?>" data-type="pseudo" aria-label="Editer le pseudo du personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">Éditer le pseudo</button>
-                            
+
                             <!-- Bouton edition du royaume -->
                             <button class="editer bouton" data-id="<?= $id; ?>" data-type="royaume" aria-label="Editer le royaume du personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">Éditer le royaume</button>
 
@@ -42,7 +42,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                                 <input type="text" name="nouveau_royaume" placeholder="Nouveau royaume" aria-label="Nouveau royaume de votre personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">
                                 <button class="bouton" type="submit" name="valider_edition" aria-label="Bouton de validation : Nouveau royaume de votre personnage <?= ucfirst($pseudo_personnage[$i]["pseudo_personnage"]) ?>">Valider</button>
                             </form>
-                            
+
                             <!-- partie suppression de personnage -->
                             <form action="./?action=profil" method="POST" onsubmit="return confirm('Confirmer la suppression? (cette action est irréversible)')">
                                 <input type="hidden" name="id_personnage_a_supprimer" value="<?= $id; ?>">
@@ -66,7 +66,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
             <h3 class="nom_personnage"></h3>
             <p class="race_personnage"></p>
             <p class="classe_personnage"></p>
-            <img class="image_personnage">
+            <img class="image_personnage" alt="">
             <p class="erreur_personnage"></p>
         </div>
     </section>
@@ -90,9 +90,9 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
             </fieldset>
         </form>
     </section>
-    <!----------------------------------------Modification du profil--------------------------------------------->
+    <!-- Modification du profil -->
 
-    <!----------------------------------------Modification du pseudo--------------------------------------------->
+    <!-- Modification du pseudo -->
     <section id="reglages_compte">
         <div class="edition_pseudo_compte">
             <button class="editer bouton" data-id="<?= $id_membre; ?>" data-type="pseudo_compte" aria-label="Editer votre pseudo">Éditer votre pseudo</button>
@@ -108,7 +108,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                 }
                 ?></p>
         </div>
-        <!--------------------------------------Modification du mot de passe------------------------------------->
+        <!-- Modification du mot de passe -->
         <div class="edition_mot_de_passe">
             <button class="editer bouton" data-id="<?= $id_membre; ?>" data-type="changer_mdp" aria-label="Changer le mot de passe de votre compte">Changer le mot de passe</button>
             <form action="./?action=profil" method="POST" id="editer_changer_mdp_<?= $id_membre ?>" class="formulaire_edition cache" onsubmit="return confirm('Voulez vous vraiment modifier votre mot de passe?')">
@@ -124,7 +124,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                 ?></p>
         </div>
 
-        <!--------------------------------------Suppression du profil-------------------------------------------->
+        <!-- Suppression du profil -->
         <div class="supprimer_profil">
             <form action="./?action=profil" method="post" onsubmit="return confirm('Voulez vous vraiment supprimer votre compte? (cette action est irréversible)')">
                 <input type="hidden" name="suppression_compte" value="<?= $id_membre; ?>">

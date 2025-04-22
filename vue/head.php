@@ -18,9 +18,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/solid.min.css">
     </noscript>
 
-    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/css/style-min.css">
+    <link rel="icon" href="public/images/logo.webp">
     <title><?= $titre ?></title>
-    <script src="https://player.twitch.tv/js/embed/v1.js"></script>
-    <script type="module" src="public/js/script.js"></script>
-    <script type="module" src="public/js/token.js"></script>
+    <script type="module" src="public/js/script-min.js"></script>
+    <script type="module" src="public/js/token-min.js"></script>
 </head>

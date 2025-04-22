@@ -50,6 +50,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["moderateur"])) {
     exit;
 }
 
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["supprimer"])) {
+    supprimerMembre($_POST["supprimer_membre"]);
+
+    $_SESSION["message_modification"] = "Utilisateur supprimé";
+    header("Location: index.php?action=gestion_utilisateurs");
+    exit;
+}
+
 $titre = "Origin - Modération des membres";
 include RACINE . "/vue/header.php";
 include RACINE . "/vue/utilisateurs_back.php";

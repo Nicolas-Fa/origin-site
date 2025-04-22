@@ -135,7 +135,7 @@ function ajouterPersonnage($pseudo_perso, $royaume, $id_membre)
             throw new Exception("Le pseudo de votre personnage ne peut pas être vide.");
         }
 
-        $royaume = trim($royaume);
+        $royaume = htmlspecialchars(trim($royaume));
         if ($royaume === '') {
             throw new Exception("Le royaume de votre personnage ne peut pas être vide.");
         }

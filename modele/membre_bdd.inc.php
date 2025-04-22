@@ -151,7 +151,7 @@ function recupererRoleMembre($role)
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("SELECT `role`, `pseudo` FROM `membre` WHERE role=:role");
+        $requete = $connexion->prepare("SELECT `role`, `pseudo`, `id_membre` FROM `membre` WHERE role=:role");
         $requete->bindValue(":role", ucfirst($role), PDO::PARAM_STR);
         $requete->execute();
 

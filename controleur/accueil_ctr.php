@@ -18,6 +18,7 @@ if (estConnecte()) {
 }
 
 $titan = recupererRoleMembre("Titan");
+$moderateur = recupererRoleMembre("Moderateur");
 
 // on va chercher les images
 $chemin_images = RACINE . "/public/images";
