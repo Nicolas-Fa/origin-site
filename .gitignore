@@ -3,3 +3,5 @@
 /public/images/iloveimg-converted.zip
 /public/images/img_jpg
 origin-site.code-workspace
+.env
+error_log

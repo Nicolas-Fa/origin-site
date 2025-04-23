@@ -620,7 +620,7 @@ button.back:hover {
 }
 
 .back #utilisateurs .utilisateur form {
-  margin: 8px;
+  margin: 8px 0;
 }
 
 /* ------------------------------------Footer----------------------------------- */

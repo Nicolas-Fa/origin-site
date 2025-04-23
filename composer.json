@@ -1,14 +1,14 @@
 {
-    "name": "kerx22/origin-site",
-    "description": "Site web de la guilde Origin",
-    "type": "website",
-    "authors": [
-        {
-            "name": "Nicolas Fayolle",
-            "email": "nicolasfayolle@yahoo.fr"
-        }
-    ],
-    "require": {
-        "vlucas/phpdotenv": "^5.6"
+  "name": "kerx22/origin-site",
+  "description": "Site web de la guilde Origin",
+  "type": "website",
+  "authors": [
+    {
+      "name": "Nicolas Fayolle",
+      "email": "nicolasfayolle@yahoo.fr"
     }
+  ],
+  "require": {
+    "vlucas/phpdotenv": "^5.6"
+  }
 }

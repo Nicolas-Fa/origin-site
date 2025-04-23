@@ -17,7 +17,6 @@
     <noscript>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/solid.min.css">
     </noscript>
-
     <link rel="stylesheet" href="public/css/style-min.css">
     <link rel="icon" href="public/images/logo.webp">
     <title><?= $titre ?></title>
