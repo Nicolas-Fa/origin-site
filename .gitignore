@@ -5,3 +5,5 @@
 origin-site.code-workspace
 .env
 error_log
+.env
+public/js/vars.js
