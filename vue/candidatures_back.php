@@ -1,9 +1,10 @@
 <main class="container back">
     <p class="message">
-        <?php if (isset($_SESSION["message_commentaire"])) {
-            echo ($_SESSION["message_commentaire"]);
-            unset($_SESSION["message_commentaire"]);
-        } ?></p>
+        <?php if (isset($_SESSION["message"])) {
+            echo ($_SESSION["message"]);
+            unset($_SESSION["message"]);
+        } ?>
+    </p>
 
     <h1>Gestion des candidatures</h1>
     <section id="liste_candidats">
@@ -28,9 +29,9 @@
                         <input type="hidden" name="refuser_postulation" value="<?= $postulation["id_postulation"]; ?>">
                         <button class="bouton" type="submit" name="refuser" aria-label="Bouton de suppression de postulation">Refuser la postulation</button>
                     </form>
-                    <form action="./?action=moderation_candidatures" method="POST" onsubmit="return confirm('Confirmer la suppression? (cette action est irréversible)')">
+                    <form action="./?action=moderation_candidatures" method="POST">
                         <input type="hidden" name="supprimer_postulation" value="<?= $postulation["id_postulation"]; ?>">
-                        <button class="bouton" type="submit" name="supprimer" aria-label="Bouton de suppression de postulation">Supprimer la postulation</button>
+                        <button class="bouton supprimer" type="submit" name="supprimer" aria-label="Bouton de suppression de postulation"><i class="fa-solid fa-trash"></i></button>
                     </form>
                 </div>
 
@@ -50,23 +51,18 @@
                         endif;
                     }
                     ?>
-                    <form action="./?action=moderation_candidatures" method="post" class="voter">
+                    <form action="" method="post" class="voter">
                         <button type="submit" class="voter_pour" data-id="<?= $postulation["id_postulation"]; ?>" aria-label="Pouce vers le haut : voter pour"><i class="fa-regular fa-thumbs-up"></i></button>
                         <input type="hidden" name="voter_pour" value="<?= $postulation["id_postulation"]; ?>">
                         <?= $vote_pour ?>
                     </form>
-                    <form action="./?action=moderation_candidatures" method="post" class="voter">
+                    <form action="" method="post" class="voter">
                         <button type="submit" class="voter_contre" data-id="<?= $postulation["id_postulation"]; ?>" aria-label="Pouce vers le bas : voter contre"><i class="fa-regular fa-thumbs-down"></i></button>
                         <?= $vote_contre ?>
                         <input type="hidden" name="voter_contre" value="<?= $postulation["id_postulation"]; ?>">
                     </form>
                 </div>
-                <p class="message">
-                    <?php if (isset($_SESSION["message_vote"])) {
-                        echo ($_SESSION["message_vote"]);
-                        unset($_SESSION["message_vote"]);
-                    }
-                    ?></p>
+
                 <div class="commentaires">
                     <h3>Commentaires :</h3>
                     <?php
@@ -83,9 +79,9 @@
                                 </form>
 
                             <?php endif; ?>
-                            <form action="./?action=moderation_candidatures" method="POST" onsubmit="return confirm('Confirmer la suppression? (cette action est irréversible)')">
+                            <form action="./?action=moderation_candidatures" method="POST">
                                 <input type="hidden" name="supprimer_commentaire" value="<?= $commentaire["id_commentaire"]; ?>">
-                                <button class="bouton" type="submit" name="supprimer" aria-label="Bouton de suppression de commentaire">Supprimer le commentaire</button>
+                                <button class="bouton supprimer" type="submit" name="supprimer" aria-label="Bouton de suppression de commentaire"><i class="fa-solid fa-trash"></i></button>
                             </form>
                         </div>
                     <?php endforeach; ?>

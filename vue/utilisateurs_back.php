@@ -10,10 +10,12 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 <main class="container back">
 
     <h1 class="titre">Liste des utilisateurs</h1>
-    <p class="message"><?php if (isset($_SESSION["message_modification"])) {
-                            echo ($_SESSION["message_modification"]);
-                            unset($_SESSION["message_modification"]);
-                        } ?></p>
+    <p class="message">
+        <?php if (isset($_SESSION["message"])) {
+            echo ($_SESSION["message"]);
+            unset($_SESSION["message"]);
+        } ?>
+    </p>
     <section id="utilisateurs">
         <?php foreach ($utilisateurs as $utilisateur) : if ($utilisateur["pseudo"] !== $_SESSION["pseudo"]) : ?>
                 <div class="utilisateur">
@@ -31,15 +33,15 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                             <button class="bouton" type="submit" name="titan" aria-label="Passer le membre au grade de titan">Titan</button>
                         </form>
                     <?php endif;
-                    if ($_SESSION["role"] == "Admin") : ?>
+                    if ($_SESSION["role"] == "Admin" && $utilisateur["role"] !== "Moderateur") : ?>
                         <form action="./?action=gestion_utilisateurs" method="POST">
                             <input type="hidden" name="pseudo_membre" value="<?= $utilisateur["pseudo"] ?>">
                             <button class="bouton" type="submit" name="moderateur" aria-label="Passer le membre au grade de modérateur">Modérateur</button>
                         </form>
                     <?php endif; ?>
-                    <form action="./?action=gestion_utilisateurs" method="POST" onsubmit="return confirm('Confirmer la suppression? (cette action est irréversible)')">
+                    <form action="./?action=gestion_utilisateurs" method="POST">
                         <input type="hidden" name="supprimer_membre" value="<?= $utilisateur["id_membre"] ?>">
-                        <button class="bouton" type="submit" name="supprimer" aria-label="Supprimer le membre">Supprimer</button>
+                        <button class="bouton supprimer" type="submit" name="supprimer" aria-label="Supprimer le membre"><i class="fa-solid fa-trash"></i></button>
                     </form>
                 </div>
         <?php endif;

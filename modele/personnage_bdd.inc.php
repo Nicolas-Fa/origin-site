@@ -48,7 +48,7 @@ function recupererIdPersonnageParIdMembre($id_membre)
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("SELECT `id_personnage` FROM `personnage` WHERE id_membre=:id_membre ORDER BY `id_personnage`");
+        $requete = $connexion->prepare("SELECT `id_personnage` FROM `personnage` WHERE id_membre=:id_membre");
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->execute();
 
@@ -75,7 +75,7 @@ function recupererPseudoPersonnageParIdMembre($id_membre)
     try {
         $connexion = connexionBdd();
 
-        $requete = $connexion->prepare("SELECT `pseudo_personnage` FROM `personnage` WHERE id_membre=:id_membre ORDER BY `pseudo_personnage` DESC");
+        $requete = $connexion->prepare("SELECT `pseudo_personnage` FROM `personnage` WHERE id_membre=:id_membre");
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->execute();
 

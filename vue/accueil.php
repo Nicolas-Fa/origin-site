@@ -70,7 +70,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                 loading="lazy"
                 class="videos">
             </iframe>
-            <button id="activer_twitch" class="bouton">Nos streamers Twitch</button>
+            <button id="activer_twitch" class="bouton actif">Nos streamers Twitch</button>
             <div id="twitch-embed"></div>
         </div>
     </div>

@@ -30,7 +30,7 @@ if (
         $_SESSION["id_membre"],
         $_POST["commentaire_postulation"]
     );
-    $_SESSION["message_commentaire"] = "Votre commentaire a bien été publié";
+    $_SESSION["message"] = "Votre commentaire a bien été publié";
     // on redirige vers la même page pour éviter une nouvelle soumission
     header("Location: index.php?action=moderation_candidatures");
     exit;
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["contenu_edition"])) {
         $_POST["contenu_edition"],
         $_POST["editer_commentaire"]
     );
-    $_SESSION["message_commentaire"] = "Votre commentaire a bien été modifié";
+    $_SESSION["message"] = "Votre commentaire a bien été modifié";
     // on redirige vers la même page pour éviter une nouvelle soumission
     header("Location: index.php?action=moderation_candidatures");
     exit;
@@ -70,14 +70,14 @@ foreach ($postulations as $postulation) {
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_pour"])) {
     enregister_vote(true, $_POST["voter_pour"], $_SESSION["id_membre"]);
-    $_SESSION["message_vote"] = "Votre vote a bien été enregistré";
+    $_SESSION["message"] = "Votre vote a bien été enregistré";
     header("Location: index.php?action=moderation_candidatures");
     exit;
 }
 // ou contre
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_contre"])) {
     enregister_vote(false, $_POST["voter_contre"], $_SESSION["id_membre"]);
-    $_SESSION["message_vote"] = "Votre vote a bien été enregistré";
+    $_SESSION["message"] = "Votre vote a bien été enregistré";
     header("Location: index.php?action=moderation_candidatures");
     exit;
 }
@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_contre"])) {
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["supprimer_postulation"])) {
     supprimerPostulation($_POST["supprimer_postulation"]);
 
-    $_SESSION["message_suppression"] = "Postulation supprimée";
+    $_SESSION["message"] = "Postulation supprimée";
     header("Location: index.php?action=moderation_candidatures");
     exit;
 }
@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["supprimer_postulation
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["supprimer_commentaire"])) {
     supprimerCommentaire($_POST["supprimer_commentaire"]);
 
-    $_SESSION["message_suppression"] = "Commentaire supprimé";
+    $_SESSION["message"] = "Commentaire supprimé";
     header("Location: index.php?action=moderation_candidatures");
     exit;
 }
@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["supprimer_commentaire
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["refuser_postulation"])) {
     editerStatutPostulation("Refusee", $_POST["refuser_postulation"]);
 
-    $_SESSION["message_statut"] = "Postulation refusée";
+    $_SESSION["message"] = "Postulation refusée";
     header("Location: index.php?action=moderation_candidatures");
     exit;
 }
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["refuser_postulation"]
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["accepter_postulation"])) {
     editerStatutPostulation("Validee", $_POST["accepter_postulation"]);
 
-    $_SESSION["message_statut"] = "Postulation refusée";
+    $_SESSION["message"] = "Postulation refusée";
     header("Location: index.php?action=moderation_candidatures");
     exit;
 }

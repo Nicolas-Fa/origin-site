@@ -23,6 +23,7 @@
   --text_color: #19d3e2;
   --content_color: #e9e9e9;
   --hover: #ffffff;
+  --font: "Exo 2";
 }
 
 /* ---------------------------------------Reset------------------------------------------- */
@@ -223,8 +224,8 @@ img {
   width: 100%;
 }
 
-#communication .progression {
-  max-width: 90%;
+#communication {
+  max-width: 100%;
 }
 
 .progression section h1 {
@@ -267,12 +268,14 @@ figure img {
 }
 
 #medias {
-  max-width: 90%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-content: center;
   height: auto;
+}
+#activer_twitch {
+  display: none;
 }
 
 #twitch-embed {
@@ -294,11 +297,11 @@ figure img {
 #liste_roster ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 #liste_roster ul li {
-  padding: 0 8px;
+  padding: 0 24px;
 }
 /* ---------------------------------------Postuler---------------------------------------- */
 #formulaire_postulation {
@@ -310,6 +313,8 @@ figure img {
 }
 
 .champ_formulaire_postulation textarea {
+  font-family: var(--font);
+  font-size: 16px;
   border-color: var(--text_color);
   background-color: var(--fond);
   color: var(--content_color);
@@ -336,7 +341,7 @@ figure img {
   width: 100%;
 }
 
-p .message {
+p.message {
   text-align: center;
   font-size: 21px;
   margin: 16px 0;
@@ -353,7 +358,6 @@ p .message {
 section .candidature {
   display: flex;
   flex-direction: column;
-  text-align: center;
   border-bottom: 1px solid var(--text_color);
 }
 
@@ -370,6 +374,8 @@ section .candidature {
 }
 
 .candidature textarea {
+  font-family: var(--font);
+  font-size: 16px;
   border-color: var(--text_color);
   background-color: var(--fond);
   color: var(--content_color);
@@ -402,9 +408,6 @@ section .candidature {
   color: var(--text_color);
 }
 
-.candidature .votes form {
-  width: px;
-}
 .candidature .commentaires button {
   margin-top: 8px;
 }
@@ -482,8 +485,9 @@ h2 {
   margin-bottom: 4px;
 }
 
-button:hover {
+.bouton:hover {
   border-color: var(--hover);
+  color: var(--hover);
   cursor: pointer;
 }
 
@@ -528,11 +532,10 @@ fieldset.fieldset_profil input {
 }
 
 #reglages_compte {
-  margin: 16px 0;
+  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-top: 1px solid var(--text_color);
   border-bottom: 1px solid var(--text_color);
   padding: 16px 0;
 }
@@ -556,15 +559,20 @@ h2 {
   margin: 16px 0;
 }
 
-.regles p, li {
+.regles p,
+.regles li {
   margin: 16px 0;
 }
 /* ------------------------------------BACK OFFICE------------------------------ */
 .back {
   background-color: #d9d9d9;
+  color: black;
 }
 
-.back h1,
+.back h1 {
+  color: black;
+  border-color: black;
+}
 .back h2,
 .back h3,
 .back h4,
@@ -576,6 +584,19 @@ h2 {
   background-color: #d9d9d9;
   color: black;
   border-color: black;
+}
+
+.back .candidature .votes .voter .voter_pour i,
+.back .candidature .votes .voter .voter_contre i {
+  color: black;
+}
+
+.back .candidature {
+  border-color: black;
+}
+
+button.back:hover {
+  border-color: var(--text_color);
 }
 
 .back .candidature .votes .voter button {
@@ -681,6 +702,7 @@ h2 {
 
   /* --------------------------------ACCUEIL----------------------- */
   #communication {
+    max-width: 100%;
     display: grid;
     grid-template-columns: 75% 25%;
     margin-bottom: 16px;
@@ -735,6 +757,10 @@ h2 {
     border: none;
     margin: 16px 0;
     width: 100%;
+  }
+
+  #activer_twitch {
+    display: block;
   }
 
   #twitch-embed {
@@ -815,6 +841,6 @@ h2 {
 
   /* -------------back utilisateurs */
   .back #utilisateurs .utilisateur {
-    width: 30%;
+    width: 14%;
   }
 }

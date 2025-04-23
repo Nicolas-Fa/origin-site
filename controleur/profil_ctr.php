@@ -105,7 +105,7 @@ require_once RACINE . "/modele/supprimer_bdd.inc.php";
 
         // on remplace le royaume dans la base de données
         $changer_royaume = editerRoyaumePersonnage($nouveau_royaume, $id_personnage);
-        $_SESSION["message_modification"] = "Royaume modifié avec succès";
+        $_SESSION["message"] = "Royaume modifié avec succès";
 
         // on redirige vers la même page
         header("Location: index.php?action=profil");
@@ -120,7 +120,7 @@ require_once RACINE . "/modele/supprimer_bdd.inc.php";
 
         // on remplace le pseudo du personnage dans la base de données
         $changer_pseudo_perso = editerPseudoPersonnage($nouveau_pseudo_perso, $id_personnage);
-        $_SESSION["message_modification"] = $changer_pseudo_perso;
+        $_SESSION["message"] = $changer_pseudo_perso;
 
         // on redirige vers la même page
         header("Location: index.php?action=profil");
@@ -134,7 +134,7 @@ require_once RACINE . "/modele/supprimer_bdd.inc.php";
         
         // on supprime le personnage dans la base de données
         $personnage_supprime = supprimerPersonnage($personnage_a_supprimer);
-        $_SESSION["message_suppression"] = $personnage_supprime;
+        $_SESSION["message"] = $personnage_supprime;
 
         // on redirige vers la même page
         header("Location: index.php?action=profil");

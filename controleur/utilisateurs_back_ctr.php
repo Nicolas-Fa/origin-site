@@ -29,7 +29,7 @@ foreach ($utilisateurs as $utilisateur) {
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["membre"])) {
     editerRoleMembre("Membre",$_POST["pseudo_membre"]);
 
-    $_SESSION["message_modification"] = "L'utilisateur a maintenant le role Membre";
+    $_SESSION["message"] = "L'utilisateur a maintenant le role Membre";
     header("Location: index.php?action=gestion_utilisateurs");
     exit;
 }
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["membre"])) {
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["titan"])) {
     editerRoleMembre("Titan",$_POST["pseudo_membre"]);
 
-    $_SESSION["message_modification"] = "L'utilisateur a maintenant le role Titan";
+    $_SESSION["message"] = "L'utilisateur a maintenant le role Titan";
     header("Location: index.php?action=gestion_utilisateurs");
     exit;
 }
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["titan"])) {
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["moderateur"])) {
     editerRoleMembre("Moderateur",$_POST["pseudo_membre"]);
 
-    $_SESSION["message_modification"] = "L'utilisateur a maintenant le role modérateur";
+    $_SESSION["message"] = "L'utilisateur a maintenant le role modérateur";
     header("Location: index.php?action=gestion_utilisateurs");
     exit;
 }
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["moderateur"])) {
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["supprimer"])) {
     supprimerMembre($_POST["supprimer_membre"]);
 
-    $_SESSION["message_modification"] = "Utilisateur supprimé";
+    $_SESSION["message"] = "Utilisateur supprimé";
     header("Location: index.php?action=gestion_utilisateurs");
     exit;
 }

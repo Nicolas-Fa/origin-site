@@ -26,7 +26,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                 <?php if (isset($_SESSION["email"])) : ?>
                     <li><a href="?action=profil" aria-label="Lien vers la page de profil">Profil</a></li>
                 <?php endif;
-                if (isset($_SESSION["email"]) && ($_SESSION["role"] == "Membre")) : ?>
+                if (isset($_SESSION["email"]) && ($_SESSION["role"] == "Membre")): ?>
                     <li class="nav_visiteur"><a href="?action=postuler" aria-label="Lien vers le formulaire de postulation">Postuler</a></li>
                 <?php endif;
                 if (isset($_SESSION["email"]) && ($_SESSION["role"] == "Titan")): ?>

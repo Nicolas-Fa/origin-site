@@ -23,7 +23,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const bouton_twitch = document.querySelector("#activer_twitch")
     bouton_twitch.addEventListener("click", () => {
       // on cache le bouton au clic
-      bouton_twitch.classList.add("cache");
+      if (bouton_twitch && bouton_twitch.classList.contains("cache")) {
+        bouton_twitch.classList.replace("cache", "actif"); // on remplace "cache" par "actif"
+      } else {
+        bouton_twitch.classList.replace("actif", "cache"); // on remplace "actif" par "caché"
+      }
       // on crée le script twitch 
       const script = document.createElement("script");
       script.src = "https://player.twitch.tv/js/embed/v1.js";

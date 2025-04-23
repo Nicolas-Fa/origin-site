@@ -8,14 +8,14 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 ?>
 
 <main class="container regles">
-    <h1>Règles de la Communauté de la Guilde</h1>
+    <h1>Règles de la communauté et de la guilde</h1>
     <section>
         <h2>Introduction</h2>
         <p>Bienvenue chez Origin ! Nous avons à cœur de maintenir un environnement sain, respectueux et agréable pour tou·te·s nos membres. Afin de garantir une expérience optimale pour chacun·e, nous avons établi des règles de conduite claires. Le respect et la rigueur sont les fondements de notre communauté.</p>
     </section>
 
     <section>
-        <h2>Nos Valeurs</h2>
+        <h2>Nos valeurs</h2>
         <p>Notre guilde repose sur deux valeurs essentielles :</p>
         <ul>
             <li><strong>Respect</strong> : Nous sommes tou·te·s différent·e·s, nous ne sommes pas toujours d’accord, mais nous avons à cœur de considérer chacun·e de nos membres avec bienveillance et tolérance</li>
@@ -24,7 +24,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     </section>
 
     <section>
-        <h2>Règles de Comportement</h2>
+        <h2>Comportement</h2>
         <p>Voici les règles de conduite que chaque membre doit suivre :</p>
         <ul>
             <li><strong>Respectez les autres membres</strong> : Toute forme de racisme, d'insultes ou de dévalorisation d’un·e autre joueur·se est strictement interdite. Soyez courtois·e et traitez les autres comme vous aimeriez être traité·e.</li>
@@ -36,7 +36,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     </section>
 
     <section>
-        <h2>Sanctions en Cas de Non-Respect des Règles</h2>
+        <h2>Sanctions en cas de non-respect des règles</h2>
         <p>Le non-respect de ces règles de conduite entraînera des sanctions. Les sanctions peuvent inclure, mais ne se limitent pas à :</p>
         <ul>
             <li><strong>Avertissements</strong> : Les membres qui enfreignent ces règles pour la première fois recevront un avertissement. Si le comportement persiste, des sanctions plus sévères seront appliquées.</li>
