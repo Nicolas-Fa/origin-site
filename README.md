@@ -1,6 +1,6 @@
 # Origin - Projet de fin de formation Développeur Web Full-Stack
 
-Ce projet est un site de recrutement pour une guilde de joueurs de World of Warcraft 
+Ce projet est un site de recrutement pour une guilde de joueurs de World of Warcraft de haut niveau
 
 ## 🚀 Installation
 
