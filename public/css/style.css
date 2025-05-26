@@ -274,7 +274,7 @@ figure img {
   align-content: center;
   height: auto;
 }
-#activer_twitch {
+.actif {
   display: none;
 }
 
@@ -473,9 +473,7 @@ h2 {
 .cache {
   display: none;
 }
-.actif {
-  display: block;
-}
+
 
 .bouton {
   font-size: 14px;
@@ -762,9 +760,9 @@ button.back:hover {
     width: 100%;
   }
 
-  #activer_twitch {
+  .actif {
     display: block;
-  }
+  } 
 
   #twitch-embed {
     display: block;

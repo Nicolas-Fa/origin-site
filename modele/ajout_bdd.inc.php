@@ -58,7 +58,6 @@ function sInscrire($pseudo, $email, $pwd)
 {
     try {
         $connexion = connexionBdd();
-
         // on vérifie que l'email soit bien renseigné
         $email = trim($email);
         if ($email === '') {
