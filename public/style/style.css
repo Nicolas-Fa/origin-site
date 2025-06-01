@@ -1,0 +1,308 @@
+/* exo-2-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Exo 2";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../font/exo-2-v24-latin-regular.eot"); /* IE9 Compat Modes */
+  src: url("../font/exo-2-v24-latin-regular.eot?#iefix") format("embedded-opentype"), url("../font/exo-2-v24-latin-regular.woff2") format("woff2"), url("../font/exo-2-v24-latin-regular.woff") format("woff"), url("../font/exo-2-v24-latin-regular.ttf") format("truetype"), url("../font/exo-2-v24-latin-regular.svg#Exo2") format("svg"); /* Legacy iOS */
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text_color);
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+}
+
+body {
+  background-color: #0f151b;
+  height: 100vh;
+  background-size: cover;
+  background-clip: content-box;
+  background-attachment: fixed;
+  color: var(--text_color);
+  font-family: "Exo 2";
+  font-size: 16px;
+}
+
+p,
+h4 {
+  color: var(--content_color);
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.container {
+  background-color: var(--fond);
+  max-width: 85%;
+  width: 100%;
+  box-sizing: border-box;
+  justify-self: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+main {
+  height: auto;
+}
+
+nav {
+  font-size: 16px;
+  display: flex;
+}
+
+.logo_origin {
+  max-width: 66%;
+  width: 100%;
+}
+
+header {
+  max-width: 85%;
+  width: 100%;
+  box-sizing: border-box;
+  justify-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 16px auto;
+}
+
+header a {
+  max-width: 30%;
+  width: 100%;
+}
+
+.back {
+  background-color: #d9d9d9;
+}
+
+.navigation a:hover {
+  color: var(--hover);
+}
+
+.navigation {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.navigation a {
+  max-width: 100%;
+}
+
+.nav_liste {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: -moz-max-content;
+  width: max-content;
+  max-height: 0;
+  overflow: hidden;
+  background-color: #131313;
+  transition: max-height 0.5s ease-out;
+  z-index: 10;
+}
+
+.nav_liste.active {
+  max-height: 250px;
+}
+
+.nav_liste li a {
+  display: block;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #333;
+}
+
+#burger {
+  display: block;
+  cursor: pointer;
+  font-size: 40px;
+}
+
+main .container {
+  flex-direction: column;
+}
+
+.bouton {
+  font-size: 14px;
+  background-color: #222c35;
+  border: 1px solid #19d3e2;
+  border-radius: 5px;
+  font-family: "Exo 2";
+  color: #19d3e2;
+  padding: 8px;
+  margin-bottom: 4px;
+}
+.bouton:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+img {
+  max-width: 500px;
+  width: 100%;
+}
+
+#communication {
+  max-width: 100%;
+}
+
+.progression section h1 {
+  margin-bottom: 24px;
+}
+
+figure {
+  margin: 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 8px;
+  justify-content: center;
+}
+
+figure img:nth-child(odd) {
+  margin-right: 5%;
+}
+
+figure img:nth-child(even) {
+  margin-left: 5%;
+}
+
+figure img {
+  max-width: 120px;
+  width: 100%;
+}
+
+.progression section {
+  margin-bottom: 16px;
+}
+
+.progression section h2 {
+  font-size: 21px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.progression section p {
+  margin: 8px 0;
+}
+
+#medias {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  height: auto;
+}
+
+.actif {
+  display: none;
+}
+
+#twitch-embed {
+  display: none;
+}
+
+#liste_roster {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+#liste_roster h2 {
+  text-align: center;
+}
+
+#liste_roster ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#liste_roster ul li {
+  padding: 0 24px;
+}
+
+.back {
+  background-color: #d9d9d9;
+  color: black;
+}
+
+.back h1 {
+  color: black;
+  border-color: black;
+}
+
+.back h2,
+.back h3,
+.back h4,
+.back p {
+  color: black;
+}
+
+.back button {
+  background-color: #d9d9d9;
+  color: black;
+  border-color: black;
+}
+.back button:hover {
+  background-color: black;
+  color: #d9d9d9;
+  border-color: black;
+}
+
+.back .candidature .votes .voter .voter_pour i,
+.back .candidature .votes .voter .voter_contre i {
+  color: black;
+}
+
+.back .candidature {
+  border-color: black;
+}
+
+button.back:hover {
+  border-color: #19d3e2;
+}
+
+.back .candidature .votes .voter button {
+  background-color: #d9d9d9;
+}
+
+.back #utilisateurs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.back #utilisateurs .utilisateur {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  padding: 16px;
+}
+
+.back #utilisateurs .utilisateur form {
+  margin: 8px 0;
+}/*# sourceMappingURL=style.css.map */

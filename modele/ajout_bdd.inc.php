@@ -63,7 +63,7 @@ function sInscrire($pseudo, $email, $pwd)
         if ($email === '') {
             throw new Exception("L'email ne peut pas être vide.");
         }
-        // on vérifie que le pseudo soit bien renseigné
+        // on vérifie que le pseudo soit bien renseigné 
         $pseudo = htmlspecialchars(trim($pseudo));
         if ($pseudo === '') {
             throw new Exception("Le pseudo ne peut pas être vide.");

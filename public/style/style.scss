@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+@import "./commun/police";
+@import "./commun/reset";
+@import "./commun/variables";
+@import "./commun/page404";
+
+@import "./composants/header";
+@import "./composants/boutons";
+
+@import "./pages/accueil";
+@import "./pages/backoffice";
+@import "./pages/connexion";
+@import "./pages/inscription";
+@import "./pages/postulations";
+@import "./pages/profil";
+@import "./pages/regles";

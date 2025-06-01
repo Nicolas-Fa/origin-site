@@ -1,0 +1,145 @@
+nav {
+  font-size: 16px;
+  display: flex;
+}
+
+.logo_origin {
+  max-width: 66%;
+  width: 100%;
+}
+
+header {
+  max-width: 85%;
+  width: 100%;
+  box-sizing: border-box;
+  justify-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 16px auto;
+}
+
+header a {
+  max-width: 30%;
+  width: 100%;
+}
+
+.back {
+  background-color: #d9d9d9;
+}
+
+.navigation a:hover {
+  color: $hover;
+}
+
+.navigation {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.navigation a {
+  max-width: 100%;
+}
+
+.nav_liste {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: max-content;
+  max-height: 0;
+  overflow: hidden;
+  background-color: #131313;
+  transition: max-height 0.5s ease-out;
+  z-index: 10;
+}
+
+.nav_liste.active {
+  max-height: 250px;
+}
+
+.nav_liste li a {
+  display: block;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #333;
+}
+
+#burger {
+  display: block;
+  cursor: pointer;
+  font-size: 40px;
+}
+
+main .container {
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 17px;
+    max-width: 100%;
+  }
+
+  h1,
+  h2 {
+    font-size: 35px;
+  }
+
+  #connexion h1,
+  #inscription h1 {
+    border-top: none;
+  }
+
+  header a {
+    max-width: 250px;
+  }
+
+  a img.logo_origin {
+    justify-items: center;
+    width: 125px;
+  }
+
+  .progression section h2 {
+    font-size: 26px;
+  }
+
+  #burger {
+    display: none;
+  }
+
+  header {
+    max-width: 85%;
+    display: flex;
+    border-bottom: 1px solid $text_color;
+    align-items: center;
+    margin: 16px auto;
+  }
+
+  header .logo_origin {
+    max-width: 50%;
+    margin-bottom: 16px;
+  }
+
+  .nav_liste {
+    position: static;
+    flex-direction: row;
+    background-color: transparent;
+    max-height: none;
+    gap: 1rem;
+    transition: none;
+    margin-bottom: 16px;
+  }
+
+  .nav_liste li a {
+    padding: 0;
+    border: none;
+  }
+
+  .container {
+    padding: 16px;
+  }
+}

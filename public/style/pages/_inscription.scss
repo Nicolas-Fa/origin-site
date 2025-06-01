@@ -1,0 +1,21 @@
+#inscription {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#inscription h1 {
+  border-bottom: none;
+  border-top: 1px solid $text_color;
+  padding-top: 32px;
+  margin-top: 16px;
+}
+
+#inscription form p {
+  margin: 8px 0;
+}
+
+#inscription form a {
+  color: $content_color;
+  text-decoration: underline;
+}

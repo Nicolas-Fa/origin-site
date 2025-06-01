@@ -1,0 +1,146 @@
+img {
+  max-width: 500px;
+  width: 100%;
+}
+
+#communication {
+  max-width: 100%;
+}
+
+.progression section h1 {
+  margin-bottom: 24px;
+}
+
+figure {
+  margin: 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 8px;
+  justify-content: center;
+}
+
+figure img:nth-child(odd) {
+  margin-right: 5%;
+}
+figure img:nth-child(even) {
+  margin-left: 5%;
+}
+
+figure img {
+  max-width: 120px;
+  width: 100%;
+}
+
+.progression section {
+  margin-bottom: 16px;
+}
+
+.progression section h2 {
+  font-size: 21px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.progression section p {
+  margin: 8px 0;
+}
+
+#medias {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  height: auto;
+}
+.actif {
+  display: none;
+}
+
+#twitch-embed {
+  display: none;
+}
+
+#liste_roster {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+#liste_roster h2 {
+  text-align: center;
+}
+
+#liste_roster ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#liste_roster ul li {
+  padding: 0 24px;
+}
+
+@media screen and (min-width: 768px) {
+ #communication {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 75% 25%;
+    margin-bottom: 16px;
+    border-bottom: 1px solid $text_color;
+  }
+  #communication .progression {
+    max-width: 100%;
+    width: 100%;
+    padding: 16px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border-right: 1px solid $text_color;
+  }
+  #communication .progression figure {
+    width: 100%;
+  }
+  #communication .progression h2 {
+    width: 100%;
+  }
+  #communication .progression p {
+    padding-right: 16px;
+  }
+  #communication img:nth-child(odd) {
+    margin-right: 0;
+  }
+  #communication img:nth-child(even) {
+    margin-left: 0;
+  }
+  #communication img {
+    width: 12.5%;
+  }
+  #medias {
+    justify-content: center;
+    width: auto;
+    padding-left: 16px;
+  }
+  #medias h2 {
+    border: none;
+  }
+  #medias iframe {
+    border: none;
+    margin: 16px 0;
+    width: 100%;
+  }
+  .actif {
+    display: block;
+  } 
+  #twitch-embed {
+    display: block;
+  }
+  #twitch-embed iframe {
+    width: 100%;
+  }
+  #liste_roster {
+    margin-top: 0;
+  }
+}
