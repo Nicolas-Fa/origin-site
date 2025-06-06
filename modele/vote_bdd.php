@@ -2,7 +2,6 @@
 
 include_once(RACINE . "/modele/bdd.inc.php");
 
-
 /* Nom de la fonction : recupererIdVoteParIdPostulation
 *
 * A quoi sert cette fonction : récupérer l'id d'un vote sur une postulation en fonction de l'id de celle-ci
@@ -12,22 +11,18 @@ include_once(RACINE . "/modele/bdd.inc.php");
 *
 * Retour : L'id des votes pour une postulation donnée
 */
-
 function recupererIdVoteParIdPostulation($id_postulation)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("SELECT id_vote FROM `vote` WHERE id_postulation=:id_postulation");
         $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
-
         $resultat = $requete->execute();
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
 }
-
 
 /* Nom de la fonction : recupererVoteParIdPostulationEtParIdMembre
 *
@@ -39,7 +34,6 @@ function recupererIdVoteParIdPostulation($id_postulation)
 *
 * Retour : Le vote du membre pour une postulation donnée ; le vote peut être inexistant
 */
-
 function recupererVotesParIdPostulation($id_postulation)
 {
     try {
@@ -47,7 +41,6 @@ function recupererVotesParIdPostulation($id_postulation)
         $requete = $connexion->prepare("SELECT * FROM `vote` WHERE id_postulation=:id_postulation");
         $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
         $requete->execute();
-
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
@@ -80,13 +73,4 @@ function recupererVoteParIdPostulationEtParIdMembre($id_postulation, $id_membre)
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
-}
-
-
-// ------------------------------test--------------------------------------------
-if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
-    header('Content-Type:text/plain');
-
-    echo "recupererVoteParIdPostulation() : \n";
-    print_r(recupererVotesParIdPostulation("1", "1"));
 }

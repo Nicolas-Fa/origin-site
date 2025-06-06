@@ -18,7 +18,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     </p>
     <section id="utilisateurs">
         <?php foreach ($utilisateurs as $utilisateur) : if ($utilisateur["pseudo"] !== $_SESSION["pseudo"]) : ?>
-                <div class="utilisateur">
+                <section class="utilisateur">
                     <p><?= ucfirst($utilisateur["pseudo"]) ?></p>
                     <p>Role : <?= $utilisateur["role"]; ?></p>
                     <?php if ($utilisateur["role"] !== "Membre") : ?>
@@ -43,7 +43,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                         <input type="hidden" name="supprimer_membre" value="<?= $utilisateur["id_membre"] ?>">
                         <button class="bouton supprimer" type="submit" name="supprimer" aria-label="Supprimer le membre"><i class="fa-solid fa-trash"></i></button>
                     </form>
-                </div>
+                </section>
         <?php endif;
         endforeach; ?>
     </section>

@@ -16,7 +16,6 @@ require_once RACINE . "/modele/maj_bdd.inc.php";
 require_once RACINE . "/modele/supprimer_bdd.inc.php";
 require_once RACINE . "/modele/vote_bdd.php";
 
-
 // ---------------------------partie disponible également aux non modérateurs---------------------
 // les modérateurs doivent avoir les mêmes options que les utilisateurs sans avoir à changer de compte à chaque fois
 // --- Ajout d'un commentaire
@@ -49,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["contenu_edition"])) {
 
 // --- Récupérer toutes les postulations en cours
 $postulations = recupererPostulationsEnCours();
-
 // --- Récupérer tous les commentaires pour chaque postulation en cours
 // Les commentaires sont classées par postulations
 $agregat_commentaires = [];
@@ -57,9 +55,6 @@ foreach ($postulations as $postulation) {
     $commentaires = recupererCommentairesParIdPostulation($postulation["id_postulation"]);
     array_push($agregat_commentaires, $commentaires);
 }
-// echo "<pre>";
-// var_dump($agregat_commentaires);
-// echo "</pre>";
 
 // récupérer les votes pour chaque postulation en cours
 $agregat_votes = [];
@@ -69,14 +64,14 @@ foreach ($postulations as $postulation) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_pour"])) {
-    enregister_vote(true, $_POST["voter_pour"], $_SESSION["id_membre"]);
+    enregistrer_vote(true, $_POST["voter_pour"], $_SESSION["id_membre"]);
     $_SESSION["message"] = "Votre vote a bien été enregistré";
     header("Location: index.php?action=moderation_candidatures");
     exit;
 }
 // ou contre
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_contre"])) {
-    enregister_vote(false, $_POST["voter_contre"], $_SESSION["id_membre"]);
+    enregistrer_vote(false, $_POST["voter_contre"], $_SESSION["id_membre"]);
     $_SESSION["message"] = "Votre vote a bien été enregistré";
     header("Location: index.php?action=moderation_candidatures");
     exit;
@@ -116,8 +111,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["accepter_postulation"
     exit;
 }
 
-
-
 $titre = "Origin - Modération des candidatures et commentaires";
 include RACINE . "/vue/header.php";
 include RACINE . "/vue/candidatures_back.php";
@@ -125,7 +118,7 @@ include RACINE . "/vue/footer.php";
 
 // ----- fonction de prise en compte du vote par un membre sur une postulation -----
 
-function enregister_vote($vote, $id_postulation, $id_votant)
+function enregistrer_vote($vote, $id_postulation, $id_votant)
 {
     // Le votant a-t-il déjà voté pour cette postulation ?
     $vote_actuel = recupererVoteParIdPostulationEtParIdMembre($id_postulation, $id_votant);

@@ -1,0 +1,15 @@
+.bouton {
+  font-size: 0.875rem;
+  background-color: $fond;
+  border: 1px solid $text_color;
+  border-radius: 5px;
+  font-family: "Exo 2";
+  color: $text_color;
+  padding: 0.5rem;
+  margin-bottom: 0.25rem;
+  &:hover {
+    border-color: $hover;
+    color: $hover;
+    cursor: pointer;
+  }
+}

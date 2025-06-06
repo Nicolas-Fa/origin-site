@@ -52,7 +52,6 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                 <?php if (isset($_SESSION["email"])): ?>
                     <li class="nav_connecte"><a href="?action=deconnexion" class="deconnexion" aria-label="Déconnexion">Déconnexion</a></li>
                 <?php endif; ?>
-
             </ul>
         </nav>
     </header>

@@ -14,7 +14,6 @@ include_once(RACINE . "/modele/bdd.inc.php");
 *
 * Retour : la modification commentaire sur la postulation
 */
-
 function editerCommentaire($contenu, $id_commentaire)
 {
     try {
@@ -54,7 +53,6 @@ function editerCommentaire($contenu, $id_commentaire)
 *
 * Retour : la modification de son pseudo
 */
-
 function editerPseudoMembre($pseudo, $id_membre)
 {
     try {
@@ -80,7 +78,6 @@ function editerPseudoMembre($pseudo, $id_membre)
     }
 }
 
-
 //------------------------------Edition mot de passe---------------------------------
 
 /* Nom de la fonction : editerMdpMembre
@@ -93,7 +90,6 @@ function editerPseudoMembre($pseudo, $id_membre)
 *
 * Retour : la modification du mot de passe du membre
 */
-
 function editerMdpMembre($pwd, $id_membre)
 {
     try {
@@ -115,7 +111,6 @@ function editerMdpMembre($pwd, $id_membre)
     }
 }
 
-
 //------------------------------Edition rôle-----------------------------------------
 
 /* Nom de la fonction : editerRoleMembre
@@ -128,7 +123,6 @@ function editerMdpMembre($pwd, $id_membre)
 *
 * Retour : la modification du rôle d'un membre
 */
-
 function editerRoleMembre($role, $pseudo)
 {
     try {
@@ -164,7 +158,6 @@ function editerRoleMembre($role, $pseudo)
 *
 * Retour : la modification du royaume du personnage
 */
-
 function editerRoyaumePersonnage($royaume, $id_personnage)
 {
     try {
@@ -191,7 +184,6 @@ function editerRoyaumePersonnage($royaume, $id_personnage)
     }
 }
 
-
 //------------------------------Edition pseudo personnage-------------------------
 
 /* Nom de la fonction : editerPseudoPersonnage
@@ -205,7 +197,6 @@ function editerRoyaumePersonnage($royaume, $id_personnage)
 *
 * Retour : la modification du pseudo du personnage
 */
-
 function editerPseudoPersonnage($pseudo, $id_personnage)
 {
     try {
@@ -248,7 +239,6 @@ function editerPseudoPersonnage($pseudo, $id_personnage)
 *
 * Retour : la modification de la postulation du membre
 */
-
 function editerPostulation($contenu, $id_membre, $id_postulation)
 {
     try {
@@ -276,7 +266,6 @@ function editerPostulation($contenu, $id_membre, $id_postulation)
     }
 }
 
-
 //------------------------Edition du statut de la postulation---------------------
 
 /* Nom de la fonction : editerStatutPostulation
@@ -289,7 +278,6 @@ function editerPostulation($contenu, $id_membre, $id_postulation)
 *
 * Retour : la modification du statut de la postulation
 */
-
 function editerStatutPostulation($statut, $id_postulation)
 {
     try {
@@ -310,7 +298,6 @@ function editerStatutPostulation($statut, $id_postulation)
     }
 }
 
-
 //----------------------------------------VOTE-------------------------------------------------------
 
 //------------------------------Edition du vote-----------------------------------
@@ -327,7 +314,6 @@ function editerStatutPostulation($statut, $id_postulation)
 *
 * Retour : la modification d'un vote
 */
-
 function modifierVote($choix, $id_vote)
 {
     try {

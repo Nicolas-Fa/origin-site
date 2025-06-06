@@ -11,7 +11,7 @@ export async function fetchCharacterInfo(royaume, pseudo) {
     if (authResponse.ok) {
         const data = await authResponse.json();
     
-    var access_token = data.access_token
+    let access_token = data.access_token
 
     const mediaData = await fetch(
         `https://eu.api.blizzard.com/profile/wow/character/${royaume}/${pseudo}/character-media?namespace=profile-eu&locale=fr_FR&${access_token}`, {

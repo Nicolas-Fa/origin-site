@@ -102,9 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
     boutons_voir.forEach((bouton) => {
       bouton.addEventListener("click", async () => {
         const pseudo = bouton.getAttribute("data-pseudo");
-        // console.log(pseudo);
         const royaume = bouton.getAttribute("data-royaume");
-        // console.log(royaume);
 
         // Réinitialisation des champs
         nom_personnage.textContent = "";
@@ -119,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
             royaume,
             pseudo
           );
-          // console.log(character);
+
           nom_personnage.textContent = `${
             pseudo.charAt(0).toUpperCase() + pseudo.slice(1)
           } - ${royaume.charAt(0).toUpperCase() + royaume.slice(1)}`;
@@ -152,8 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // compteur de mots des postulations
     const textarea = document.getElementById("postulation");
     const compteur = document.getElementById("compteur");
-    // console.log(textarea);
-    // console.log(compteur);
 
     // on modifie le compteur en fonction de ce qui est écrit
     const mettreAJourCompteur = () => {

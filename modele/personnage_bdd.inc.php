@@ -2,7 +2,6 @@
 
 include_once(RACINE . "/modele/bdd.inc.php");
 
-
 /* Nom de la fonction : recupererPersonnage
 *
 * A quoi sert cette fonction : récupérer les personnages
@@ -11,16 +10,13 @@ include_once(RACINE . "/modele/bdd.inc.php");
 *
 * Retour : un tableau associatif avec toutes les informations sur tous les personnages
 */
-
 function recupererPersonnage()
 {
     $resultat = array();
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("SELECT * FROM `personnage`");
         $requete->execute();
-
         $ligne = $requete->fetchAll(PDO::FETCH_ASSOC);
         while ($ligne) {
             $resultat[] = $ligne;
@@ -32,7 +28,6 @@ function recupererPersonnage()
     return $resultat;
 }
 
-
 /* Nom de la fonction : recupererIdPersonnageParIdMembre
 *
 * A quoi sert cette fonction : récupérer l'id des personnages en fonction de l'id du membre
@@ -42,23 +37,19 @@ function recupererPersonnage()
 *
 * Retour : l'id des personnages appartenant à l'ID renseignée
 */
-
 function recupererIdPersonnageParIdMembre($id_membre)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("SELECT `id_personnage` FROM `personnage` WHERE id_membre=:id_membre");
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->execute();
-
         $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
 }
-
 
 /* Nom de la fonction : recupererPseudoPersonnageParIdMembre
 *
@@ -69,23 +60,19 @@ function recupererIdPersonnageParIdMembre($id_membre)
 *
 * Retour : le pseudo des personnages appartenant à l'ID renseignée
 */
-
 function recupererPseudoPersonnageParIdMembre($id_membre)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("SELECT `pseudo_personnage` FROM `personnage` WHERE id_membre=:id_membre");
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->execute();
-
         $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
 }
-
 
 /* Nom de la fonction : recupererRoyaumeParIdMembre
 *
@@ -97,17 +84,14 @@ function recupererPseudoPersonnageParIdMembre($id_membre)
 *
 * Retour : le royaume d'un personnage
 */
-
 function recupererRoyaumeParIdMembre($id_membre)
 {
     $resultat = array();
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("SELECT `royaume` FROM `personnage` WHERE id_membre=:id_membre");
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->execute();
-
         $resultat =$requete->fetchAll(PDO::FETCH_ASSOC);
         
     } catch (PDOException $erreur) {
@@ -115,19 +99,3 @@ function recupererRoyaumeParIdMembre($id_membre)
     }
     return $resultat;
 }
-
-// ------------------------------test--------------------------------------------
-// if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
-//     header('Content-Type:text/plain');
-
-//     echo "recupererPersonnage() : \n";
-//     echo "<pre>";
-//     print_r(recupererPersonnage());
-//     echo "</pre>";
-
-//     echo "recupererPseudoPersonnageParIdMembre() : \n";
-//     print_r(recupererPseudoPersonnageParIdMembre("1"));
-
-//     echo "recupererRoyaumeParIdMembre() : \n";
-//     print_r(recupererRoyaumeParIdMembre("1", "Llorwina"));
-// }

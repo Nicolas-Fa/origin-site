@@ -60,7 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["contenu_edition"])) {
 
 // --- Récupérer toutes les postulations en cours
 $postulations = recupererPostulationsEnCours();
-
 // --- Récupérer tous les commentaires pour chaque postulation en cours
 // Les commentaires sont classées par postulations
 $agregat_commentaires = [];
@@ -68,9 +67,6 @@ foreach ($postulations as $postulation) {
     $commentaires = recupererCommentairesParIdPostulation($postulation["id_postulation"]);
     array_push($agregat_commentaires, $commentaires);
 }
-// echo "<pre>";
-// var_dump($postulations);
-// echo "</pre>";
 
 // récupérer les votes pour chaque postulation en cours
 $agregat_votes = [];
@@ -80,7 +76,7 @@ foreach ($postulations as $postulation) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_pour"])) {
-    enregister_vote(true, $_POST["voter_pour"], $_SESSION["id_membre"]);
+    enregistrer_vote(true, $_POST["voter_pour"], $_SESSION["id_membre"]);
     $_SESSION["message"] = "Votre vote a bien été enregistré";
     header("Location: index.php?action=moderation_candidatures");
     exit;
@@ -88,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_pour"])) {
 
 // ou contre
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["voter_contre"])) {
-    enregister_vote(false, $_POST["voter_contre"], $_SESSION["id_membre"]);
+    enregistrer_vote(false, $_POST["voter_contre"], $_SESSION["id_membre"]);
     $_SESSION["message"] = "Votre vote a bien été enregistré";
     header("Location: index.php?action=moderation_candidatures");
     exit;
@@ -102,10 +98,16 @@ include RACINE . "/vue/candidatures.php"; // on accède à la page des candidatu
 include RACINE . "/vue/footer.php";
 exit;
 
-
 // ----- fonction de prise en compte du vote par un membre sur une postulation -----
-
-function enregister_vote($vote, $id_postulation, $id_votant)
+/**
+ * Enregistre le vote d'un membre pour une postulation.
+ * Si le membre a déjà voté, son vote est mis à jour.
+ * @param bool $vote - Le choix du vote : true pour "pour", false pour "contre"
+ * @param int $id_postulation - L'identifiant de la postulation concernée par le vote
+ * @param int $id_votant - L'identifiant du membre qui vote
+ * @return void
+ */
+function enregistrer_vote($vote, $id_postulation, $id_votant): void
 {
     // Le votant a-t-il déjà voté pour cette postulation ?
     $vote_actuel = recupererVoteParIdPostulationEtParIdMembre($id_postulation, $id_votant);

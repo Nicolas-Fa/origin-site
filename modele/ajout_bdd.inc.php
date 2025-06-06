@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include_once(RACINE . "/modele/bdd.inc.php");
 
@@ -20,7 +20,7 @@ function ajouterCommentaires($contenu, $id_membre, $id_postulation)
 {
     try {
         $connexion = connexionBdd();
-        
+
         // on vérifie que le commentaire ne soit pas vide
         $contenu = htmlspecialchars(trim($contenu), ENT_QUOTES, 'UTF-8');
         if ($contenu === '') {
@@ -32,14 +32,13 @@ function ajouterCommentaires($contenu, $id_membre, $id_postulation)
         $requete->bindValue(":contenu", ucfirst($contenu), PDO::PARAM_STR);
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
-        
+
         $resultat = $requete->execute();
     } catch (PDOException $erreur) {
         throw new Exception("Erreur lors de l'ajout du commentaire : " . $erreur->getMessage());
     }
     return $resultat;
 }
-
 
 //-----------------------------Creation de membre------------------------------------
 
@@ -69,7 +68,7 @@ function sInscrire($pseudo, $email, $pwd)
             throw new Exception("Le pseudo ne peut pas être vide.");
         }
         // on vérifie que le mot de passe fasse au moins 8 caractères
-        if(strlen($pwd) < 8){
+        if (strlen($pwd) < 8) {
             throw new Exception(("Le mot de passe doit contenir au moins 8 caractères"));
         }
 
@@ -78,7 +77,7 @@ function sInscrire($pseudo, $email, $pwd)
         $check_email->bindValue(":email", $email, PDO::PARAM_STR);
         $check_email->execute();
 
-        if($check_email->fetchColumn() > 0){
+        if ($check_email->fetchColumn() > 0) {
             throw new Exception("Cet email est déjà utilisé");
         }
 
@@ -87,7 +86,7 @@ function sInscrire($pseudo, $email, $pwd)
         $check_pseudo->bindValue(":pseudo", $pseudo, PDO::PARAM_STR);
         $check_pseudo->execute();
 
-        if($check_pseudo->fetchColumn() > 0){
+        if ($check_pseudo->fetchColumn() > 0) {
             throw new Exception("Ce pseudo est déjà utilisé");
         }
 
@@ -104,12 +103,11 @@ function sInscrire($pseudo, $email, $pwd)
         $resultat = $requete->execute();
     } catch (PDOException $erreur) { // on capture et on gère les erreurs de base de données
         throw new Exception("Erreur: " . $erreur->getMessage());
-    } catch (Exception $msg){ // on capture et on gère les autres erreurs (email, mdr)
+    } catch (Exception $msg) { // on capture et on gère les autres erreurs (email, mdr)
         throw new Exception("Erreur : " . $msg->getMessage());
     }
     return $resultat;
 }
-
 
 //-----------------------------Enregistrer un personnage-----------------------------
 
@@ -138,7 +136,7 @@ function ajouterPersonnage($pseudo_perso, $royaume, $id_membre)
         if ($royaume === '') {
             throw new Exception("Le royaume de votre personnage ne peut pas être vide.");
         }
-        
+
         $requete = $connexion->prepare("INSERT INTO `personnage` (pseudo_personnage, royaume, id_membre) VALUES (:pseudo_personnage, :royaume, :id_membre)");
         $requete->bindValue(':pseudo_personnage', strtolower($pseudo_perso), PDO::PARAM_STR);
         $requete->bindValue(':royaume', strtolower(str_replace(" ", "-", ($royaume))), PDO::PARAM_STR);
@@ -150,7 +148,6 @@ function ajouterPersonnage($pseudo_perso, $royaume, $id_membre)
     }
     return $resultat;
 }
-
 
 //-----------------------------Postulations------------------------------------------
 
@@ -165,7 +162,6 @@ function ajouterPersonnage($pseudo_perso, $royaume, $id_membre)
 *
 * Retour : l'ajout du commentaire sur la postulation
 */
-
 function ajouterPostulation($contenu, $id_membre)
 {
     try {
@@ -181,14 +177,13 @@ function ajouterPostulation($contenu, $id_membre)
         $requete->bindValue(":contenu", ucfirst($contenu), PDO::PARAM_STR);
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->bindValue(":statut", ucfirst($statut), PDO::PARAM_STR);
-        
+
         $resultat = $requete->execute();
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
 }
-
 
 //------------------------------------Vote-------------------------------------------
 
@@ -203,7 +198,6 @@ function ajouterPostulation($contenu, $id_membre)
 *
 * Retour : l'ajout d'un vote sur la postulation
 */
-
 function ajouterVote($choix, $id_membre, $id_postulation)
 {
     try {
@@ -213,7 +207,7 @@ function ajouterVote($choix, $id_membre, $id_postulation)
         $requete->bindValue(":choix", $choix, PDO::PARAM_BOOL);
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
-        
+
         $resultat = $requete->execute();
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());

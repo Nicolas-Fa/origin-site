@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  color: $text_color;
+  cursor: pointer;
+}
+ul {
+  list-style-type: none;
+}
+body {
+  background-color: #0f151b;
+  height: 100vh;
+  background-size: cover;
+  background-clip: content-box;
+  background-attachment: fixed;
+  color: $text_color;
+  font-family: "Exo 2";
+  font-size: 16px;
+}
+p,
+h4 {
+  color: $content_color;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.container {
+  background-color: $fond;
+  max-width: 85%;
+  width: 100%;
+  box-sizing: border-box;
+  justify-self: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 16px;
+}
+main {
+  height: auto;
+}
+footer {
+  text-align: center;
+}

@@ -13,12 +13,10 @@ include_once(RACINE . "/modele/bdd.inc.php");
 *
 * Retour : la suppression d'un commentaire
 */
-
 function supprimerCommentaire($id_commentaire)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("DELETE FROM `commentaire` WHERE id_commentaire=:id_commentaire");
         $requete->bindValue(":id_commentaire", $id_commentaire, PDO::PARAM_INT);
         $requete->execute();
@@ -29,12 +27,10 @@ function supprimerCommentaire($id_commentaire)
             $message = "Erreur lors de la suppression du commentaire.";
         }
         return $message;
-
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
 }
-
 
 //---------------------------Suppression du compte membre-------------------------
 
@@ -47,12 +43,10 @@ function supprimerCommentaire($id_commentaire)
 *
 * Retour : la suppression d'un membre
 */
-
 function supprimerMembre($id_membre)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("DELETE FROM `membre` WHERE id_membre=:id_membre");
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->execute();
@@ -63,12 +57,10 @@ function supprimerMembre($id_membre)
             $message = "Erreur lors de la suppression du compte.";
         }
         return $message;
-
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
 }
-
 
 //---------------------------Suppression du personnage----------------------------
 
@@ -81,12 +73,10 @@ function supprimerMembre($id_membre)
 *
 * Retour : la suppression du personnage choisi
 */
-
 function supprimerPersonnage($id_personnage)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("DELETE FROM `personnage` WHERE id_personnage=:id_personnage");
         $requete->bindValue(":id_personnage", $id_personnage, PDO::PARAM_INT);
         $requete->execute();
@@ -97,12 +87,10 @@ function supprimerPersonnage($id_personnage)
             $message = "Erreur lors de la suppression du personnage.";
         }
         return $message;
-
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
 }
-
 
 //---------------------------Suppression de la postulation------------------------
 
@@ -115,12 +103,10 @@ function supprimerPersonnage($id_personnage)
 *
 * Retour : la suppression de la postulation
 */
-
 function supprimerPostulation($id_postulation)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("DELETE FROM `postulation` WHERE id_postulation=:id_postulation");
         $requete->bindValue(":id_postulation", $id_postulation, PDO::PARAM_INT);
         $requete->execute();
@@ -131,12 +117,10 @@ function supprimerPostulation($id_postulation)
             $message = "Erreur lors de la suppression de la postulation.";
         }
         return $message;
-
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
 }
-
 
 //---------------------------Suppression du vote----------------------------------
 
@@ -149,12 +133,10 @@ function supprimerPostulation($id_postulation)
 *
 * Retour : la suppression du vote
 */
-
 function supprimerVote($id_vote)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("DELETE FROM `vote` WHERE id_vote=:id_vote");
         $requete->bindValue(":id_vote", $id_vote, PDO::PARAM_INT);
         $requete->execute();
@@ -165,7 +147,6 @@ function supprimerVote($id_vote)
             $message = "Erreur lors de la suppression du vote.";
         }
         return $message;
-
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }

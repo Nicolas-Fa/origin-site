@@ -1,0 +1,127 @@
+#formulaire_postulation {
+  width: 100%;
+}
+.champ_formulaire_postulation {
+  width: 100%;
+}
+.champ_formulaire_postulation textarea {
+  font-family: $font;
+  font-size: 1rem;
+  border-color: $text_color;
+  background-color: $fond;
+  color: $content_color;
+  margin: 0.5rem 0;
+  border-radius: 5px;
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.champ_formulaire_postulation textarea:hover {
+  border-color: $hover;
+}
+.champ_logs_postulation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+.champ_logs_postulation input {
+  margin: 0.5rem 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+p.message {
+  text-align: center;
+  font-size: 1.313rem;
+  margin: 1rem 0;
+  color: greenyellow;
+}
+#liste_candidats .vide {
+  text-align: center;
+  font-size: 1.313rem;
+  padding: 3.125rem 0;
+}
+section .candidature {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $text_color;
+}
+.candidature h3 {
+  margin-top: 1rem;
+}
+.candidature h4 {
+  margin: 0.5rem 0;
+}
+.candidature .statut {
+  margin: 0.5rem 0;
+}
+.candidature textarea {
+  font-family: $font;
+  font-size: 1rem;
+  border-color: $text_color;
+  background-color: $fond;
+  color: $content_color;
+  margin: 0.5rem 0;
+  border-radius: 5px;
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.candidature .votes {
+  display: flex;
+  justify-content: center;
+}
+.candidature .votes form {
+  margin-right: 1rem;
+}
+.candidature .votes .voter button {
+  width: 3.125rem;
+  height: 3.125rem;
+  background-color: $fond;
+  border: none;
+}
+.candidature .votes .voter .voter_pour i,
+.candidature .votes .voter .voter_contre i {
+  font-size: 1.5rem;
+  color: $text_color;
+}
+.candidature .commentaires button {
+  margin-top: 0.5rem;
+}
+.candidature .commentaires {
+  margin-bottom: 1rem;
+}
+.candidature .commentaires .un_commentaire {
+  padding-bottom: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .moderation {
+    display: flex;
+    justify-content: center;
+  }
+  .moderation form {
+    margin: 0.5rem;
+  }
+  .champ_logs_postulation input {
+    display: flex;
+    justify-self: center;
+    width: 35%;
+  }
+  .champ_formulaire_postulation textarea {
+    width: 50%;
+  }
+  .candidature {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid $text_color;
+  }
+  #liste_candidats .candidature button {
+    width: max-content;
+    align-self: center;
+  }
+}

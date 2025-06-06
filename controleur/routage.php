@@ -31,7 +31,6 @@ function navigation($action = "defaut")
 
     //si le fichier n'existe pas :
     if (! file_exists(__DIR__ . '/' . $fichier_ctrl)) die("Le fichier : " . $fichier_ctrl . " n'existe pas !");
-
     //si la clé "action" existe dans notre tableau "choix_action" :
     if (array_key_exists($action, $choix_action)) {
         // le fichier à inclure sera retourné :

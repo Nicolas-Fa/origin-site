@@ -1,0 +1,134 @@
+img {
+  max-width: 31.25rem;
+  width: 100%;
+}
+#communication {
+  max-width: 100%;
+}
+.progression section h1 {
+  margin-bottom: 1.5rem;
+}
+figure {
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  justify-content: center;
+}
+figure img:nth-child(odd) {
+  margin-right: 5%;
+}
+figure img:nth-child(even) {
+  margin-left: 5%;
+}
+figure img {
+  max-width: 7.5rem;
+  width: 100%;
+}
+.progression section {
+  margin-bottom: 1rem;
+}
+.progression section p {
+  margin: 0.5rem 0;
+}
+#medias {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  height: auto;
+}
+.actif {
+  display: flex;
+  justify-content: center;
+}
+button#activer_twitch{
+  display: none;
+}
+#twitch-embed {
+  display: none;
+}
+#liste_roster {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+#liste_roster h2 {
+  text-align: center;
+}
+#liste_roster ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 2rem 0;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid $text_color;
+}
+#liste_roster ul li {
+  padding: 0 1.5rem;
+}
+@media screen and (min-width: 768px) {
+  #communication {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 75% 25%;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid $text_color;
+  }
+  #communication .progression {
+    max-width: 100%;
+    width: 100%;
+    padding: 1rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border-right: 1px solid $text_color;
+  }
+  #communication .progression figure {
+    width: 100%;
+  }
+  #communication .progression h2 {
+    width: 100%;
+  }
+  #communication .progression p {
+    padding-right: 1rem;
+  }
+  #communication img:nth-child(odd) {
+    margin-right: 0;
+  }
+  #communication img:nth-child(even) {
+    margin-left: 0;
+  }
+  #communication img {
+    width: 12.5%;
+  }
+  #medias {
+    justify-content: center;
+    width: auto;
+    padding-left: 1rem;
+  }
+  #medias h2 {
+    border: none;
+  }
+  #medias iframe {
+    border: none;
+    margin: 1rem 0;
+    width: 100%;
+  }
+  button#activer_twitch.actif{
+    display: block;
+  }
+  #twitch-embed {
+    display: block;
+  }
+  #twitch-embed iframe {
+    width: 100%;
+  }
+  #liste_roster {
+    margin-top: 0;
+  }
+}

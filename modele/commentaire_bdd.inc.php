@@ -11,7 +11,6 @@ include_once(RACINE . "/modele/bdd.inc.php");
 *
 * Retour : un tableau associatif avec toutes les informations sur tous les commentaires
 */
-
 function recupererCommentaires()
 {
     try {
@@ -33,7 +32,6 @@ function recupererCommentaires()
     return $resultat;
 }
 
-
 /* Nom de la fonction : recupererCommentaireParIdPostulation
 *
 * A quoi sert cette fonction : récupère le contenu du commentaire en fonction de l'id de la postulation
@@ -43,7 +41,6 @@ function recupererCommentaires()
 *
 * Retour : le contenu du commentaire de la postulation
 */
-
 function recupererCommentaireParIdPostulation($id_postulation)
 {
     try {
@@ -61,7 +58,6 @@ function recupererCommentaireParIdPostulation($id_postulation)
 }
 
 // récupère tous les commentaires avec le pseudo de l'auteur sur une postulation identifiée par son id
-
 function recupererCommentairesParIdPostulation($id_postulation)
 {
     try {
@@ -80,6 +76,7 @@ function recupererCommentairesParIdPostulation($id_postulation)
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
 }
+
 // ----------------------------------------------------
 
 /* Nom de la fonction : recupererDateCommentaireParIdPostulation
@@ -91,7 +88,6 @@ function recupererCommentairesParIdPostulation($id_postulation)
 *
 * Retour : la date du commentaire de la postulation
 */
-
 function recupererDateCommentaireParIdPostulation($id_postulation)
 {
     try {
@@ -106,20 +102,4 @@ function recupererDateCommentaireParIdPostulation($id_postulation)
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
-}
-
-// ------------------------------test--------------------------------------------
-if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
-    header('Content-Type:text/plain');
-
-    echo "recupererCommentaires() : \n";
-    echo "<pre>";
-    print_r(recupererCommentaires(""));
-    echo "</pre>";
-
-    echo "recupererCommentaireParIdPostulation() : \n";
-    print_r(recupererPseudoMembre("1"));
-
-    echo "recupererDateCommentaireParIdPostulation() : \n";
-    print_r(recupererDateCommentaireParIdPostulation("1"));
 }

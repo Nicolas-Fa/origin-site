@@ -16,10 +16,6 @@ require_once RACINE . "/modele/maj_bdd.inc.php";
 require_once RACINE . "/modele/supprimer_bdd.inc.php";
 
 $utilisateurs = recupererMembres();
-// echo "<pre>";
-// var_dump($utilisateurs);
-// echo "</pre>";
-
 $role_membre = [];
 foreach ($utilisateurs as $utilisateur) {
     $role = recupererRoleMembre($utilisateur["role"]);

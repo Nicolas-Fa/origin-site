@@ -2,7 +2,6 @@
 
 include_once(RACINE . "/modele/bdd.inc.php");
 
-
 /* Nom de la fonction : recupererMembres
 *
 * A quoi sert cette fonction : récuperer tous les membres
@@ -11,22 +10,17 @@ include_once(RACINE . "/modele/bdd.inc.php");
 *
 * Retour : un tableau associatif avec l'ensemble des membres inscrits
 */
-
 function recupererMembres()
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("SELECT * FROM `membre`");
         $requete->execute();
-
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
-
 }
-
 
 /* Nom de la fonction : recupererMailMembre
 *
@@ -37,23 +31,19 @@ function recupererMembres()
 *
 * Retour : le membre associé à l'email renseigné
 */
-
 function recupererMailMembre($email)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("SELECT * FROM `membre` WHERE email=:email");
         $requete->bindValue(":email", $email, PDO::PARAM_STR);
         $requete->execute();
-
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
 }
-
 
 /* Nom de la fonction : recupererIdMembreParMail
 *
@@ -64,23 +54,19 @@ function recupererMailMembre($email)
 *
 * Retour : l'id membre associé à l'email renseigné
 */
-
 function recupererIdMembreParMail($email)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("SELECT `id_membre` FROM `membre` WHERE email=:email");
         $requete->bindValue(":email", $email, PDO::PARAM_STR);
         $requete->execute();
-
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
 }
-
 
 /* Nom de la fonction recupererPseudoMembre()
 *
@@ -91,23 +77,19 @@ function recupererIdMembreParMail($email)
 *
 * Retour : le membre associé au pseudo renseigné
 */
-
 function recupererPseudoMembre($pseudo)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("SELECT `pseudo` FROM `membre` WHERE pseudo=:pseudo");
         $requete->bindValue(":pseudo", ucfirst($pseudo), PDO::PARAM_STR);
         $requete->execute();
-
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
 }
-
 
 /* Nom de la fonction recupererPseudoMembreParIdMembre($id_membre)
 *
@@ -118,23 +100,19 @@ function recupererPseudoMembre($pseudo)
 *
 * Retour : le pseudo du membre associé à son id
 */
-
 function recupererPseudoMembreParIdMembre($id_membre)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("SELECT `pseudo` FROM `membre` WHERE id_membre=:id_membre");
         $requete->bindValue(":id_membre", $id_membre, PDO::PARAM_INT);
         $requete->execute();
-
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
 }
-
 
 /* Nom de la fonction recupererRoleMembre()
 *
@@ -145,16 +123,13 @@ function recupererPseudoMembreParIdMembre($id_membre)
 *
 * Retour : les membres ayant le rôle choisi
 */
-
 function recupererRoleMembre($role)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("SELECT `role`, `pseudo`, `id_membre` FROM `membre` WHERE role=:role");
         $requete->bindValue(":role", ucfirst($role), PDO::PARAM_STR);
         $requete->execute();
-
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
@@ -170,23 +145,19 @@ function recupererRoleMembre($role)
 *
 * Retour : le pseudo du membre associé a l'email 
 */
-
 function recupererPseudoMembreParMail($email)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("SELECT `pseudo` FROM `membre` WHERE email=:email");
         $requete->bindValue(":email", ucfirst($email), PDO::PARAM_STR);
         $requete->execute();
-
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
 }
-
 
 /* Nom de la fonction recupererRoleMembreParMail()
 *
@@ -197,35 +168,16 @@ function recupererPseudoMembreParMail($email)
 *
 * Retour : le role du membre associé à l'email
 */
-
 function recupererRoleMembreParMail($email)
 {
     try {
         $connexion = connexionBdd();
-
         $requete = $connexion->prepare("SELECT `role` FROM `membre` WHERE email=:email");
         $requete->bindValue(":email", $email, PDO::PARAM_STR);
         $requete->execute();
-
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $erreur) {
         throw new Exception("Erreur: " . $erreur->getMessage());
     }
     return $resultat;
-}
-
-// ------------------------------test--------------------------------------------
-if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE__)) {
-    header('Content-Type:text/plain');
-
-    echo "recupererMailMembre() : \n";
-    echo "<pre>";
-    print_r(recupererMailMembre("origin@test.com"));
-    echo "</pre>";
-
-    echo "recupererPseudoMembre() : \n";
-    print_r(recupererPseudoMembre("test"));
-
-    echo "recupererRoleMembre() : \n";
-    print_r(recupererRoleMembre("Membre"));
 }

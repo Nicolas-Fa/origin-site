@@ -1,0 +1,59 @@
+.back {
+  background-color: #d9d9d9;
+  color: black;
+}
+.back h1 {
+  color: black;
+  border-color: black;
+}
+.back h2,
+.back h3,
+.back h4,
+.back p {
+  color: black;
+}
+.back button {
+  background-color: #d9d9d9;
+  color: black;
+  border-color: black;
+  &:hover {
+    background-color: black;
+    color: #d9d9d9;
+    border-color: black;
+  }
+}
+.back .candidature .votes .voter .voter_pour i,
+.back .candidature .votes .voter .voter_contre i {
+  color: black;
+}
+.back .candidature {
+  border-color: black;
+}
+button.back:hover {
+  border-color: $text_color;
+}
+.back .candidature .votes .voter button {
+  background-color: #d9d9d9;
+}
+.back #utilisateurs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.back #utilisateurs .utilisateur {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  padding: 1rem;
+}
+.back #utilisateurs .utilisateur form {
+  margin: 0.5rem 0;
+}
+@media screen and (min-width: 768px) {
+  .back #utilisateurs .utilisateur {
+    width: 14%;
+  }
+}

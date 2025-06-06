@@ -9,7 +9,6 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
 require_once RACINE . "/modele/authentification.inc.php";
 
 // On va récupérer les données POST et SESSION
-
 if (isset($_POST["email"]) && isset($_POST["mot_de_passe"])) {
     $email = $_POST["email"];
     $pwd = $_POST["mot_de_passe"];
