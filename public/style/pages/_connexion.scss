@@ -3,6 +3,7 @@
   flex-direction: column;
   text-align: center;
 }
+<<<<<<< HEAD
 #connexion h1 {
   border-bottom: none;
   border-top: 1px solid $text_color;
@@ -25,13 +26,43 @@
   margin: 0 0 0.25rem;
   border-radius: 5px;
 }
+=======
+
+h1 {
+  text-align: center;
+}
+
+#connexion h1 {
+  border-bottom: none;
+  border-top: 1px solid $text_color;
+  padding-top: 32px;
+  margin-top: 16px;
+}
+
+#connexion p.inscription {
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+#connexion a.inscription {
+  border: 1px solid $text_color;
+  padding: 8px;
+  margin: 0 0 4px;
+  border-radius: 5px;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 #connexion a.inscription:hover {
   color: $hover;
   text-decoration: underline;
   border-color: $hover;
+<<<<<<< HEAD
 }
 @media screen and (min-width: 768px) {
   #connexion form {
     align-items: center;
   }
 }
+=======
+}
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1

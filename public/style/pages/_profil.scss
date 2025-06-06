@@ -1,31 +1,83 @@
+<<<<<<< HEAD
 .titre {
   width: 100%;
   text-align: center;
   margin-bottom: 1rem;
   padding: 1rem 0;
 }
+=======
+h1,
+h2 {
+  border-bottom: 1px solid $text_color;
+  font-size: 21px;
+  padding-bottom: 8px;
+}
+
+.titre {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 16px;
+  padding: 16px 0;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 #mes_personnages ul li {
   width: 100%;
   align-items: flex-start;
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
   margin-bottom: 1rem;
 }
 #mes_personnages ul li p {
   margin-bottom: 0.5rem;
 }
+=======
+  margin-bottom: 16px;
+}
+#mes_personnages ul li p {
+  margin-bottom: 8px;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 #mes_personnages ul li button {
   justify-content: flex-start;
   flex-direction: row;
 }
+<<<<<<< HEAD
 .cache {
   display: none;
 }
+=======
+
+.cache {
+  display: none;
+}
+
+.bouton {
+  font-size: 14px;
+  background-color: $fond;
+  border: 1px solid $text_color;
+  border-radius: 5px;
+  font-family: "Exo 2";
+  color: $text_color;
+  padding: 8px;
+  margin-bottom: 4px;
+}
+
+.bouton:hover {
+  border-color: $hover;
+  color: $hover;
+  cursor: pointer;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 input {
   background-color: $fond;
   border: 1px solid $text_color;
   border-radius: 5px;
   font-family: "Exo 2";
+<<<<<<< HEAD
   font-size: 0.875rem;
   color: $text_color;
   padding: 0.5rem;
@@ -42,11 +94,33 @@ fieldset {
   width: 100%;
   text-align: center;
 }
+=======
+  font-size: 14px;
+  color: $text_color;
+  padding: 8px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+input:hover {
+  border-color: $hover;
+}
+
+fieldset {
+  border: none;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 #ajout_personnage {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
+<<<<<<< HEAD
 fieldset.fieldset_profil {
   display: flex;
   justify-content: center;
@@ -59,10 +133,26 @@ fieldset.fieldset_profil legend {
 }
 #reglages_compte {
   margin-bottom: 1rem;
+=======
+
+fieldset.fieldset_profil legend {
+  margin-bottom: 8px;
+}
+
+fieldset.fieldset_profil input {
+  max-width: max-content;
+  width: auto;
+  margin: 8px 0;
+}
+
+#reglages_compte {
+  margin-bottom: 16px;
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
   display: flex;
   flex-direction: column;
   align-items: center;
   border-bottom: 1px solid $text_color;
+<<<<<<< HEAD
   padding: 1rem 0;
   gap: 1rem;
 }
@@ -98,3 +188,45 @@ fieldset.fieldset_profil legend {
     margin-right: 0.5rem;
   }
 }
+=======
+  padding: 16px 0;
+}
+
+#reglages_compte div {
+  margin: 8px 0;
+}
+
+@media screen and (min-width: 768px) {
+    #mes_personnages {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+    #mes_personnages .liste_personnages {
+    width: 100%;
+    max-width: 50%;
+    }
+
+    #mes_personnages .visualisation_personnage {
+    text-align: center;
+    }
+
+    #reglages_compte {
+    flex-direction: row;
+    justify-content: center;
+    }
+
+    #reglages_compte div {
+    margin: 0 8px;
+    }
+
+    .boutons_edition {
+    display: flex;
+    }
+
+    .boutons_edition button {
+    margin-right: 8px;
+    }
+}
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1

@@ -1,6 +1,7 @@
 #formulaire_postulation {
   width: 100%;
 }
+<<<<<<< HEAD
 .champ_formulaire_postulation {
   width: 100%;
 }
@@ -19,10 +20,35 @@
 .champ_formulaire_postulation textarea:hover {
   border-color: $hover;
 }
+=======
+
+.champ_formulaire_postulation {
+  width: 100%;
+}
+
+.champ_formulaire_postulation textarea {
+  font-family: $font;
+  font-size: 16px;
+  border-color: $text_color;
+  background-color: $fond;
+  color: $content_color;
+  margin: 8px 0;
+  border-radius: 5px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.champ_formulaire_postulation textarea:hover {
+  border-color: $hover;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 .champ_logs_postulation {
   display: flex;
   flex-direction: column;
   align-items: center;
+<<<<<<< HEAD
   margin-top: 0.5rem;
   width: 100%;
 }
@@ -35,18 +61,40 @@ p.message {
   text-align: center;
   font-size: 1.313rem;
   margin: 1rem 0;
+=======
+  margin-top: 8px;
+}
+
+.champ_logs_postulation input {
+  margin: 8px 0;
+  width: 100%;
+}
+
+p.message {
+  text-align: center;
+  font-size: 21px;
+  margin: 16px 0;
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
   color: greenyellow;
 }
 #liste_candidats .vide {
   text-align: center;
+<<<<<<< HEAD
   font-size: 1.313rem;
   padding: 3.125rem 0;
 }
+=======
+  font-size: 21px;
+  padding: 50px 0;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 section .candidature {
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid $text_color;
 }
+<<<<<<< HEAD
 .candidature h3 {
   margin-top: 1rem;
 }
@@ -68,10 +116,39 @@ section .candidature {
   width: 100%;
   box-sizing: border-box;
 }
+=======
+
+.candidature h3 {
+  margin-top: 16px;
+}
+
+.candidature h4 {
+  margin: 8px 0;
+}
+
+.candidature .statut {
+  margin: 8px 0;
+}
+
+.candidature textarea {
+  font-family: $font;
+  font-size: 16px;
+  border-color: $text_color;
+  background-color: $fond;
+  color: $content_color;
+  margin: 8px 0;
+  border-radius: 5px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 .candidature .votes {
   display: flex;
   justify-content: center;
 }
+<<<<<<< HEAD
 .candidature .votes form {
   margin-right: 1rem;
 }
@@ -112,10 +189,58 @@ section .candidature {
     width: 50%;
   }
   .candidature {
+=======
+
+.candidature .votes form {
+  margin-right: 16px;
+}
+
+.candidature .votes .voter button {
+  width: 50px;
+  height: 50px;
+  background-color: $fond;
+  border: none;
+}
+
+.candidature .votes .voter .voter_pour i,
+.candidature .votes .voter .voter_contre i {
+  font-size: 24px;
+  color: $text_color;
+}
+
+.candidature .commentaires button {
+  margin-top: 8px;
+}
+
+.candidature .commentaires {
+  margin-bottom: 16px;
+}
+.candidature .commentaires .un_commentaire {
+  padding-bottom: 16px;
+}
+@media screen and (min-width: 768px) {
+    .moderation {
+    display: flex;
+    justify-content: center;
+    }
+    .moderation form {
+    margin: 8px;
+    }
+    .champ_logs_postulation input {
+    display: flex;
+    justify-self: center;
+    width: 35%;
+    }
+    .champ_formulaire_postulation textarea {
+    width: 50%;
+    }
+    .candidature {
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-content: center;
+<<<<<<< HEAD
     margin-bottom: 1.5rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid $text_color;
@@ -125,3 +250,14 @@ section .candidature {
     align-self: center;
   }
 }
+=======
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid $text_color;
+    }
+    #liste_candidats .candidature button {
+    width: max-content;
+    align-self: center;
+    }
+}
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1

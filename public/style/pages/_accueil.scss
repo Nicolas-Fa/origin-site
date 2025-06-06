@@ -1,4 +1,5 @@
 img {
+<<<<<<< HEAD
   max-width: 31.25rem;
   width: 100%;
 }
@@ -16,12 +17,36 @@ figure {
   margin-bottom: 0.5rem;
   justify-content: center;
 }
+=======
+  max-width: 500px;
+  width: 100%;
+}
+
+#communication {
+  max-width: 100%;
+}
+
+.progression section h1 {
+  margin-bottom: 24px;
+}
+
+figure {
+  margin: 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 8px;
+  justify-content: center;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 figure img:nth-child(odd) {
   margin-right: 5%;
 }
 figure img:nth-child(even) {
   margin-left: 5%;
 }
+<<<<<<< HEAD
 figure img {
   max-width: 7.5rem;
   width: 100%;
@@ -32,6 +57,28 @@ figure img {
 .progression section p {
   margin: 0.5rem 0;
 }
+=======
+
+figure img {
+  max-width: 120px;
+  width: 100%;
+}
+
+.progression section {
+  margin-bottom: 16px;
+}
+
+.progression section h2 {
+  font-size: 21px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.progression section p {
+  margin: 8px 0;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 #medias {
   width: 100%;
   display: flex;
@@ -40,6 +87,7 @@ figure img {
   height: auto;
 }
 .actif {
+<<<<<<< HEAD
   display: flex;
   justify-content: center;
 }
@@ -49,20 +97,40 @@ button#activer_twitch{
 #twitch-embed {
   display: none;
 }
+=======
+  display: none;
+}
+
+#twitch-embed {
+  display: none;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 #liste_roster {
   max-width: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+<<<<<<< HEAD
   margin-top: 1rem;
 }
 #liste_roster h2 {
   text-align: center;
 }
+=======
+  margin-top: 16px;
+}
+
+#liste_roster h2 {
+  text-align: center;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 #liste_roster ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+<<<<<<< HEAD
   gap: 2rem;
   margin: 2rem 0;
   padding-bottom: 2rem;
@@ -77,12 +145,30 @@ button#activer_twitch{
     display: grid;
     grid-template-columns: 75% 25%;
     margin-bottom: 1rem;
+=======
+}
+
+#liste_roster ul li {
+  padding: 0 24px;
+}
+
+@media screen and (min-width: 768px) {
+ #communication {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 75% 25%;
+    margin-bottom: 16px;
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
     border-bottom: 1px solid $text_color;
   }
   #communication .progression {
     max-width: 100%;
     width: 100%;
+<<<<<<< HEAD
     padding: 1rem 0 0 0;
+=======
+    padding: 16px 0 0 0;
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -95,7 +181,11 @@ button#activer_twitch{
     width: 100%;
   }
   #communication .progression p {
+<<<<<<< HEAD
     padding-right: 1rem;
+=======
+    padding-right: 16px;
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
   }
   #communication img:nth-child(odd) {
     margin-right: 0;
@@ -109,19 +199,32 @@ button#activer_twitch{
   #medias {
     justify-content: center;
     width: auto;
+<<<<<<< HEAD
     padding-left: 1rem;
+=======
+    padding-left: 16px;
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
   }
   #medias h2 {
     border: none;
   }
   #medias iframe {
     border: none;
+<<<<<<< HEAD
     margin: 1rem 0;
     width: 100%;
   }
   button#activer_twitch.actif{
     display: block;
   }
+=======
+    margin: 16px 0;
+    width: 100%;
+  }
+  .actif {
+    display: block;
+  } 
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
   #twitch-embed {
     display: block;
   }
@@ -131,4 +234,8 @@ button#activer_twitch{
   #liste_roster {
     margin-top: 0;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1

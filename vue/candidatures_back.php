@@ -16,11 +16,17 @@
         foreach ($postulations as $postulation) : ?>
             <section class="candidature">
                 <h3>Candidature de <?= ucfirst($postulation["pseudo"]); ?></h3>
+<<<<<<< HEAD
                 <section>
                     <h4>Postée le <?= $postulation["date_formatee"]; ?></h4>
                     <p><?= ucfirst($postulation["contenu"]); ?></p>
                     <p class="statut">Statut : <?= $postulation["statut"]; ?></p>
                 </section>
+=======
+                <h4>Postée le <?= $postulation["date_formatee"]; ?></h4>
+                <p><?= ucfirst($postulation["contenu"]); ?></p>
+                <p class="statut">Statut : <?= $postulation["statut"]; ?></p>
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
                 <section class="moderation">
                     <form action="./?action=moderation_candidatures" method="POST">
                         <input type="hidden" name="accepter_postulation" value="<?= $postulation["id_postulation"]; ?>">
@@ -64,6 +70,10 @@
                         <input type="hidden" name="voter_contre" value="<?= $postulation["id_postulation"]; ?>">
                     </form>
                 </section>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
                 <section class="commentaires">
                     <h3>Commentaires :</h3>
                     <?php

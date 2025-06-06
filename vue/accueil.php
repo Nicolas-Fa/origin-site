@@ -23,7 +23,11 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
     <!-- Progression des boss -->
     <div id="communication">
         <section class="progression">
+<<<<<<< HEAD
             <h1 class="titre">Progression de la guilde Origin</h1>
+=======
+            <h1>Progression de la guilde Origin</h1>
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
             <figure>
                 <?php foreach ($images_boss as $images): ?>
                     <img src="public/images/<?= $images ?>" alt="Origin <?= substr($images, 0, 6) ?>">
@@ -66,6 +70,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
                 </section>
             </section>
         </section>
+<<<<<<< HEAD
     <aside id="medias">
         <iframe
             src="https://www.youtube-nocookie.com/embed/0VZz7v0-LVs?si=TlCQP79vRfIdvDZ4"
@@ -79,6 +84,22 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
         <button id="activer_twitch" class="bouton actif">Nos streamers Twitch</button>
         <div id="twitch-embed"></div>
     </aside>
+=======
+
+        <aside id="medias">
+            <iframe
+                src="https://www.youtube-nocookie.com/embed/0VZz7v0-LVs?si=TlCQP79vRfIdvDZ4"
+                title="Reine Ansurek Myhique"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+                loading="lazy"
+                class="videos">
+            </iframe>
+            <button id="activer_twitch" class="bouton actif">Nos streamers Twitch</button>
+            <div id="twitch-embed"></div>
+        </aside>
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
     </div>
 
     <!-- Liste des membres du roster -->

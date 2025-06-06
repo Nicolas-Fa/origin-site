@@ -1,10 +1,21 @@
 nav {
+<<<<<<< HEAD
   display: flex;
 }
+=======
+  font-size: 16px;
+  display: flex;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 .logo_origin {
   max-width: 66%;
   width: 100%;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 header {
   max-width: 85%;
   width: 100%;
@@ -13,27 +24,53 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+<<<<<<< HEAD
   margin: 1rem auto;
 }
+=======
+  margin: 16px auto;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 header a {
   max-width: 30%;
   width: 100%;
 }
+<<<<<<< HEAD
 .back {
   background-color: #d9d9d9;
 }
 .navigation a:hover {
   color: $hover;
 }
+=======
+
+.back {
+  background-color: #d9d9d9;
+}
+
+.navigation a:hover {
+  color: $hover;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 .navigation {
   position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
 }
+<<<<<<< HEAD
 .navigation a {
   max-width: 100%;
 }
+=======
+
+.navigation a {
+  max-width: 100%;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 .nav_liste {
   display: flex;
   flex-direction: column;
@@ -47,15 +84,24 @@ header a {
   transition: max-height 0.5s ease-out;
   z-index: 10;
 }
+<<<<<<< HEAD
 .nav_liste.active {
   max-height: 15.625rem;
 }
+=======
+
+.nav_liste.active {
+  max-height: 250px;
+}
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 .nav_liste li a {
   display: block;
   text-decoration: none;
   padding: 0.75rem 1rem;
   border-bottom: 1px solid #333;
 }
+<<<<<<< HEAD
 #burger {
   display: block;
   cursor: pointer;
@@ -69,10 +115,35 @@ main .container {
     font-size: 1.063rem;
     max-width: 100%;
   }
+=======
+
+#burger {
+  display: block;
+  cursor: pointer;
+  font-size: 40px;
+}
+
+main .container {
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 17px;
+    max-width: 100%;
+  }
+
+  h1,
+  h2 {
+    font-size: 35px;
+  }
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
   #connexion h1,
   #inscription h1 {
     border-top: none;
   }
+<<<<<<< HEAD
   header a {
     max-width: 15.625rem;
   }
@@ -86,17 +157,48 @@ main .container {
   #burger {
     display: none;
   }
+=======
+
+  header a {
+    max-width: 250px;
+  }
+
+  a img.logo_origin {
+    justify-items: center;
+    width: 125px;
+  }
+
+  .progression section h2 {
+    font-size: 26px;
+  }
+
+  #burger {
+    display: none;
+  }
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
   header {
     max-width: 85%;
     display: flex;
     border-bottom: 1px solid $text_color;
     align-items: center;
+<<<<<<< HEAD
     margin: 1rem auto;
   }
   header .logo_origin {
     max-width: 50%;
     margin-bottom: 1rem;
   }
+=======
+    margin: 16px auto;
+  }
+
+  header .logo_origin {
+    max-width: 50%;
+    margin-bottom: 16px;
+  }
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
   .nav_liste {
     position: static;
     flex-direction: row;
@@ -104,13 +206,27 @@ main .container {
     max-height: none;
     gap: 1rem;
     transition: none;
+<<<<<<< HEAD
     margin-bottom: 1rem;
   }
+=======
+    margin-bottom: 16px;
+  }
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
   .nav_liste li a {
     padding: 0;
     border: none;
   }
+<<<<<<< HEAD
   .container {
     padding: 1rem;
   }
 }
+=======
+
+  .container {
+    padding: 16px;
+  }
+}
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1

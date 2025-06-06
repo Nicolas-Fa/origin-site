@@ -1,15 +1,29 @@
 .bouton {
+<<<<<<< HEAD
   font-size: 0.875rem;
+=======
+  font-size: 14px;
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
   background-color: $fond;
   border: 1px solid $text_color;
   border-radius: 5px;
   font-family: "Exo 2";
   color: $text_color;
+<<<<<<< HEAD
   padding: 0.5rem;
   margin-bottom: 0.25rem;
+=======
+  padding: 8px;
+  margin-bottom: 4px;
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
   &:hover {
     border-color: $hover;
     color: $hover;
     cursor: pointer;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1

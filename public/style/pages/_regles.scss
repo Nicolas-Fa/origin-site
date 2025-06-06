@@ -1,11 +1,16 @@
 .regles {
   color: $content_color;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 .regles h1,
 h2 {
   color: $text_color;
   text-align: center;
 }
+<<<<<<< HEAD
 .regles section {
   margin: 1rem 0;
 }
@@ -13,3 +18,14 @@ h2 {
 .regles li {
   margin: 1rem 0;
 }
+=======
+
+.regles section {
+  margin: 16px 0;
+}
+
+.regles p,
+.regles li {
+  margin: 16px 0;
+}
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1

@@ -1,10 +1,16 @@
 @charset "utf-8";
 
 @import "./commun/police";
+<<<<<<< HEAD
 @import "./commun/variables";
 @import "./commun/reset";
 @import "./commun/page404";
 @import "./commun/commun";
+=======
+@import "./commun/reset";
+@import "./commun/variables";
+@import "./commun/page404";
+>>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
 
 @import "./composants/header";
 @import "./composants/boutons";
