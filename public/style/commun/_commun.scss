@@ -1,17 +1,28 @@
 h1 {
+  font-family: $font_titre;
   border-bottom: 1px solid $text_color;
   font-size: 1.5rem;
-  padding-bottom: 0.5rem;
+  font-weight: 500;
 }
+
 h2 {
+  font-family: $font_titre;
   border-bottom: 1px solid $text_color;
   font-size: 1.3125rem;
-  padding-bottom: 0.5rem;
+  padding-bottom: 1rem;
+  font-weight: 500;
 }
+
+h3{
+  font-family: $font_titre;
+  font-weight: 500;
+}
+
 @media screen and (min-width: 768px) {
   h1 {
     font-size: 2rem;
   }
+  
   h2 {
     font-size: 1.8rem;
     margin-top: 1rem;

@@ -3,46 +3,32 @@
   flex-direction: column;
   text-align: center;
 }
-<<<<<<< HEAD
+
 #inscription form {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   gap: 1rem;
 }
+
 #inscription h1 {
   border-bottom: none;
   border-top: 1px solid $text_color;
   padding-top: 2rem;
   margin-top: 1rem;
 }
+
 #inscription form p {
   margin: 0.5rem 0;
 }
+
 #inscription form a {
   color: $content_color;
   text-decoration: underline;
 }
+
 @media screen and (min-width: 768px) {
   #inscription form {
     align-items: center;
   }
 }
-=======
-
-#inscription h1 {
-  border-bottom: none;
-  border-top: 1px solid $text_color;
-  padding-top: 32px;
-  margin-top: 16px;
-}
-
-#inscription form p {
-  margin: 8px 0;
-}
-
-#inscription form a {
-  color: $content_color;
-  text-decoration: underline;
-}
->>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1

@@ -29,11 +29,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == str_replace(DIRECTORY_SEPARATOR, '/',  __FILE
             </form>
         </section>
     <?php else : ?>
-<<<<<<< HEAD
         <h1 class="titre">Votre candidature est en cours de traitement</h1>
-=======
-        <h1>Votre candidature est en cours de traitement</h1>
->>>>>>> 340cd16746a54d114a0aa8a8ed9e9d38412750c1
         <section>
             <p class="message">
                 <?php if (isset($_SESSION["message"])) {
